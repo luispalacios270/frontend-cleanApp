@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button clear (click)="closeModal()" color="danger">Cerrar</button>
+    <ion-buttons end>
+      <button ion-button clear (click)="presentAlertInput('área',1)">Agregar Área</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-list *ngFor="let area of oldAreas">
+    <ion-list-header class="parent">
+      <p class="area-name">{{area.name}}</p>
+      <button (click)="presentAlertInput('item',2, area)" class="plus-item" ion-button icon-only clear>
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-list-header>
+    <!--<div *ngIf="showItems">      -->
+    <ion-item *ngFor="let item of area.items">
+      <p class="item-name"> {{item.name}} </p>
+      <button (click)="presentAlertInput('Objeto',3, item)" class="plus-item" ion-button icon-only clear>
+        <ion-icon name="add"></ion-icon>
+      </button>
+      <div class="adjust-horizontal">
+        <ion-slides>
+          <ion-slide *ngFor="let furniture of item.furniture">
+            <ion-card>
+              <img src="http://mueblesyacc.vteximg.com.br/arquivos/ids/157885-1000-718/Comedor-Dallas---Banca-Turin-Nueva_MG_8789.jpg"
+              />
+              <div class="card-title" color="primary">{{furniture.name}}</div>
+            </ion-card>
+          </ion-slide>
+        </ion-slides>
+      </div>
+    </ion-item>
+    <!--</div>-->
+  </ion-list>
+</ion-content>

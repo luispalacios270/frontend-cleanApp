@@ -1,0 +1,134 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>
+      <p class="center-text main-header header-back-btn">{{service.client.address}}</p>
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<!--<ion-content padding>
+
+  <ion-list>
+    <ion-item *ngFor="let area of areas">
+      <ion-list-header>
+        {{area.name}}
+      </ion-list-header>
+      <ion-row>
+        <ion-col class="item-container parent" (click)="selectItem(item)" col-6 *ngFor="let item of area.items">
+          <div class="card-note adjust"></div>
+          <div class="center-item">
+            <button ion-button outline class="items">  
+              {{item.name}}
+            </button>
+          </div>
+        </ion-col>
+        <ion-col col-12>
+          <button ion-button block (click)="additem(area.id)"> Agregar item</button>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-col>
+      <button (click)="addArea()" ion-button block> Agregar área</button>
+    </ion-col>
+  </ion-list>
+
+</ion-content>-->
+
+<ion-content padding>
+
+  <ion-menu [content]="content">
+    <ion-header>
+      <ion-toolbar *ngIf="!items||items.length==0">
+        <ion-title>Areas</ion-title>
+      </ion-toolbar>
+      <ion-toolbar *ngIf="items&&items.length>0">
+        <ion-title>
+          <button class="back-drawer" ion-button clear (click)="items=[]">
+            <ion-icon name="arrow-back"></ion-icon>
+            <span class="title-drawer-area">{{selectedArea}}</span>
+          </button></ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list *ngIf="!items||items.length==0">
+        <button *ngFor="let area of areas" (click)="selectArea(area.id, area.name)" ion-item>
+          {{area.name}}
+        </button>
+      </ion-list>
+      <ion-list *ngIf="items&&items.length>0">
+        <button *ngFor="let item of items" (click)="selectItem(item,selectedArea)" ion-item>
+          {{item.name}}
+        </button>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-nav id="nav" #content></ion-nav>
+
+  <!--<button ion-button >Toggle Menu</button>-->
+
+
+
+  <ion-row justify-content-center>
+    <button ion-button menuToggle> Realizar Inspección </button>
+  </ion-row>
+
+
+  <ion-card>
+    <ion-card-header>
+      <div class="inline">
+        <div>
+          <ion-icon class="header-card" name="information-circle"></ion-icon>
+          <span class="header-card">Información</span>
+        </div>
+
+        <button (click)="editUser()" class="inline-right edit-client" ion-button clear icon-only>
+          <ion-icon class="" name="md-create"></ion-icon>
+        </button>
+
+      </div>
+
+
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item text-wrap>
+          <ion-icon name="person" item-start></ion-icon>
+          <span class="label-item">Cliente:</span> {{service.client.realm}}
+        </ion-item>
+        <ion-item text-wrap>
+          <ion-icon name="call" item-start></ion-icon>
+          <span class="label-item">Teléfono:</span> {{service.client.phone}}
+        </ion-item>
+        <ion-item text-wrap>
+          <ion-icon name="map" item-start></ion-icon>
+          <span class="label-item">Dirección:</span> {{service.client.address}}
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+
+  </ion-card>
+
+  <!-- <ion-card>
+    <ion-card-header>
+      <ion-toolbar>
+        <ion-title>
+          <ion-icon class="header-card" name="person"></ion-icon>
+          <span class="header-card">Dora lantomasi</span>
+        </ion-title>
+      </ion-toolbar>
+    </ion-card-header>
+    <ion-list>
+      <ion-item>
+        Telephone
+      </ion-item>
+      <ion-item>
+        Email
+      </ion-item>
+    </ion-list>
+
+  </ion-card>
+-->
+</ion-content>

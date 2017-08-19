@@ -1,0 +1,14 @@
+{
+  "name": "limpiezaApp",
+  "app_id": "",
+  "type": "ionic-angular",
+  "proxies": [{
+      "path": "/api",
+      "proxyUrl": "http://192.168.0.19:3000/api"
+    },
+    {
+      "path": "/api",
+      "proxyUrl": "https://limpiezapp.herokuapp.com/api"
+    }
+  ]
+}

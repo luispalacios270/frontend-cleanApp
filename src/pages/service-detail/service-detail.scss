@@ -1,0 +1,32 @@
+page-service-detail {
+  .item-container {
+    min-height: 120px
+  }
+  .title-drawer-area {
+    margin-left: 10px;
+  }
+  .main-header {
+    margin: 0;
+    font-size: 0.9em;
+  }
+  .items {
+    border-color: burlywood !important;
+    color: burlywood !important;
+  }
+  .header-card {
+    font-size: 1.55em !important;
+    color: cornflowerblue;
+  }
+  .label-item {
+    color: grey
+  }
+  .back-drawer {
+    color: white !important;
+  }
+  .edit-client {
+    padding-bottom: 15px !important;
+    span {
+      font-size: 0.65em !important;
+    }
+  }
+}

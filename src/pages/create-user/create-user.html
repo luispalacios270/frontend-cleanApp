@@ -1,0 +1,88 @@
+<!--
+  Generated template for the CreateUserPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>
+      <p class="center-text header-top"> Nuevo Usuario </p>
+      <!--<button ion-button>Agregar areas a usuario</button>-->
+    </ion-title>
+    <ion-buttons *ngIf="user && user.id" end>
+      <button ion-button (click)="editAreas(user)">Areas</button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <div>
+    <ion-row>
+      <ion-col col-4 offset-4>
+        <div *ngIf="img==''" [ngStyle]="{'background-image': 'url('+api+'/containers/client-'+user.id+'/download/profilePic.jpg), url(http://simpleicon.com/wp-content/uploads/user1.png)'}"
+          class="user-icon parent" (click)="takePicture()">
+          <ion-icon id="picture-icon-user" name="camera"></ion-icon>
+        </div>
+        <img (click)="takePicture()" *ngIf="img!=''" [src]="img">
+      </ion-col>
+    </ion-row>
+
+  </div>
+
+
+  <ion-list>
+    <form [formGroup]="registerForm">
+      <ion-item>
+        <ion-label inline>Nombre</ion-label>
+        <ion-input (blur)="try.realm=true" (focus)="try.realm=false" type="text" formControlName="realm" [(ngModel)]="user.realm"></ion-input>
+      </ion-item>
+      <div class="error-input item-md" [hidden]="!try.realm || (registerForm.controls.realm.valid || !registerForm.controls.realm._errors.required)">Este campo es requerido</div>
+      <!--<ion-item>
+        <ion-label inline>Apellidos</ion-label>
+        <ion-input (blur)="try.lastName=true" (focus)="try.lastName=false" type="text" formControlName="lastName" [(ngModel)]="user.lastName"></ion-input>
+      </ion-item>
+
+      <div class="error-input item-md" [hidden]="!try.lastName || (registerForm.controls.lastName.valid || !registerForm.controls.lastName._errors.required)">Este campo es requerido</div>-->
+
+      <ion-item>
+        <ion-label inline>Teléfono</ion-label>
+        <ion-input (blur)="try.phone=true" (focus)="try.phone=false" type="text" formControlName="phone" [(ngModel)]="user.phone"></ion-input>
+      </ion-item>
+
+      <div class="error-input item-md" [hidden]="!try.phone || (registerForm.controls.phone.valid || !registerForm.controls.phone._errors.required)">Este campo es requerido</div>
+      <!-- <div class="error-input item-md" [hidden]="!try.email || registerForm.controls.email.valid || !registerForm.controls.email._errors.invalidEmail">Este campo debe ser un email</div> -->
+
+
+      <ion-item>
+        <ion-label inline>Correo</ion-label>
+        <ion-input (blur)="try.email=true" (focus)="try.email=false" type="text" formControlName="email" [(ngModel)]="user.email"></ion-input>
+      </ion-item>
+
+      <div class="error-input item-md" [hidden]="!try.email || (registerForm.controls.email.valid || !registerForm.controls.email._errors.required)">Este campo es requerido</div>
+      <div class="error-input item-md" [hidden]="!try.email || registerForm.controls.email.valid || !registerForm.controls.email._errors.invalidEmail">Este campo debe ser un email</div>
+
+      <ion-item>
+        <ion-label inline>Dirección</ion-label>
+        <ion-input (blur)="try.address=true" (focus)="try.address=false" type="text" formControlName="address" [(ngModel)]="user.address"></ion-input>
+      </ion-item>
+
+      <div class="error-input item-md" [hidden]="!try.address || (registerForm.controls.address.valid || !registerForm.controls.address._errors.required)">Este campo es requerido</div>
+
+    </form>
+  </ion-list>
+
+
+  <ion-row>
+    <button *ngIf="!user.id" ion-button (click)="registerUser()" color="primary" [disabled]="registerForm.invalid" block>Guardar</button>
+    <button *ngIf="user.id" ion-button (click)="updateUser()" color="primary" [disabled]="registerForm.invalid" block>Guardar Cambios</button>
+  </ion-row>
+
+
+
+
+</ion-content>

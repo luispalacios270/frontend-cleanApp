@@ -1,0 +1,51 @@
+page-item-detail {
+  .header-title {
+    padding-right: 20%;
+  }
+  ion-card-header {
+    padding-bottom: 0 !important;
+  }
+  ion-item-divider {
+    padding: 0 16px !important;
+  }
+  ion-chip {
+    margin: 0 5px !important;
+  }
+  .red {
+    background: rgb(233, 52, 48)!important;
+    color: white !important;
+  }
+  .green {
+    background: rgb(94, 207, 62)!important;
+    color: white !important;
+  }
+  .grey {
+    background: #a9a9a9!important;
+    color: white !important;
+  }
+  .sub-ranking {
+    /* z-index: -1; */
+    width: 100%;
+    height: 6px; // background: green;
+    position: absolute;
+    bottom: 0;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 4px;
+  }
+  .ranking {
+    color: #aeaeae;
+    border-radius: 6px; // padding: 23px 29px;
+    width: 100%; // height: 100%;
+    height: 70px; // background: white;
+    border: 1px solid #aeaeae;
+    /*background: #D70D0D;*/
+  }
+  .header-furniture {
+    color: $main-color;
+    font-size: 1.1em;
+    font-weight: bold;
+  }
+  .number-notes {
+    color: #b5b0b0;
+  }
+}

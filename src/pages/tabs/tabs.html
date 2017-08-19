@@ -1,0 +1,11 @@
+<ion-header class="cosa-prueba">
+  <ion-navbar class="parent">
+    <ion-title class="center-text header-back-btn" >{{title.toUpperCase()}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-tabs>
+  <ion-tab [root]="tab1Root" tabTitle="Servicios" tabIcon="home"></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="Resumen" tabIcon="information-circle"></ion-tab>
+  <ion-tab [root]="tab3Root" tabTitle="Aprobación" tabIcon="md-create"></ion-tab>
+</ion-tabs>

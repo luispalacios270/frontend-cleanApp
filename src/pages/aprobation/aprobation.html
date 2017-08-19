@@ -1,0 +1,65 @@
+<!--
+  Generated template for the AprobationPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>
+      <!--<p class="center-text" color="light">Aprobación de inspección</p>-->
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+
+
+<ion-content padding>
+
+  <div>
+    <h6>Aprobación del cliente</h6>
+
+    <ion-list>
+      <!--<ion-list-header>
+        <h6>Aprobación del cliente</h6>
+
+      </ion-list-header>-->
+      <ion-item>
+        <ion-label>Nombre Completo</ion-label>
+        <ion-input [(ngModel)]="aprobationName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Fecha de finalización de servicio</ion-label>
+        <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" [(ngModel)]="service.finalDate"></ion-datetime>
+      </ion-item>
+      <!--<ion-item>
+        <ion-label>Prénom</ion-label>
+        <ion-input></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Prénom</ion-label>
+        <ion-input></ion-input>
+      </ion-item>-->
+    </ion-list>
+  </div>
+
+  <div>
+    <h6>Firmas</h6>
+    <ion-list>
+      <button ion-item (click)="showSignature(1)"> <div class="inline adjust-horizontal">Firma del cliente <ion-icon *ngIf="signatureClient!=''" class="inline-right" name="checkmark"></ion-icon></div></button>
+      <button ion-item (click)="showSignature(2)"><div class="inline adjust-horizontal">Firma del Inspector <ion-icon *ngIf="signatureInspector!=''" class="inline-right" name="checkmark"></ion-icon></div></button>
+    </ion-list>
+  </div>
+
+
+  <button [disabled]="signatureClient=='' || signatureInspector =='' || aprobationName==''" ion-button block (click)="presentAlert()">Guardar y Terminar</button>
+
+  <!-- <canvas id="SignaturePad"></canvas>-->
+  <!--<signature-pad (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>-->
+
+
+
+</ion-content>

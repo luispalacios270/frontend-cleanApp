@@ -1,0 +1,257 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>      
+      <p *ngIf="item" (click)="selectService()" class="center-text no-margin">{{item.name.toUpperCase()}}</p>
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<!--<ion-content padding>
+
+
+
+  <ion-list-header>
+    {{item.name}}:
+  </ion-list-header>
+  <ion-row>    
+    <ion-slides>
+      <ion-slide>
+        <img src="http://www.homecenter.com.co/static/categorias/vitrina/n2/banoscocinas/vmb-cat-Cocina.jpg" alt="">
+      </ion-slide>
+      <ion-slide>
+        <img src="http://www.arqhys.com/wp-content/fotos/2014/01/tendencia-decorativa-en-oficinas..jpg" alt="">
+      </ion-slide>
+      <ion-slide>
+        <img src="http://images.locanto.com.co/1199071167/JUEGOS-DE-ALCOBA-FINOS-ENCONOMICOS_1.jpg" alt="">
+      </ion-slide>
+    </ion-slides>
+  </ion-row>
+  <ion-item>
+    <ion-list-header>
+      Notes:
+    </ion-list-header>
+    <ion-row class="notes-container" *ngFor="let note of notes">
+      <ion-col col-10 offset-1>
+        <ion-card>
+          <ion-card-content class="card-note" text-wrap>
+            {{note.content}}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <h6 *ngIf="notes && notes.length===0">En el momento no hay notas desponibles para este item</h6>
+  </ion-item>
+
+  <div padding>
+    <button ion-button color="primary" (click)="finishItem()" block>Finalizar</button>
+  </div>
+</ion-content>-->
+
+<ion-content padding>
+
+  <!--<ion-slides pager="true" zoom= "true" parallax="true">
+    <ion-slide>
+      <h1>Slide 1</h1>
+    </ion-slide>
+    <ion-slide>
+      <h1>Slide 2</h1>
+    </ion-slide>
+    <ion-slide>
+      <h1>Slide 3</h1>
+    </ion-slide>
+  </ion-slides>-->
+
+
+  <div>
+    <ion-row align-items-center justify-content-center>
+      <ion-chip>
+        <ion-icon name="pin"></ion-icon>
+        <ion-label>{{areaName}}</ion-label>
+      </ion-chip>
+      <!--<ion-chip>
+        <ion-icon name="pin"></ion-icon>
+        <ion-label>item</ion-label>
+      </ion-chip>-->
+    </ion-row>
+  </div>
+
+
+
+  <!--<ion-item>
+    <p>
+      Cabinets/Drawers/TOP Insede & Out
+    </p>
+
+
+
+    <ion-row align-items-center justify-content-center>
+      <div class="ranking">G</div>
+      <div class="ranking">G</div>
+      <div class="ranking">G</div>
+    </ion-row>
+
+
+
+
+    <ion-row align-items-center justify-content-center>
+      <ion-col>
+        <button (click)="presentActionSheet()" class="color-grey-icon" ion-button clear icon-only>
+            <ion-icon name="camera"></ion-icon>        
+          </button>
+      </ion-col>
+      <ion-col class="parent">
+        <button class="color-grey-icon" ion-button clear icon-only>
+            <ion-icon name="md-clipboard"></ion-icon>        
+          </button>
+      </ion-col>
+      <ion-col class="parent">
+        0 Detalles
+      </ion-col>
+    </ion-row>
+
+    
+
+
+
+
+
+  </ion-item>-->
+
+ <!-- <ion-card>
+
+    <ion-card-header>
+      <ion-item-divider class="header-furniture" text-wrap>
+        Cabinets/Drawers/TOP Insede & Out
+      </ion-item-divider>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <ion-item-divider padding>
+        <ion-row align-items-center justify-content-center>
+          <ion-col>
+            <button class="adjust no-padding" ion-button clear>
+              <div class="ranking parent">
+                <span class="center-item">B</span>
+                <div class="sub-ranking green"></div>
+              </div>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button class="adjust no-padding" ion-button clear>
+              <div class="ranking parent">
+                <span class="center-item">R</span>
+                <div class="sub-ranking red"></div>
+              </div>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button class="adjust no-padding" ion-button clear>
+              <div class="ranking parent">
+                <span class="center-item">ND</span>
+                <div class="sub-ranking grey"></div>
+              </div>
+            </button>
+          </ion-col>
+
+        </ion-row>
+      </ion-item-divider>
+
+
+
+
+      <ion-row align-items-center justify-content-center>
+        <ion-col class="parent">
+          <button (click)="presentActionSheet()" class="color-grey-icon" ion-button clear icon-only>
+            <ion-icon name="camera"></ion-icon>        
+          </button>
+        </ion-col>
+        <ion-col class="parent">
+          <button (click)="goToNotes()" class="color-grey-icon" ion-button clear icon-only>
+            <ion-icon name="md-clipboard"></ion-icon>        
+          </button>
+        </ion-col>
+        <ion-col class="number-notes">
+          0 Detalles
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>-->
+
+  <ion-card *ngFor="let furniture of furnitures">
+
+    <ion-card-header>
+      <ion-item-divider class="center-text header-furniture" text-wrap>
+        {{furniture.name}}
+      </ion-item-divider>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <ion-item-divider padding>
+        <ion-row align-items-center justify-content-center>
+          <ion-col>
+            <button (click)="rankFurniture(furniture,1)" class="adjust no-padding" ion-button clear>
+              <div [ngClass]="{'green': furniture.furnitureInspections.length>0 && furniture.furnitureInspections[0].qualification==1}" class="ranking parent">
+                <span class="center-item">B</span>
+                <div [hidden]="furniture.furnitureInspections.length>0 && furniture.furnitureInspections[0].qualification==1" class="sub-ranking green"></div>
+              </div>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button (click)="rankFurniture(furniture,2)" class="adjust no-padding" ion-button clear>
+              <div [ngClass]="{'red': furniture.furnitureInspections.length>0 && furniture.furnitureInspections[0].qualification==2}" class="ranking parent">
+                <span class="center-item">R</span>
+                <div [hidden]="furniture.furnitureInspections.length>0 && furniture.furnitureInspections[0].qualification==2" class="sub-ranking red"></div>
+              </div>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button (click)="rankFurniture(furniture,0)" class="adjust no-padding" ion-button clear>
+              <div [ngClass]="{'grey': furniture.furnitureInspections.length>0 && furniture.furnitureInspections[0].qualification==0}" class="ranking parent">
+                <span class="center-item">ND</span>
+                <div [hidden]="furniture.furnitureInspections.length>0 && furniture.furnitureInspections[0].qualification==0" class="sub-ranking grey"></div>
+              </div>
+            </button>
+          </ion-col>
+
+        </ion-row>
+      </ion-item-divider>
+
+
+
+
+      <ion-row align-items-center justify-content-center>
+        <ion-col class="parent">
+          <button (click)="presentActionSheet(furniture)" class="color-grey-icon" ion-button clear icon-only>
+            <ion-icon name="camera"></ion-icon>        
+          </button>
+        </ion-col>
+        <ion-col class="parent">
+          <button (click)="goToNotes(furniture)" class="color-grey-icon" ion-button clear icon-only>
+            <ion-icon name="md-clipboard"></ion-icon>        
+          </button>
+        </ion-col>
+        <ion-col class="number-notes">
+          {{getNotes(furniture.furnitureInspections)}} Detalles
+        </ion-col>
+      </ion-row>
+
+
+      <!--<button ion-button clear item-start>Like</button>-->
+      <!--<button ion-button clear item-end>Comment</button>-->
+
+
+
+
+    </ion-card-content>
+  </ion-card>
+
+
+
+
+
+</ion-content>

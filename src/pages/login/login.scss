@@ -1,0 +1,26 @@
+page-login {
+  #container-login {
+    margin-top: 25%
+  }
+  .company-name {
+    margin-top: 10px;
+    color: dimgray;
+    font-weight: bold;
+  }
+  .text-center {
+    text-align: center;
+  }
+  ion-content {
+    background: linear-gradient(to bottom, #488aff 0%, #488aff 50%/*, #000000 50%*/
+    , white 50%, white 100%);
+  }
+  .error-user {
+    margin-top: 20px;
+    text-align: center;
+    color: red;
+    font-size: 1.2em;
+  }
+  #forget-pass {
+    font-size: 0.8em;
+  }
+}

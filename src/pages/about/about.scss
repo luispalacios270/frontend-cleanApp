@@ -1,0 +1,45 @@
+page-about {
+  table {
+    width: 100%; // border: 1px solid #bebebe;
+  }
+  .pie-caption {
+    margin: 4px 0 0 0;
+    font-size: 1.25em;
+    color: #017dc3;
+  }
+  .header-summary {
+    color: cornflowerblue;
+    font-size: 1.35em;
+    width: 100%;
+    text-align: center
+    /*font-weight: 100;*/
+  }
+  td,
+  th {
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid rgb(235, 236, 237);
+  }
+  th {
+    color: rgb(2, 141, 255);
+  }
+  td {}
+  .progress-bar {
+    height: 50px;
+    width: 100%;
+    /*background: linear-gradient(to right, blue 0%, blue 50%, orange 50%, orange 100%);*/
+  }
+  .list-items {
+    color: grey;
+  }
+  .finished {
+    text-decoration: line-through;
+  }
+  .text-porcentage {
+    color: slategrey;
+    width: 100%;
+    text-align: center;
+    font-size: 1.5em;
+    margin: 1px;
+  }
+}
