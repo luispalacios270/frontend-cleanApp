@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, AlertController, NavParams, ViewController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, AlertController, NavParams, ViewController, ToastController, ModalController } from 'ionic-angular';
 import { AreaPrividerProvider } from '../../providers/area-privider/area-privider'
 import { ClientProvider } from '../../providers/client/client'
 import { ItemProvider } from '../../providers/item/item'
+import { CreateItemPage } from '../create-item/create-item'
 
 /**
  * Generated class for the CreateAreasPage page.
@@ -23,22 +24,54 @@ export class CreateAreasPage {
   // newAreas: Array<any>;
   oldAreas: Array<any> = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public areaProvider: AreaPrividerProvider, public itemProvider: ItemProvider, public clientProvider: ClientProvider, public toastCtrl: ToastController, public alertCtrl: AlertController) {
-    /*let areas = navParams.get("areas");
-    if (areas != undefined)
-    this.ol*/
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public viewCtrl: ViewController,
+    public areaProvider: AreaPrividerProvider,
+    public itemProvider: ItemProvider,
+    public clientProvider: ClientProvider,
+    public toastCtrl: ToastController,
+    public alertCtrl: AlertController,
+    public modalCtrl: ModalController
+  ) {
     this.user = navParams.get("user");
-    console.log(this.user);
+    // console.log(this.user);
     if (this.user != null) {
       this.areaProvider.getAllInfoClient(this.user.id)
         .then((result: Array<any>) => {
-          console.log("las tales", result);
+          // console.log("las tales", result);
           this.oldAreas = result;
         })
-        .catch(err => console.log(err))
+      // .catch(err => console.log(err))
     }
-    /*if (this.oldAreas != null && this.oldAreas.length != 0)*/
   }
+
+
+
+  deleteArea(area: object, i: number) {
+    this.areaProvider.deleteArea(area)
+      .then(() => this.oldAreas.splice(i, 1))
+  }
+
+  updateArea(area: any, name: string) {
+    const objTemp = { ...area, name };
+    this.areaProvider.updateArea(objTemp)
+      .then((result: any) => area.name = result.name)
+  }
+
+  deleteItem(item: object, i: number, parentIndex: number) {
+    this.itemProvider.deleteItem(item)
+      .then(() => this.oldAreas[parentIndex].items.splice(i, 1))
+  }
+
+  updateItem(item: any, name: string) {
+    const objTemp = { ...item, name };
+    this.itemProvider.updateItem(objTemp)
+      .then((result: any) => item.name = result.name)
+  }
+
+
 
   addArea(nameArea: string) {
     let objTmp: object = {
@@ -81,14 +114,14 @@ export class CreateAreasPage {
         {
           text: "Cancelar",
           handler: data => {
-            console.log("Close alert");
+            // console.log("Close alert");
           }
         },
         {
           text: "Agregar",
           handler: data => {
             data = data.title;
-            console.log(data);
+            // console.log(data);
             switch (option) {
               case 1:
                 this.addArea(data);
@@ -98,6 +131,12 @@ export class CreateAreasPage {
                 break;
               case 3:
                 this.addFutniture(parent, data);
+                break;
+              case 4:
+                this.updateArea(parent, data);
+                break;
+              case 5:
+                this.updateItem(parent, data);
                 break;
 
               default:
@@ -172,6 +211,16 @@ export class CreateAreasPage {
         }).present();
 
       });
+  }
+
+  modifyItem(item: any) {
+    let modal = this.modalCtrl.create(CreateItemPage, { item });
+    /* modal.onDidDismiss(data => {
+      console.log(data);
+      item = data;
+
+    }) */
+    modal.present();
   }
 
   closeModal() {

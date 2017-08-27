@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 // import { TabsPage } from '../tabs/tabs';
 import { HomePage } from '../home/home';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
@@ -33,7 +33,21 @@ export class LoginPage {
     password: ""
   }
 
-  constructor(public navCtrl: NavController, public userServiceProvider: UserServiceProvider, public navParams: NavParams, public FormBuilder: FormBuilder, public toast: ToastController) {
+  loader: any = this.loadingCtrl.create({
+    content: "Cargando"/* ,
+      duration: 3000 */
+  });/*  = this.loadingCtrl.create({
+    content: "Cargando"
+  }); */
+
+  constructor(
+    public navCtrl: NavController,
+    public userServiceProvider: UserServiceProvider,
+    public navParams: NavParams,
+    public FormBuilder: FormBuilder,
+    public toast: ToastController,
+    public loadingCtrl: LoadingController
+  ) {
     this.loginForm = FormBuilder.group({
       email: ['', Validators.compose([Validators.maxLength(100), this.emailValidator,/* Validators.pattern("/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/")*/, Validators.required])],
       password: ['', Validators.required]
@@ -54,23 +68,36 @@ export class LoginPage {
     }
   }
 
-  // Function to do the login.
+  presentLoading() {
+    this.loader.present();
+  }
+
+  dissMissLoader() {
+    this.loader.dismiss();
+  }
+
+
   login() {
-    // this.navCtrl.push(HomePage);
-     this.userServiceProvider.doLogin(this.user).then(result => {
-       console.log("token", result);
-       this.token = result;
-       this.navCtrl.push(HomePage);
-     }).catch(err => {
-       if (err.status === 0) {
-         this.toast.create({
-           message: 'El servidor no esta disponible',
-           duration: 3000,
-           position: 'bottom'
-         }).present();
-       } else
-         this.wrongUser = true;
-       console.log("error", err);
-     });
+    this.navCtrl.push(HomePage);
+   /*  let loader = this.loadingCtrl.create({
+      content: "Cargando"
+    });
+    loader.present();
+    this.userServiceProvider.doLogin(this.user).then(result => {
+      loader.dismiss();
+      this.token = result;
+      this.navCtrl.push(HomePage);
+    }).catch(err => {
+      loader.dismiss();
+      // console.log(err);
+      if (err.name === 'TimeoutError') {
+        this.toast.create({
+          message: 'El servidor no esta disponible',
+          duration: 3000,
+          position: 'bottom'
+        }).present();
+      } else
+        this.wrongUser = true;
+    }); */
   }
 }

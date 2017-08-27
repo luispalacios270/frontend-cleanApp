@@ -1,20 +1,27 @@
+import { providerParent } from '../providerParent'
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { AppSettings } from '../../appSettings'
-import 'rxjs/add/operator/map';
+/* import { AppSettings } from '../../appSettings'
+import 'rxjs/add/operator/map'; */
 
 
 @Injectable()
-export class AreaPrividerProvider {
-  link: string;
+export class AreaPrividerProvider extends providerParent {
+  /* link: string;
   modelEndPoint: string = '/areas';
 
   headers = new Headers({ 'Content-Type': 'application/json' });
-  options = new RequestOptions({ headers: this.headers });
+  options = new RequestOptions({ headers: this.headers }); */
 
-  constructor(public http: Http) {
-    this.link = AppSettings.API_ENDPOINT;
+  modelEndPoint: string = '/areas';
+
+  constructor(
+    public http: Http
+  ) {
+    super(http);
   }
+
+
 
 
 
@@ -28,23 +35,26 @@ export class AreaPrividerProvider {
   };*/
 
   getItems(areaId: string) {
-    let end_point: string = '/' + areaId + '/items';
-    let url: string = this.link + this.modelEndPoint + end_point;
-    return new Promise((resolve, reject) => {
-      this.http.get(url, this.options)
-        .map(res => res.json())
-        .subscribe(res => resolve(res),
-        err => reject(err));
-    });
+    let completeEndPoint: string = `${this.link + this.modelEndPoint}/${areaId}/items`;
+    return this.getData(completeEndPoint);
   };
 
   createArea(area: object) {
-    return new Promise((resolve, reject) => {
-      this.http.post(this.link + this.modelEndPoint, area, this.options)
-        .map(res => res.json())
-        .subscribe(res => resolve(res),
-        err => reject(err));
-    });
+    let completeEndPoint: string = `${this.link + this.modelEndPoint}`;
+    return this.postData(completeEndPoint, area);
+  }
+
+  deleteArea(area: any) {
+    if (!area && !area.id) return;
+    let completeEndPoint: string = `${this.link + this.modelEndPoint}/${area.id}`;
+    return this.deleteData(completeEndPoint);
+  }
+
+  updateArea(area: any) {
+    if (!area && !area.id) return;
+    let completeEndPoint: string = `${this.link + this.modelEndPoint}/${area.id}`;
+    return this.patchData(completeEndPoint, area);
+
   }
 
   getAllInfoClient(clientId: string) {
@@ -67,7 +77,7 @@ export class AreaPrividerProvider {
         , err => reject(err));
     });
   }
-  
+
   createItems(areaId: string, item: any) {
     let end_point: string = '/' + areaId + '/items';
     let url: string = this.link + this.modelEndPoint + end_point;

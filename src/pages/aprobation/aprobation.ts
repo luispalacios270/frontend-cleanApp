@@ -4,7 +4,7 @@ import { SignaturePage } from '../signature/signature'
 import { ServicesProvider } from '../../providers/services/services'
 import { Storage } from '@ionic/storage';
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-aprobation',
   templateUrl: 'aprobation.html',

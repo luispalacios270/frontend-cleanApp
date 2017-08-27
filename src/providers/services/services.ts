@@ -61,6 +61,7 @@ export class ServicesProvider {
     }
     return new Promise((resolve, reject) => {
       this.http.get(this.link + this.modelEndPoint + end_point + JSON.stringify(data))
+        .timeout(3000)
         .map(res => res.json())
         .subscribe((result) => resolve(result),
         err => reject(err));

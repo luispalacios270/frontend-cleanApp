@@ -1,16 +1,15 @@
-<ion-header>
+<!-- <ion-header>
   <ion-navbar>
-
     <div>
       <ion-row align-items-center>
         <ion-title>
           <p class="center-text">Inspecciones</p>
         </ion-title>
-         <!-- <ion-buttons end>
+         <ion-buttons end>
           <button (click)="showOption()" ion-button icon-only clear>
               <ion-icon name="ios-more"></ion-icon>
           </button>
-        </ion-buttons>  -->
+        </ion-buttons> 
       </ion-row>
       <ion-row align-items-center>
         <ion-searchbar [(ngModel)]="searchFirlter" [showCancelButton]="true" (ionInput)="doFilter()">
@@ -26,17 +25,51 @@
       </ion-row>
     </div>
   </ion-navbar>
+</ion-header> -->
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      <!--  <p class="center-text"> -->Inspecciones
+      <!-- </p> -->
+    </ion-title>
+
+
+
+  </ion-navbar>
+
+  <ion-toolbar class="">
+    <ion-segment [(ngModel)]="segment" (ionChange)="selectList()">
+      <ion-segment-button value="0" color="light">
+        Activos
+      </ion-segment-button>
+      <ion-segment-button value="1">
+        Terminados
+      </ion-segment-button>
+      <ion-segment-button value="2">
+        Clientes
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+  <ion-toolbar class="">
+
+    <ion-searchbar [(ngModel)]="searchFirlter" placeholder="Realizar filtro" [showCancelButton]="true" (ionInput)="doFilter()">
+    </ion-searchbar>
+
+  </ion-toolbar>
+
+
 </ion-header>
 
 <ion-content padding>
 
-  <ion-refresher (ionRefresh)="doRefresh($event)" pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
-    refreshingText="Refreshing...">
+  <ion-refresher (ionRefresh)="doRefresh($event)" pullingIcon="arrow-dropdown" pullingText="Desliza para actualizar" refreshingSpinner="circles">
     <ion-refresher-content>
     </ion-refresher-content>
   </ion-refresher>
 
-  <div>
+  <div [hidden]="segment==='2'">
     <ion-card (click)="selectService(service)" *ngFor="let service of serviceListAux">
       <ion-card-content>
         <ion-row align-items-center justify-content-center>
@@ -67,6 +100,39 @@
       </ion-card-content>
     </ion-card>
   </div>
+
+  <ion-list [hidden]="segment!=='2'">
+    <ion-card (click)="modifyUser(client)" *ngFor="let client of clients">
+      <ion-card-content>
+        <ion-row align-items-center justify-content-center>
+          <ion-col col-3>
+            <ion-avatar item-start>
+              <div [ngStyle]="{'background':'url('+api+'/containers/client-'+client.id+'/download/profilePic.jpg), url(http://simpleicon.com/wp-content/uploads/user1.png)'}"
+                class="avatar-img">
+              </div>
+            </ion-avatar>
+          </ion-col>
+          <ion-col col-9>
+            <ion-row>
+              <p class="client-name">{{client.realm}}</p>
+            </ion-row>
+            <ion-row>
+              <p class="address" text-wrap>{{client.address}}</p>
+            </ion-row>
+            <!-- <ion-row>
+              <p class="address" text-wrap>{{service.initialDate | date:'medium'}}</p>
+            </ion-row> -->
+            <!-- <ion-row *ngIf="service.finalDate">
+              <p class="address" text-wrap>{{service.finalDate | date:'medium'}}</p>
+            </ion-row> -->
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+    <!--  <ion-item *ngFor="let client of clients " (click)="">
+      {{}}
+    </ion-item> -->
+  </ion-list>
 
   <ion-fab right bottom>
     <button ion-fab><ion-icon name="add"></ion-icon></button>

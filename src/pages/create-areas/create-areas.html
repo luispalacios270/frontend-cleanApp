@@ -1,37 +1,162 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button clear (click)="closeModal()" color="danger">Cerrar</button>
+    <button ion-button clear (click)="closeModal()">Cerrar</button>
     <ion-buttons end>
       <button ion-button clear (click)="presentAlertInput('área',1)">Agregar Área</button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <ion-list *ngFor="let area of oldAreas">
-    <ion-list-header class="parent">
-      <p class="area-name">{{area.name}}</p>
-      <button (click)="presentAlertInput('item',2, area)" class="plus-item" ion-button icon-only clear>
-        <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-list-header>
-    <!--<div *ngIf="showItems">      -->
-    <ion-item *ngFor="let item of area.items">
-      <p class="item-name"> {{item.name}} </p>
-      <button (click)="presentAlertInput('Objeto',3, item)" class="plus-item" ion-button icon-only clear>
-        <ion-icon name="add"></ion-icon>
-      </button>
-      <div class="adjust-horizontal">
-        <ion-slides>
-          <ion-slide *ngFor="let furniture of item.furniture">
-            <ion-card>
-              <img src="http://mueblesyacc.vteximg.com.br/arquivos/ids/157885-1000-718/Comedor-Dallas---Banca-Turin-Nueva_MG_8789.jpg"
-              />
-              <div class="card-title" color="primary">{{furniture.name}}</div>
-            </ion-card>
-          </ion-slide>
-        </ion-slides>
-      </div>
-    </ion-item>
-    <!--</div>-->
+
+  <ion-list *ngFor="let area of oldAreas; let iArea = index">
+    <ion-item-divider>
+      <ion-label text-center>
+        <ion-row>
+          <ion-col align-self-center col-8>
+            {{area.name}}
+          </ion-col>
+          <ion-col align-self-center col-4>
+              <button class="header-buttons" ion-button clear icon-only color="secondary" icon-end (click)="presentAlertInput('Actualizar Area', 4, area)">
+                  <ion-icon name="create"></ion-icon>
+                </button>
+            <button class="header-buttons" ion-button clear icon-only icon-end (click)="presentAlertInput('item',2,area)">
+              <ion-icon name="add"></ion-icon>
+            </button>
+            <button class="header-buttons" ion-button clear icon-only icon-end color="danger" (click)="deleteArea(area, i)">
+              <ion-icon name="trash"></ion-icon>
+            </button>
+
+          </ion-col>
+        </ion-row>
+
+
+
+      </ion-label>
+
+
+
+    </ion-item-divider>
+    <ion-item-sliding *ngFor="let item of area.items; let iItems=index">
+      <ion-item>
+        {{item.name}}
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button icon-only clear (click)="modifyItem(item)">
+          <ion-icon name="logo-buffer"></ion-icon>
+        </button>
+        <button ion-button icon-only clear color="danger" (click)=" deleteItem(item, iItems, iArea )">
+          <ion-icon name="trash"></ion-icon>           
+        </button>
+        <button ion-button icon-only clear color="secondary" (click)="presentAlertInput('Actualizar Item', 5, item)">
+          <ion-icon name="create"></ion-icon>           
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+    <!--  <ion-card>
+      <ion-card-content>
+        <ion-row align-items-center justify-content-center>
+          <ion-col col-10>
+            {{area.name}}
+          </ion-col>
+          <ion-col col-2>
+            <button (click)="presentAlertInput('item',2, area)" class="plus-item" ion-button icon-only clear>
+              <ion-icon name="add"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-list class="items-padding" *ngFor="let item of area.items">
+      <ion-list-header class="">
+
+      </ion-list-header>
+      <ion-card class="">
+        <ion-card-content class="">
+          <ion-row align-items-center justify-content-center>
+            <ion-col col-10>
+              {{item.name}}
+            </ion-col>
+            <ion-col col-2>
+              <button (click)="presentAlertInput('Objeto',3, item)" class="plus-item" ion-button icon-only clear>
+                    <ion-icon name="add"></ion-icon>
+                  </button>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-list class="items-padding">
+
+        <ion-card class="" *ngFor="let furniture of item.furniture">
+          <ion-card-content class="">
+            <ion-row align-items-center justify-content-center>
+              <ion-col>
+                {{furniture.name}}
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+
+      </ion-list>
+
+    </ion-list> -->
+
   </ion-list>
+
+
+  <!-- <ion-list *ngFor="let area of oldAreas">
+    <ion-card>
+      <ion-card-content>
+        <ion-row align-items-center justify-content-center>
+          <ion-col col-10>
+            {{area.name}}
+          </ion-col>
+          <ion-col col-2>
+            <button (click)="presentAlertInput('item',2, area)" class="plus-item" ion-button icon-only clear>
+              <ion-icon name="add"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-list class="items-padding" *ngFor="let item of area.items">
+      <ion-list-header class="">
+        Items
+      </ion-list-header>
+      <ion-card class="">
+        <ion-card-content class="">
+          <ion-row align-items-center justify-content-center>
+            <ion-col col-10>
+              {{item.name}}
+            </ion-col>
+            <ion-col col-2>
+              <button (click)="presentAlertInput('Objeto',3, item)" class="plus-item" ion-button icon-only clear>
+                <ion-icon name="add"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-list class="items-padding">
+        <ion-list-header class="">
+          Objetos
+        </ion-list-header>
+        <ion-card class="" *ngFor="let furniture of item.furniture">
+          <ion-card-content class="">
+            <ion-row align-items-center justify-content-center>
+              <ion-col>
+                {{furniture.name}}
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+
+      </ion-list>
+
+    </ion-list>
+
+    </ion-list> -->
 </ion-content>

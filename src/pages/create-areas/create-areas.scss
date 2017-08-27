@@ -18,6 +18,10 @@ page-create-areas {
     font-size: 1em;
     color: #044569 !important;
   }
+  .header-buttons{
+    width: 21px;
+    height: 30px;
+  }
   .card-title {
     position: absolute;
     top: 45%;
@@ -27,9 +31,10 @@ page-create-areas {
     font-weight: bold;
   }
   .plus-item {
-    position: absolute;
-    top: 5px;
-    right: 0;
+    height: 30px !important;
     color: #959595;
+  }
+  .items-padding{
+    padding-left: 10%;
   }
 }

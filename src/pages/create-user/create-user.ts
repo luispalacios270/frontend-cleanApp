@@ -50,7 +50,6 @@ export class CreateUserPage {
     });
     if (navParams.get("user") != null)
       this.user = navParams.get("user");
-
   }
 
   takePicture() {
@@ -65,11 +64,12 @@ export class CreateUserPage {
   }
 
   editAreas(user: object) {
-    let createAreasPages = this.modalCtrl.create(CreateAreasPage, { user: user });
+    /* let createAreasPages = this.modalCtrl.create(CreateAreasPage, { user: user });
     createAreasPages.onDidDismiss(() => {
       this.navCtrl.pop();
     })
-    createAreasPages.present();
+    createAreasPages.present(); */
+    this.navCtrl.push(CreateAreasPage, { user });
   }
 
 

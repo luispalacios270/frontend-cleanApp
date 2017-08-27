@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController, ToastController } from 'ionic-angular';
 import { ServicesProvider } from '../../providers/services/services';
 import { ServiceDetailPage } from '../service-detail/service-detail'
@@ -12,9 +12,13 @@ import * as globalVariables from '../../global'
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
+export class HomePage implements OnInit {
+
+  clients: Array<any>;
 
   api: string = globalVariables.API_ENDPOINT;
+
+  segment: string = '0';
 
   servicesList: Array<object>;
 
@@ -39,32 +43,41 @@ export class HomePage {
       return 'url('+this.api+'/containers/client-'+picId+'/download/profilePic.jpg), url('++')';
     }*/
 
-  constructor(public navCtrl: NavController, public services: ServicesProvider, public alert: AlertController, public toast: ToastController, public storage: Storage, public clientService: ClientProvider) {
+  constructor(
+    public navCtrl: NavController,
+    public services: ServicesProvider,
+    public alert: AlertController,
+    public toast: ToastController,
+    public storage: Storage,
+    public clientService: ClientProvider
+  ) { }
+
+  ngOnInit() {
     this.updateLists(null);
   }
 
- /*  editClient() {
-    this.clientService.getClients()
-      .then((result: Array<object>) => {
-        let alert = this.alert.create();
-        alert.setTitle('Clientes');
-
-
-        alert.addButton('Cancel');
-        alert.addButton({
-          text: 'OK',
-          handler: data => {
-            console.log(data);
-          }
-        });
-        alert.present();
-
-      })
-      .catch(err => {
-
-      });
-
-  } */
+  /*  editClient() {
+     this.clientService.getClients()
+       .then((result: Array<object>) => {
+         let alert = this.alert.create();
+         alert.setTitle('Clientes');
+ 
+ 
+         alert.addButton('Cancel');
+         alert.addButton({
+           text: 'OK',
+           handler: data => {
+             console.log(data);
+           }
+         });
+         alert.present();
+ 
+       })
+       .catch(err => {
+ 
+       });
+ 
+   } */
 
   doOption(option: number) {
     switch (option) {
@@ -102,37 +115,45 @@ export class HomePage {
 
   }
 
+  modifyUser(client) {
+    this.navCtrl.push(CreateUserPage, { user: client });
+  }
+
   updateLists(refresher: any) {
 
     this.services.getServicesWithClientsNoFinished().then((result: Array<object>) => {
-      console.log("Unfinished Services", result);
       this.servicesListActives = result;
-      this.selectList(this.onlyFinished);
-      /*  if (!this.onlyFinished) {
-         console.log("Entro a unfinished", this.onlyFinished);
-         this.selectedList = this.servicesListActives;
-         this.serviceListAux = this.servicesListActives;
-       } */
+      this.selectList();
       if (refresher != null) {
         refresher.complete();
       }
-
     }).catch(err => {
       if (refresher != null) {
         refresher.complete();
       }
-      console.log(err);
-    });
 
+    });
     this.services.getServicesWithClientsFinished().then((result: Array<object>) => {
-      console.log("Finished Services", result);
+
       this.servicesListFinished = result;
-      this.selectList(this.onlyFinished);
-      // this.serviceListAux = result;
+      this.selectList();
+
     }).catch(err => {
-      console.log(err);
+
     });
+
+    this.updateClients();
+
+
   }
+
+  updateClients() {
+    this.clientService.getClients()
+      .then((resp: Array<any>) => this.clients = resp)
+      .catch(err => console.log(err));
+  }
+
+
 
   createUser() {
     this.navCtrl.push(CreateUserPage);
@@ -150,9 +171,36 @@ export class HomePage {
     });
   }
 
-  selectList(switchList: boolean) {
-    this.onlyFinished = switchList;
-    console.log(this.onlyFinished);
+  test(testVariable: boolean = false) {
+    return testVariable;
+  }
+
+  selectList() {
+    const option = Number(this.segment);
+    switch (option) {
+      case 0:
+        this.selectedList = this.servicesListActives;
+        this.serviceListAux = this.servicesListActives;
+        break;
+      case 1:
+        this.selectedList = this.servicesListFinished;
+        this.serviceListAux = this.servicesListFinished;
+        break;
+      case 2:
+        this.selectedList = this.servicesListFinished;
+        this.serviceListAux = this.servicesListFinished;
+        break;
+      default:
+        this.selectedList = this.servicesListActives;
+        this.serviceListAux = this.servicesListActives;
+        break;
+
+    }
+    return;/* 
+
+
+
+
     if (this.onlyFinished) {
       this.selectedList = this.servicesListFinished;
       this.serviceListAux = this.servicesListFinished;
@@ -160,7 +208,7 @@ export class HomePage {
     if (!this.onlyFinished) {
       this.selectedList = this.servicesListActives;
       this.serviceListAux = this.servicesListActives;
-    }
+    } */
   }
 
   deleteService(serviceId: string) {
@@ -206,13 +254,11 @@ export class HomePage {
   }
 
   doFilter() {
-    /*console.log(this.searchFirlter);*/
     if (this.searchFirlter != null && this.searchFirlter != '')
       this.serviceListAux = this.selectedList.filter((item: any) => {
         return (
           item.client.realm.toLowerCase().includes(this.searchFirlter.toLowerCase()) ||
           item.client.address.toLowerCase().includes(this.searchFirlter.toLowerCase())
-          // item.client.realm.toLowerCase().includes(this.searchFirlter.toLowerCase())
         );
       });
     else
@@ -220,6 +266,6 @@ export class HomePage {
   }
 
   ionViewDidEnter() {
-    /* this.updateLists(); */
+
   }
 }

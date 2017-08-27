@@ -17,6 +17,7 @@ import { PicturePage } from '../pages/picture/picture';
 import { SignaturePage } from '../pages/signature/signature'
 import { CreateUserPage } from '../pages/create-user/create-user'
 import { CreateAreasPage } from '../pages/create-areas/create-areas'
+import { CreateItemPage } from '../pages/create-item/create-item'
 
 import { IonicStorageModule } from '@ionic/storage';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -35,6 +36,7 @@ import { ClientProvider } from '../providers/client/client';
 import { Camera } from '@ionic-native/camera';
 import { SignaturePadModule } from 'angular2-signaturepad';
 import { ItemInspectionProvider } from '../providers/item-inspection/item-inspection';
+import { UrlPicDirective } from '../directives/url-pic/url-pic';
 
 
 
@@ -54,12 +56,22 @@ import { ItemInspectionProvider } from '../providers/item-inspection/item-inspec
     PicturePage,
     SignaturePage,
     CreateUserPage,
-    CreateAreasPage
+    CreateAreasPage,
+    UrlPicDirective,
+    CreateItemPage
+
   ],
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      menuType: 'overlay'/* ,
+      platforms: {
+        ios: {
+          menuType: 'overlay',
+        }
+      } */
+    }),
     IonicStorageModule.forRoot(),
     SignaturePadModule
   ],
@@ -79,7 +91,8 @@ import { ItemInspectionProvider } from '../providers/item-inspection/item-inspec
     PicturePage,
     SignaturePage,
     CreateUserPage,
-    CreateAreasPage
+    CreateAreasPage,
+    CreateItemPage
   ],
   providers: [
     StatusBar,
