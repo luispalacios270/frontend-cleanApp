@@ -35,6 +35,7 @@ export class PicturePage implements OnInit {
     //Add 'implements OnInit' to the class.
 
     let futnitureId = this.params.get("furnitureId");
+    futnitureId = futnitureId.id;
     let isBeforePic = this.params.get("isBeforePic");
     if (isBeforePic)
       this.files.getBeforePics(futnitureId)

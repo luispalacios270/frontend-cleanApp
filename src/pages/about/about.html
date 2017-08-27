@@ -45,7 +45,7 @@
             {{item.name}}
           </td>
           <td *ngIf="item.totalItem!=0">
-            {{100*(item.doneItem / item.totalItem)}}%
+            {{100*(item.doneItem / item.totalItem) | number:'1.2' }}%
           </td>
           <td *ngIf="item.totalItem==0">
             Sin Atículos

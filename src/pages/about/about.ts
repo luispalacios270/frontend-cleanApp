@@ -91,7 +91,7 @@ export class AboutPage {
     var myChart = new Chart(ctx, {
       type: 'pie',
       data: {
-        labels: ["Terminado", "Sin Terminar"/*, "Yellow", "Green", "Purple", "Orange"*/],
+        labels: ["Terminado", "Pendiente"/*, "Yellow", "Green", "Purple", "Orange"*/],
         datasets: [{
           /*label: '# of Votes',*/
           data: [this.service.done, (this.service.total - this.service.done)],

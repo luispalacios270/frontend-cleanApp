@@ -28,7 +28,8 @@ export class ItemDetailPage {
     quality: 50,
     destinationType: this.cameraCtrl.DestinationType.DATA_URL,
     encodingType: this.cameraCtrl.EncodingType.JPEG,
-    mediaType: this.cameraCtrl.MediaType.PICTURE
+    mediaType: this.cameraCtrl.MediaType.PICTURE,
+    correctOrientation: true
   };
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public itemProvider: ItemProvider, public actionSheet: ActionSheetController, private cameraCtrl: Camera, public storage: Storage, public modalCtrl: ModalController, public toast: ToastController, public inspectionProvider: ItemInspectionProvider, public filesProvider: FilesProvider, public alertCtrl: AlertController) {
