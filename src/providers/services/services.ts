@@ -28,10 +28,10 @@ export class ServicesProvider {
     });
   }
 
-  generatePDF(serviceId, signatureClient, signatureInspector, clientName) {
+  generatePDF(service, signatureClient, signatureInspector, clientName) {
     let end_point: string = '/generatePDF';
     let data: object = {
-      serviceId: serviceId,
+      service: service,
       signatureClient: signatureClient,
       signatureInspector: signatureInspector,
       clientName: clientName

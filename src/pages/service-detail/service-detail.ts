@@ -6,6 +6,11 @@ import { ClientProvider } from '../../providers/client/client';
 import { CreateUserPage } from '../create-user/create-user'
 import { TabsPage } from '../tabs/tabs';
 import { Storage } from '@ionic/storage';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
+import { SocialSharing } from '@ionic-native/social-sharing';
+
+import * as globalVariables from '../../global'
 
 @IonicPage()
 @Component({
@@ -18,11 +23,24 @@ export class ServiceDetailPage {
   service: any;
   areas: Array<any>;
   items: Array<any>;
-
+  api: string = globalVariables.API_ENDPOINT;
   selectedArea: string = '';
+  fileTransfer: FileTransferObject = this.transfer.create();
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public servicesProvider: ServicesProvider, public areaPrividerProvider: AreaPrividerProvider, public alertCtrl: AlertController, public clientService: ClientProvider, public storage: Storage, public toastCtrl: ToastController) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public servicesProvider: ServicesProvider,
+    public areaPrividerProvider: AreaPrividerProvider,
+    public alertCtrl: AlertController,
+    public clientService: ClientProvider,
+    public storage: Storage,
+    public toastCtrl: ToastController,
+    private transfer: FileTransfer,
+    private file: File,
+    private socialSharing: SocialSharing
+  ) {
     this.service = navParams.get('service');
     console.log("Servicio", this.service);
     clientService.getClientAreas(this.service.client.id)
@@ -40,6 +58,41 @@ export class ServiceDetailPage {
         user: this.service.client
       });
   }
+
+  downloadPdf(service: any) {
+    const url: string = `${this.api}/containers/pdf/download/${service.id}.pdf`;
+    this.socialSharing.share("test", null, url, url)
+      .then(result => this.toastCtrl.create({
+        duration: 3000,
+        message: "Share",
+        position: "bottom"
+      }).present())
+      .catch(err => {
+        this.toastCtrl.create({
+          duration: 3000,
+          message: "Hubo un error",
+          position: "bottom"
+        }).present();
+      });
+  }
+
+  /* downloadPdf(service: any) {
+    const url: string = `${this.api}/containers/pdf/download/${service.id}.pdf`;
+    this.fileTransfer.download(url, this.file.externalRootDirectory + 'file.pdf').then((entry) => {
+      this.toastCtrl.create({
+        duration: 3000,
+        message: "Descarga finalizada",
+        position: "bottom"
+      }).present();
+      console.log('download complete: ' + entry.toURL());
+    }, (error) => {
+      this.toastCtrl.create({
+        duration: 3000,
+        message: "Hubo un error",
+        position: "bottom"
+      }).present();      
+    });
+  } */
 
   selectItem(item: object, areaName: string) {
     this.storage.set("currentService", this.service.id)

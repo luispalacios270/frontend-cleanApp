@@ -20,6 +20,8 @@ export class AprobationPage {
   }
   serviceId: string = '';
 
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public modal: ModalController, public alertCtrl: AlertController, public serviceProvider: ServicesProvider, public toastCtrl: ToastController, public storage: Storage) {
     this.storage.get('currentService').then(val => {
       this.serviceId = val;
@@ -28,12 +30,12 @@ export class AprobationPage {
 
   finishService() {
     this.serviceProvider.updateService(this.serviceId, this.service)
-      .then(() => {
-        this.serviceProvider.generatePDF(this.serviceId, this.signatureClient, this.signatureInspector, this.aprobationName)
+      .then((resultService) => {
+        this.serviceProvider.generatePDF(resultService, this.signatureClient, this.signatureInspector, this.aprobationName)
           .then((result) => {
             this.alertCtrl.create({
               title: "Servicio Finalizado",
-              subTitle: "El servicio fue finalizado. Se enviará un correo al usuario con la información.",
+              subTitle: "El servicio fue finalizado y el pdf fue creado",
               buttons: ['OK']
             }).present();
           })

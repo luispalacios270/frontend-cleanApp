@@ -78,8 +78,9 @@ export class LoginPage {
 
 
   login() {
-    this.navCtrl.push(HomePage);
-   /*  let loader = this.loadingCtrl.create({
+    // this.navCtrl.push(HomePage);
+    this.user.email = this.user.email.trim();
+    let loader = this.loadingCtrl.create({
       content: "Cargando"
     });
     loader.present();
@@ -98,6 +99,6 @@ export class LoginPage {
         }).present();
       } else
         this.wrongUser = true;
-    }); */
+    });
   }
 }

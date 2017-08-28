@@ -6,6 +6,8 @@ import { EditServicePage } from '../edit-service/edit-service'
 import { CreateUserPage } from '../create-user/create-user'
 import { Storage } from '@ionic/storage';
 import { ClientProvider } from '../../providers/client/client';
+
+
 import * as globalVariables from '../../global'
 
 @Component({
@@ -19,6 +21,8 @@ export class HomePage implements OnInit {
   api: string = globalVariables.API_ENDPOINT;
 
   segment: string = '0';
+
+
 
   servicesList: Array<object>;
 
@@ -36,12 +40,7 @@ export class HomePage implements OnInit {
   // Auxiliar Array to do the filters
   serviceListAux: Array<object>;
   searchFirlter: string;
-
-  // currentService: string = "";
-
-  /*  getImage(picId:string){
-      return 'url('+this.api+'/containers/client-'+picId+'/download/profilePic.jpg), url('++')';
-    }*/
+  
 
   constructor(
     public navCtrl: NavController,
@@ -49,35 +48,19 @@ export class HomePage implements OnInit {
     public alert: AlertController,
     public toast: ToastController,
     public storage: Storage,
-    public clientService: ClientProvider
+    public clientService: ClientProvider,
+   
   ) { }
 
   ngOnInit() {
     this.updateLists(null);
   }
 
-  /*  editClient() {
-     this.clientService.getClients()
-       .then((result: Array<object>) => {
-         let alert = this.alert.create();
-         alert.setTitle('Clientes');
- 
- 
-         alert.addButton('Cancel');
-         alert.addButton({
-           text: 'OK',
-           handler: data => {
-             console.log(data);
-           }
-         });
-         alert.present();
- 
-       })
-       .catch(err => {
- 
-       });
- 
-   } */
+
+
+
+
+
 
   doOption(option: number) {
     switch (option) {
@@ -93,6 +76,8 @@ export class HomePage implements OnInit {
     }
 
   }
+
+  
 
   showOption() {
     let alert = this.alert.create();

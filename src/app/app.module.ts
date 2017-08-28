@@ -37,6 +37,9 @@ import { Camera } from '@ionic-native/camera';
 import { SignaturePadModule } from 'angular2-signaturepad';
 import { ItemInspectionProvider } from '../providers/item-inspection/item-inspection';
 import { UrlPicDirective } from '../directives/url-pic/url-pic';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 
 
@@ -65,12 +68,7 @@ import { UrlPicDirective } from '../directives/url-pic/url-pic';
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp, {
-      menuType: 'overlay'/* ,
-      platforms: {
-        ios: {
-          menuType: 'overlay',
-        }
-      } */
+      menuType: 'overlay'
     }),
     IonicStorageModule.forRoot(),
     SignaturePadModule
@@ -111,7 +109,10 @@ import { UrlPicDirective } from '../directives/url-pic/url-pic';
     Camera,
     SignaturePadModule,
     FilesProvider,
-    ItemInspectionProvider
+    ItemInspectionProvider,
+    FileTransfer,
+    File,
+    SocialSharing
   ]
 })
 export class AppModule { }

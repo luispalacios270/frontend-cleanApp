@@ -47,6 +47,9 @@
   <ion-row justify-content-center>
     <button ion-button menuToggle> Realizar Inspección </button>
   </ion-row>
+  <ion-row justify-content-center *ngIf="service.finalDate">
+    <button ion-button (click)="downloadPdf(service)">Descargar PDF</button>
+  </ion-row>
 
 
   <ion-card>
