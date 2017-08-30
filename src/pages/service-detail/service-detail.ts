@@ -42,17 +42,14 @@ export class ServiceDetailPage {
     private socialSharing: SocialSharing
   ) {
     this.service = navParams.get('service');
-    console.log("Servicio", this.service);
     clientService.getClientAreas(this.service.client.id)
       .then((result: Array<object>) => {
-        console.log("areas", result);
         this.areas = result;
-        // this.auxList = this.areas;
       }).catch(err => console.log(err));
   }
 
   editUser() {
-    console.log(this.service.client);
+    // console.log(this.service.client);
     this.navCtrl.push(CreateUserPage,
       {
         user: this.service.client
@@ -61,16 +58,12 @@ export class ServiceDetailPage {
 
   downloadPdf(service: any) {
     const url: string = `${this.api}/containers/pdf/download/${service.id}.pdf`;
-    this.socialSharing.share("test", null, url, url)
-      .then(result => this.toastCtrl.create({
-        duration: 3000,
-        message: "Share",
-        position: "bottom"
-      }).present())
+    this.socialSharing.share("Compartir PDF", null, url)
+      .then()
       .catch(err => {
         this.toastCtrl.create({
           duration: 3000,
-          message: "Hubo un error",
+          message: "El PDF no se encuentra generado aún",
           position: "bottom"
         }).present();
       });
@@ -104,11 +97,7 @@ export class ServiceDetailPage {
               .then(result => {
                 this.navCtrl.push(TabsPage, {
                   navCtrl: this.navCtrl
-                }
-                /*, {
-              item: item,
-              areaName: areaName
-            }*/);
+                });
               })
               .catch(err => console.log(err))
 
@@ -116,7 +105,6 @@ export class ServiceDetailPage {
           .catch(err => {
             console.log(err);
           })
-        // this.currentService = result;
       })
       .catch(err => console.log(err));
   }
@@ -124,7 +112,7 @@ export class ServiceDetailPage {
   selectArea(areaId: string, areaName: string) {
     this.areaPrividerProvider.getItems(areaId)
       .then((result: Array<object>) => {
-        console.log("items", result);
+        // console.log("items", result);
         if (result.length == 0) {
           this.toastCtrl.create({
             message: "El area seleccionado no cuenta con items",

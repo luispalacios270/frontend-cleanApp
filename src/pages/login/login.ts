@@ -28,7 +28,7 @@ export class LoginPage {
   token: any;
 
   //Parameters for the login.
-  user: object = {
+  user: any = {
     email: "",
     password: ""
   }
@@ -79,7 +79,10 @@ export class LoginPage {
 
   login() {
     // this.navCtrl.push(HomePage);
-    this.user.email = this.user.email.trim();
+    let emailTrimmed: string = this.user.email;
+    emailTrimmed = emailTrimmed.trim();
+    this.user.email = emailTrimmed;
+    // this.us e r.email = th is.user.email.trim();
     let loader = this.loadingCtrl.create({
       content: "Cargando"
     });

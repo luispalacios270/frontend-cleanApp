@@ -34,6 +34,7 @@
         "@ionic-native/status-bar": "3.10.2",
         "@ionic-native/toast": "^3.12.1",
         "@ionic/storage": "^2.0.1",
+        "angular": "^1.6.6",
         "angular2-signaturepad": "^2.6.0",
         "chart.js": "^2.6.0",
         "cordova-android": "^6.0.0",
