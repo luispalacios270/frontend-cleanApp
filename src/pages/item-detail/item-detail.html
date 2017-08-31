@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>      
+    <ion-title>
       <p *ngIf="item" (click)="selectService()" class="center-text no-margin">{{item.name.toUpperCase()}}</p>
     </ion-title>
   </ion-navbar>
@@ -120,7 +120,7 @@
 
   </ion-item>-->
 
- <!-- <ion-card>
+  <!-- <ion-card>
 
     <ion-card-header>
       <ion-item-divider class="header-furniture" text-wrap>
@@ -202,21 +202,22 @@
             </button>
           </ion-col>
           <ion-col>
+            <button (click)="rankFurniture(furniture,0)" class="adjust no-padding" ion-button clear>
+                <div [ngClass]="{'grey': furniture.furnitureInspections.length>0 && furniture.furnitureInspections[0].qualification==0}" class="ranking parent">
+                  <span class="center-item">R</span>
+                  <div [hidden]="furniture.furnitureInspections.length>0 && furniture.furnitureInspections[0].qualification==0" class="sub-ranking grey"></div>
+                </div>
+              </button>
+          </ion-col>
+          <ion-col>
             <button (click)="rankFurniture(furniture,2)" class="adjust no-padding" ion-button clear>
               <div [ngClass]="{'red': furniture.furnitureInspections.length>0 && furniture.furnitureInspections[0].qualification==2}" class="ranking parent">
-                <span class="center-item">R</span>
+                <span class="center-item">M</span>
                 <div [hidden]="furniture.furnitureInspections.length>0 && furniture.furnitureInspections[0].qualification==2" class="sub-ranking red"></div>
               </div>
             </button>
           </ion-col>
-          <ion-col>
-            <button (click)="rankFurniture(furniture,0)" class="adjust no-padding" ion-button clear>
-              <div [ngClass]="{'grey': furniture.furnitureInspections.length>0 && furniture.furnitureInspections[0].qualification==0}" class="ranking parent">
-                <span class="center-item">ND</span>
-                <div [hidden]="furniture.furnitureInspections.length>0 && furniture.furnitureInspections[0].qualification==0" class="sub-ranking grey"></div>
-              </div>
-            </button>
-          </ion-col>
+
 
         </ion-row>
       </ion-item-divider>

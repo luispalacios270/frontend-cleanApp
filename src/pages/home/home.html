@@ -102,7 +102,7 @@
   </div>
 
   <ion-list [hidden]="segment!=='2'">
-    <ion-card (click)="modifyUser(client)" *ngFor="let client of clients">
+    <ion-card (click)="modifyUser(client)" *ngFor="let client of clientsFiltered">
       <ion-card-content>
         <ion-row align-items-center justify-content-center>
           <ion-col col-3>
