@@ -18,6 +18,8 @@ export class HomePage implements OnInit {
 
   clients: Array<any>;
 
+  clientsFiltered: Array<any>;
+
   api: string = globalVariables.API_ENDPOINT;
 
   segment: string = '0';
@@ -40,7 +42,7 @@ export class HomePage implements OnInit {
   // Auxiliar Array to do the filters
   serviceListAux: Array<object>;
   searchFirlter: string;
-  
+
 
   constructor(
     public navCtrl: NavController,
@@ -49,7 +51,7 @@ export class HomePage implements OnInit {
     public toast: ToastController,
     public storage: Storage,
     public clientService: ClientProvider,
-   
+
   ) { }
 
   ngOnInit() {
@@ -77,7 +79,7 @@ export class HomePage implements OnInit {
 
   }
 
-  
+
 
   showOption() {
     let alert = this.alert.create();
@@ -134,7 +136,10 @@ export class HomePage implements OnInit {
 
   updateClients() {
     this.clientService.getClients()
-      .then((resp: Array<any>) => this.clients = resp)
+      .then((resp: Array<any>) => {
+        this.clients = resp;
+        this.clientsFiltered = resp;
+      })
       .catch(err => console.log(err));
   }
 
@@ -156,9 +161,9 @@ export class HomePage implements OnInit {
     });
   }
 
-  test(testVariable: boolean = false) {
-    return testVariable;
-  }
+  /*  test(testVariable: boolean = false) {
+     return testVariable;
+   } */
 
   selectList() {
     const option = Number(this.segment);
@@ -239,15 +244,22 @@ export class HomePage implements OnInit {
   }
 
   doFilter() {
-    if (this.searchFirlter != null && this.searchFirlter != '')
+    if (this.searchFirlter != null && this.searchFirlter != '') {
       this.serviceListAux = this.selectedList.filter((item: any) => {
         return (
           item.client.realm.toLowerCase().includes(this.searchFirlter.toLowerCase()) ||
           item.client.address.toLowerCase().includes(this.searchFirlter.toLowerCase())
         );
       });
-    else
+      this.clientsFiltered = this.clients.filter((client) => {
+        return (client.realm.toLowerCase().includes(this.searchFirlter.toLowerCase()) ||
+          client.address.toLowerCase().includes(this.searchFirlter.toLowerCase()))
+      });
+    }
+    else {
       this.serviceListAux = this.selectedList;
+      this.clientsFiltered = this.clients;
+    }
   }
 
   ionViewDidEnter() {

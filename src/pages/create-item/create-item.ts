@@ -47,15 +47,18 @@ export class CreateItemPage implements OnInit {
   }
 
   createFurniture() {
-    
+
     const option: number = 0;
     this.presentAlertInput("Crear Objeto", option);
   }
 
   deleteFurniture(furniture: any, index: number) {
     this.itemProvider.deleteItemFurniture(this.item.id, furniture)
-      .then(result => this.item.furnitures.splice(index, 1))
-      .catch(err => this.showErr());
+      .then(result => this.item.furniture.splice(index, 1))
+      .catch(err => {
+        this.showErr();
+        console.log(err)
+      });
   }
 
   editFurniture(furniture: object) {
