@@ -24,7 +24,7 @@
   <div>
     <ion-row>
       <ion-col col-4 offset-4>
-        <div *ngIf="img==''" [ngStyle]="{'background-image': 'url('+api+'/containers/client-'+user.id+'/download/profilePic.jpg), url(http://simpleicon.com/wp-content/uploads/user1.png)'}"
+        <div *ngIf="img==''" [ngStyle]="{'background-image': 'url('+api+'/containers/client-'+user.id+'/download/profilePic.jpg), url(assets/images/user.png)'}"
           class="user-icon parent" (click)="takePicture()">
           <ion-icon id="picture-icon-user" name="camera"></ion-icon>
         </div>
