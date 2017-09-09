@@ -24,8 +24,6 @@ export class HomePage implements OnInit {
 
   segment: string = '0';
 
-
-
   servicesList: Array<object>;
 
   onlyFinished: boolean = false;
@@ -50,20 +48,13 @@ export class HomePage implements OnInit {
     public alert: AlertController,
     public toast: ToastController,
     public storage: Storage,
-    public clientService: ClientProvider,
-
+    public clientService: ClientProvider
   ) { }
 
   ngOnInit() {
     // this.updateLists(null);
     // this.navCtrl.setRoot(HomePage);
   }
-
-
-
-
-
-
 
   doOption(option: number) {
     switch (option) {
