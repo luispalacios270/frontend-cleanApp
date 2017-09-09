@@ -34,7 +34,7 @@ export class ServicesProvider {
       service: service,
       signatureClient: signatureClient,
       signatureInspector: signatureInspector,
-      clientName: clientName
+      aprobationName: clientName
     }
     return new Promise((resolve, reject) => {
       this.http.post(this.link + this.modelEndPoint + end_point, data, this.options)

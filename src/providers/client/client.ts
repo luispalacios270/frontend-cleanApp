@@ -42,6 +42,17 @@ export class ClientProvider {
     });
   }
 
+  deleteClient(clientId: string) {
+    const endPoint: string = `${this.link + this.modelEndPoint}/${clientId}/services`;
+    return new Promise((resolve, reject) => {
+      this.http.delete(endPoint, this.options)
+        .map(res => res.json())
+        .subscribe(result => resolve(result)
+        , err => reject(err));
+    });
+
+  }
+
   getClientAreas(clientId: string) {
     let end_point: string = "/" + clientId + "/areas"
     return new Promise((resolve, reject) => {

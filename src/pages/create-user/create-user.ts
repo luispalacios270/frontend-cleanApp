@@ -136,6 +136,43 @@ export class CreateUserPage {
       })
   }
 
+  presentConfirmDelete() {
+    this.alertCtrl.create({
+      title: "Eliminación de cliente",
+      message: "Esta seguro que desea eliminar el archivo",
+      buttons: [
+        {
+          text: "No",
+          role: "cancel"
+        },
+        {
+          text: "Si",
+          handler: () => {
+            this.deleteUser();
+          }
+        }
+      ]
+    }).present();
+
+    // this.clientProvider.deleteClient(this.user.id)
+
+
+  }
+
+
+  deleteUser() {
+    this.clientProvider.deleteClient(this.user.id)
+      .then(() => this.navCtrl.popTo(this.navCtrl.getByIndex(1)))
+      .catch(() => {
+        this.toastCtrl.create({
+          message: "Ha pasado un problema",
+          duration: 3000,
+          position: "bottom center"
+        }).present();
+      });
+
+  }
+
   updateUser() {
     this.user.email = this.user.email.trim();
     this.clientProvider.updateUser(this.user.id, this.user)

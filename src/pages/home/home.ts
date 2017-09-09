@@ -55,7 +55,8 @@ export class HomePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.updateLists(null);
+    // this.updateLists(null);
+    // this.navCtrl.setRoot(HomePage);
   }
 
 
@@ -262,7 +263,11 @@ export class HomePage implements OnInit {
     }
   }
 
-  ionViewDidEnter() {
+  ionViewDidLoad() {
+    // this.navCtrl.setRoot(HomePage);
+  }
 
+  ionViewDidEnter() {
+    this.updateLists(null);
   }
 }
