@@ -1,6 +1,6 @@
 page-notes {
   .header-furniture {
-    color: $main-color;
+    color: map-get($colors, primary);
     font-size: 1.35em !important;
     font-weight: bold;
   }

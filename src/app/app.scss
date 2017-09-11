@@ -17,6 +17,11 @@ ion-app {
   font-family: 'Open Sans', sans-serif !important;
 }
 
+.app-title{
+  font-weight: bold;    
+  color:map-get($colors, primary);
+}
+
 $main-color: cornflowerblue;
 .no-margin {
   margin: 0 !important;

@@ -5,10 +5,10 @@ page-about {
   .pie-caption {
     margin: 4px 0 0 0;
     font-size: 1.25em;
-    color: #017dc3;
+    color: map-get($colors,primary);
   }
   .header-summary {
-    color: cornflowerblue;
+    color: map-get($colors,primary);
     font-size: 1.35em;
     width: 100%;
     text-align: center
@@ -21,7 +21,7 @@ page-about {
     border-bottom: 1px solid rgb(235, 236, 237);
   }
   th {
-    color: rgb(2, 141, 255);
+    color: map-get($colors,primary);;
   }
   td {}
   .progress-bar {

@@ -5,9 +5,15 @@ page-create-user {
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
-    border-radius: 50%;
-    border: solid 0.18em #017dc3;
+    // border-radius: 50%;
+    // border: solid 0.18em map-get($colors, primary);
   }
+
+  .border{
+    border-radius: 50%;
+    border: solid 0.18em map-get($colors, primary);
+  }
+
   .imte-inner {
     margin-top: 30px !important;
   }
@@ -18,7 +24,7 @@ page-create-user {
     position: absolute;
     bottom: 0;
     right: 0;
-    color: #017dc3;
+    color: map-get($colors, primary);
     font-size: 1.25em;
   }
 }

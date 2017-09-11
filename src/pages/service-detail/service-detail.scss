@@ -13,6 +13,20 @@ page-service-detail {
     .scroll-content {
       // background: #d4d2d2;
       background: #353438;
+      padding:0 !important;
+
+      button{
+        transition: none;
+        background: transparent;
+        color: white;
+        border-bottom: 1px solid map-get($colors,primary) !important;
+        // border-top: 1px solid map-get($colors,primary) !important;
+
+        .item-inner{
+          border: none !important;
+
+        }
+      }
     }
   }
   .items {
@@ -21,7 +35,7 @@ page-service-detail {
   }
   .header-card {
     font-size: 1.55em !important;
-    color: cornflowerblue;
+    // color: cornflowerblue;
   }
   .label-item {
     color: grey

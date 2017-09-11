@@ -22,7 +22,9 @@ page-home {
   }
   .client-name {
     font-size: 1em !important;
-    color: cornflowerblue;
+    font-weight: bold;    
+    color:map-get($colors, primary);
+    // color: cornflowerblue;
   }
   .address {
     color: grey;

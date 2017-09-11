@@ -26,10 +26,10 @@
     <ion-row>
       <ion-col col-4 offset-4>
         <div *ngIf="img==''" [ngStyle]="{'background-image': 'url('+api+'/containers/client-'+user.id+'/download/profilePic.jpg), url(assets/images/user.png)'}"
-          class="user-icon parent" (click)="takePicture()">
+          class="user-icon border parent" (click)="takePicture()">
           <ion-icon id="picture-icon-user" name="camera"></ion-icon>
         </div>
-        <img (click)="takePicture()" *ngIf="img!=''" [src]="img">
+        <img (click)="takePicture()" class="border" *ngIf="img!=''" [src]="img">
       </ion-col>
     </ion-row>
 
