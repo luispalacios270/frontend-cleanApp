@@ -161,7 +161,8 @@ export class CreateUserPage {
 
 
   deleteUser() {
-    this.clientProvider.deleteClient(this.user.id)
+    this.clientProvider.deleteClientServices(this.user.id)
+      .then(() => this.clientProvider.deleteClient(this.user.id))
       .then(() => this.navCtrl.popTo(this.navCtrl.getByIndex(1)))
       .catch(() => {
         this.toastCtrl.create({

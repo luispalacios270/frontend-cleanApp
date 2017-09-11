@@ -181,9 +181,12 @@ export class ItemDetailPage {
         .then(result => {
           console.log()
           furniture.furnitureInspections[0] = result;
-          this.navCtrl.push(NotesPage, {
+          /* this.navCtrl.push(NotesPage, {
             furniture: furniture.furnitureInspections[0]
-          });
+          }); */
+          this.modalCtrl.create(NotesPage, {
+            furniture: furniture.furnitureInspections[0]
+          }).present();
         })
         .catch(err => {
           console.log(err);
