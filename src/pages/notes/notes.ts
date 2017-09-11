@@ -50,10 +50,10 @@ export class NotesPage {
           position: 'bottom center'
         }).present();
         // this.originalFurniture = this.furniture;
-        this.originalFurniture.notesActionPlan= this.furniture.notesActionPlan;
-        this.originalFurniture.notesAdministrator= this.furniture.notesAdministrator;
-        this.originalFurniture.notesClient= this.furniture.notesClient;
-        this.originalFurniture.notesInspector= this.furniture.notesInspector;
+        this.originalFurniture.notesActionPlan = this.furniture.notesActionPlan;
+        this.originalFurniture.notesAdministrator = this.furniture.notesAdministrator;
+        this.originalFurniture.notesClient = this.furniture.notesClient;
+        this.originalFurniture.notesInspector = this.furniture.notesInspector;
         this.viewCtrl.dismiss(this.originalFurniture);
         // this.viewCtrl.dismiss(this.furniture);
 
