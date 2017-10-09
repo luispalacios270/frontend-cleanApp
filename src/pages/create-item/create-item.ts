@@ -74,7 +74,7 @@ export class CreateItemPage implements OnInit {
       .then(result => {
         let tempFurnitures = this.item.furniture;
         if (tempFurnitures) return tempFurnitures.push(result);
-        return tempFurnitures = [result];
+        return this.item.furniture = [result];
       })
       .catch(err => {
         this.showErr();
