@@ -5,7 +5,7 @@ import { Headers, RequestOptions } from '@angular/http'
 import { AppSettings } from '../../appSettings'
 import 'rxjs/add/operator/map';
 
-@Injectable()/* 
+@Injectable()/*
 export class ItemProvider  {
 
   link: string;
@@ -126,9 +126,12 @@ export class ItemProvider extends providerParent {
 
   editItemFurniture(itemId: string, furniture: any) {
     if (!itemId && !furniture && !furniture.id) return;
+
     const completeEndPoint: string = `${this.link + this.modelEndPoint}/${itemId}/furniture/${furniture.id}`;
+
     return this.putData(completeEndPoint, furniture);
   }
+
 
   /* doLogin(user: object) {
     if (!user) return;

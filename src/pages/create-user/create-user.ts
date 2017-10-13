@@ -6,7 +6,9 @@ import { FilesProvider } from '../../providers/files/files'
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { CreateAreasPage } from '../create-areas/create-areas'
 import * as globalVariables from '../../global'
+
 @IonicPage()
+
 @Component({
   selector: 'page-create-user',
   templateUrl: 'create-user.html',
@@ -55,12 +57,8 @@ export class CreateUserPage {
 
   takePicture() {
     this.cameraCtrl.getPicture(this.options).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it's base64:
       this.img = 'data:image/jpeg;base64,' + imageData;
-    }, (err) => {
-      // Handle error
-    });
+    }, (err) => { });
 
   }
 
