@@ -41,8 +41,6 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 import { File } from '@ionic-native/file';
 import { SocialSharing } from '@ionic-native/social-sharing';
 
-
-
 @NgModule({
   declarations: [
     MyApp,
@@ -113,6 +111,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
     FileTransfer,
     File,
     SocialSharing
+
   ]
 })
 export class AppModule { }
