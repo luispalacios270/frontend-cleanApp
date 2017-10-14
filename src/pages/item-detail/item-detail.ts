@@ -32,6 +32,15 @@ export class ItemDetailPage {
     correctOrientation: true
   };
 
+  optionsGallery: CameraOptions = {
+    quality: 50,
+    destinationType: this.cameraCtrl.DestinationType.DATA_URL,
+    encodingType: this.cameraCtrl.EncodingType.JPEG,
+    mediaType: this.cameraCtrl.MediaType.PICTURE,
+    correctOrientation: true,
+    sourceType: this.cameraCtrl.PictureSourceType.PHOTOLIBRARY
+  };
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public itemProvider: ItemProvider, public actionSheet: ActionSheetController, private cameraCtrl: Camera, public storage: Storage, public modalCtrl: ModalController, public toast: ToastController, public inspectionProvider: ItemInspectionProvider, public filesProvider: FilesProvider, public alertCtrl: AlertController) {
     this.init();
     console.log(this.navCtrl);
@@ -167,6 +176,20 @@ export class ItemDetailPage {
 
   }
 
+  selectPictureFromGallery(isBefore: boolean, furnitureId: string) {
+    this.cameraCtrl.getPicture(this.optionsGallery).then((imageData) => {
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      if (isBefore)
+        this.uploadBeforePic(furnitureId, imageData);
+      else
+        this.uploadAfterPic(furnitureId, imageData);
+
+    }, (err) => {
+      // Handle error
+    });
+
+  }
+
   goToNotes(furniture) {
     if (furniture.furnitureInspections.length > 0)
       this.modalCtrl.create(NotesPage, {
@@ -246,18 +269,60 @@ export class ItemDetailPage {
       title: 'Tomar Foto',
       buttons: [
         {
-          text: 'Tomar foto Antes',
+          text: 'Seleccionar foto Antes',
           handler: () => {
 
-            this.takePicture(true, furniture.furnitureInspections[0].id);
-            console.log('Destructive clicked');
+            this.alertCtrl.create({
+              title: "Visor de imagenes",
+              message: "¿Que fotos quiere ver?",
+              buttons: [
+                {
+                  text: "Seleccionar de galería",
+                  handler: () => {
+                    this.selectPictureFromGallery(true, furniture.furnitureInspections[0].id);
+                  }
+                },
+                {
+                  text: "Tomar Foto",
+                  handler: () => {
+                    this.takePicture(true, furniture.furnitureInspections[0].id);
+                  }
+                }
+              ]
+
+
+            }).present();
+
+
+            // console.log('Destructive clicked');
           }
         },
         {
-          text: 'Tomar Foto depues',
+          text: 'Seleccionar Foto depues',
           handler: () => {
+            this.alertCtrl.create({
+              title: "Visor de imagenes",
+              message: "¿Que fotos quiere ver?",
+              buttons: [
+                {
+                  text: "Antes",
+                  handler: () => {
+                    this.goToSlide(furniture.furnitureInspections[0], true);
+                    // console.log('Archive clicked');
+                  }
+                },
+                {
+                  text: "Después",
+                  handler: () => {
+                    this.goToSlide(furniture.furnitureInspections[0], false);
+                  }
+                }
+              ]
+
+
+            }).present();
             this.takePicture(false, furniture.furnitureInspections[0].id);
-            console.log('Destructive clicked');
+            // console.log('Destructive clicked');
           }
         }, {
           text: 'Ver fotos de objeto',

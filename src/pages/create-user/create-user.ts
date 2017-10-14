@@ -6,7 +6,10 @@ import { FilesProvider } from '../../providers/files/files'
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { CreateAreasPage } from '../create-areas/create-areas'
 import * as globalVariables from '../../global'
+
+
 @IonicPage()
+
 @Component({
   selector: 'page-create-user',
   templateUrl: 'create-user.html',
@@ -42,7 +45,15 @@ export class CreateUserPage {
 
   registerForm: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, public clientProvider: ClientProvider, public files: FilesProvider, public cameraCtrl: Camera, public alertCtrl: AlertController, public modalCtrl: ModalController, public toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public formBuilder: FormBuilder,
+    public clientProvider: ClientProvider,
+    public files: FilesProvider,
+    public cameraCtrl: Camera,
+    public alertCtrl: AlertController,
+    public modalCtrl: ModalController,
+    public toastCtrl: ToastController) {
     this.registerForm = formBuilder.group({
       email: ['', Validators.compose([Validators.maxLength(100), this.emailValidator, Validators.required])],
       realm: ['', Validators.required],
@@ -53,23 +64,48 @@ export class CreateUserPage {
       this.user = navParams.get("user");
   }
 
-  takePicture() {
-    this.cameraCtrl.getPicture(this.options).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it's base64:
-      this.img = 'data:image/jpeg;base64,' + imageData;
-    }, (err) => {
-      // Handle error
-    });
-
+  selectTypeOfPic() {
+    this.alertCtrl.create({
+      title: "Origen de imagen",
+      message: "Seleccione de donde desea obtener la imagen",
+      buttons: [{
+        text: "Galería",
+        role: "cancel",
+        handler: () => {
+          this.selectPictureFromGallery();
+        }
+      }, {
+        text: "Cámara",
+        handler: () => {
+          this.takePicture();
+        }
+      }]
+    }).present();
   }
 
-  editAreas(user: object) {
-    /* let createAreasPages = this.modalCtrl.create(CreateAreasPage, { user: user });
-    createAreasPages.onDidDismiss(() => {
-      this.navCtrl.pop();
-    })
-    createAreasPages.present(); */
+  takePicture() {
+    this.cameraCtrl.getPicture(this.options).then((imageData) => {
+      this.img = 'data:image/jpeg;base64,' + imageData;
+    }, (err) => { })
+  }
+
+  async selectPictureFromGallery() {
+    const temporalCameraOptions = {
+      ...this.options,
+      sourceType: this.cameraCtrl.PictureSourceType.PHOTOLIBRARY
+    };
+
+    try {
+      let image = await this.cameraCtrl.getPicture(temporalCameraOptions);
+      image = `data:image/jpeg;base64,${image}`;
+      this.img = image;
+    } catch (error) {
+      console.log(error);
+
+    }
+  }
+
+  editAreas(user: {}) {
     this.navCtrl.push(CreateAreasPage, { user });
   }
 
@@ -135,6 +171,8 @@ export class CreateUserPage {
         }
       })
   }
+
+
 
   presentConfirmDelete() {
     this.alertCtrl.create({

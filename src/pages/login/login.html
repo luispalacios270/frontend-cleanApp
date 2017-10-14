@@ -43,13 +43,13 @@
         <div class="error-user item-md" [hidden]="!wrongUser">Usuario o contraseña erróneo</div>
         <div padding>
           <ion-row align-items-center>
-            <ion-col col-6>
-              <!--<button ion-button [disabled]="loginForm.invalid" block>Olvido contraseña</button>-->
+            <!-- <ion-col col-6>
+              <button ion-button [disabled]="loginForm.invalid" block>Olvido contraseña</button>
               <a id="forget-pass" href="#">Olvidó contraseña?</a>
-            </ion-col>
-            <ion-col col-6>
-              <button ion-button [disabled]="loginForm.invalid" (click)="login()" color="primary" block>Login</button>
-              <!-- <button ion-button (click)="login()" color="primary" block>Login</button> -->
+            </ion-col> -->
+            <ion-col col-12>
+              <!-- <button ion-button [disabled]="loginForm.invalid" (click)="login()" color="primary" block>Login</button> -->
+              <button ion-button (click)="login()" color="primary" block>Login</button>
             </ion-col>
           </ion-row>          
         </div>

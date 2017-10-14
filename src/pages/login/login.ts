@@ -78,30 +78,30 @@ export class LoginPage {
 
 
   login() {
-    // this.navCtrl.push(HomePage);
-    let emailTrimmed: string = this.user.email;
-    emailTrimmed = emailTrimmed.trim();
-    this.user.email = emailTrimmed;
-    // this.us e r.email = th is.user.email.trim();
-    let loader = this.loadingCtrl.create({
-      content: "Cargando"
-    });
-    loader.present();
-    this.userServiceProvider.doLogin(this.user).then(result => {
-      loader.dismiss();
-      this.token = result;
-      this.navCtrl.push(HomePage);
-    }).catch(err => {
-      loader.dismiss();
-      // console.log(err);
-      if (err.name === 'TimeoutError') {
-        this.toast.create({
-          message: 'El servidor no esta disponible',
-          duration: 3000,
-          position: 'bottom'
-        }).present();
-      } else
-        this.wrongUser = true;
-    });
+    this.navCtrl.push(HomePage);
+    // let emailTrimmed: string = this.user.email;
+    // emailTrimmed = emailTrimmed.trim();
+    // this.user.email = emailTrimmed;
+    // // this.us e r.email = th is.user.email.trim();
+    // let loader = this.loadingCtrl.create({
+    //   content: "Cargando"
+    // });
+    // loader.present();
+    // this.userServiceProvider.doLogin(this.user).then(result => {
+    //   loader.dismiss();
+    //   this.token = result;
+    //   this.navCtrl.push(HomePage);
+    // }).catch(err => {
+    //   loader.dismiss();
+    //   // console.log(err);
+    //   if (err.name === 'TimeoutError') {
+    //     this.toast.create({
+    //       message: 'El servidor no esta disponible',
+    //       duration: 3000,
+    //       position: 'bottom'
+    //     }).present();
+    //   } else
+    //     this.wrongUser = true;
+    // });
   }
 }

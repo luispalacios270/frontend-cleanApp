@@ -1,0 +1,20 @@
+.special-item-header {
+ion-content, .scroll-content{
+  padding: 0 !important;
+}
+
+ion-item-divider{
+  background-color: #858585 !important;
+  color:white !important;
+}
+
+ion-item{
+
+  padding-right: 16px !important;
+
+  .item-inner{
+    border-bottom: 1px solid map-get($map: $colors, $key: primary) !important;
+
+  }
+}
+}
