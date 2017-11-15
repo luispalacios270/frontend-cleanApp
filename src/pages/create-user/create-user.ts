@@ -4,11 +4,12 @@ import { IonicPage, NavController, NavParams, AlertController, ModalController, 
 import { ClientProvider } from '../../providers/client/client'
 import { FilesProvider } from '../../providers/files/files'
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Storage } from '@ionic/storage';
 import { CreateAreasPage } from '../create-areas/create-areas'
 import * as globalVariables from '../../global'
 
 
-@IonicPage()
+// @IonicPage()
 
 @Component({
   selector: 'page-create-user',
@@ -25,6 +26,8 @@ export class CreateUserPage {
     mediaType: this.cameraCtrl.MediaType.PICTURE,
     correctOrientation: true
   };
+
+  currentUser: string;
 
   img: string = "";
 
@@ -53,7 +56,8 @@ export class CreateUserPage {
     public cameraCtrl: Camera,
     public alertCtrl: AlertController,
     public modalCtrl: ModalController,
-    public toastCtrl: ToastController) {
+    public toastCtrl: ToastController,
+    public storage: Storage) {
     this.registerForm = formBuilder.group({
       email: ['', Validators.compose([Validators.maxLength(100), this.emailValidator, Validators.required])],
       realm: ['', Validators.required],
@@ -62,6 +66,10 @@ export class CreateUserPage {
     });
     if (navParams.get("user") != null)
       this.user = navParams.get("user");
+
+    this.storage.get("currentUser").then((user: string) => {
+      this.currentUser = user;
+    })
   }
 
   selectTypeOfPic() {
@@ -128,7 +136,7 @@ export class CreateUserPage {
     }
   }
 
-  presentConfirm(user: object) {
+  presentConfirm(user: {}) {
     let alert = this.alertCtrl.create({
       title: 'Usuario Creado',
       message: 'El usuario se ha creado de forma correcta. ¿Desea agregar areas al usuario recién creado?',
@@ -154,22 +162,21 @@ export class CreateUserPage {
 
   registerUser() {
     this.user.email = this.user.email.trim();
-    this.clientProvider.createClient(this.user)
-      .then((result: any) => {
-        if (this.img != '')
-          this.uploadPicture(result.id)
-        this.presentConfirm(result);
-      })
-      .catch(err => {
-        console.log(err);
-        if (err.status == 422) {
-          this.toastCtrl.create({
-            message: "El email ingresado ya pertenece a un cliente",
-            duration: 3000,
-            position: "bottom center"
-          }).present();
-        }
-      })
+    this.user.supervisorId = this.currentUser;
+    this.clientProvider.createClient(this.user).then((result: any) => {
+      if (this.img != '')
+        this.uploadPicture(result.id)
+      this.presentConfirm(result);
+    }).catch(err => {
+      // console.log(err);
+      if (err.status == 422) {
+        this.toastCtrl.create({
+          message: "El email ingresado ya pertenece a un cliente",
+          duration: 3000,
+          position: "bottom center"
+        }).present();
+      }
+    })
   }
 
 

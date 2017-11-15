@@ -9,9 +9,6 @@ import { PicturePage } from '../picture/picture';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Storage } from '@ionic/storage';
 
-
-
-@IonicPage()
 @Component({
   selector: 'page-item-detail',
   templateUrl: 'item-detail.html',
@@ -159,12 +156,13 @@ export class ItemDetailPage {
           duration: 3000,
           position: "bottom center"
         }).present();
-      })
+      });
   }
+
 
   takePicture(isBefore: boolean, furnitureId: string) {
     this.cameraCtrl.getPicture(this.options).then((imageData) => {
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      // let base64Image = 'data:image/jpeg;base64,' + imageData;
       if (isBefore)
         this.uploadBeforePic(furnitureId, imageData);
       else
@@ -178,7 +176,7 @@ export class ItemDetailPage {
 
   selectPictureFromGallery(isBefore: boolean, furnitureId: string) {
     this.cameraCtrl.getPicture(this.optionsGallery).then((imageData) => {
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      // let base64Image = 'data:image/jpeg;base64,' + imageData;
       if (isBefore)
         this.uploadBeforePic(furnitureId, imageData);
       else
@@ -245,6 +243,8 @@ export class ItemDetailPage {
     this.updateFurnitures();
   }
 
+
+
   presentActionSheet(furniture: any) {
     if (furniture.furnitureInspections.length === 0) {
       let data = {
@@ -273,8 +273,8 @@ export class ItemDetailPage {
           handler: () => {
 
             this.alertCtrl.create({
-              title: "Visor de imagenes",
-              message: "¿Que fotos quiere ver?",
+              title: "Sleccione la fuente",
+              message: "¿Como desea obtener la imagen?",
               buttons: [
                 {
                   text: "Seleccionar de galería",
@@ -300,21 +300,21 @@ export class ItemDetailPage {
         {
           text: 'Seleccionar Foto depues',
           handler: () => {
+
             this.alertCtrl.create({
-              title: "Visor de imagenes",
-              message: "¿Que fotos quiere ver?",
+              title: "Sleccione la fuente",
+              message: "¿Como desea obtener la imagen?",
               buttons: [
                 {
-                  text: "Antes",
+                  text: "Seleccionar de galería",
                   handler: () => {
-                    this.goToSlide(furniture.furnitureInspections[0], true);
-                    // console.log('Archive clicked');
+                    this.selectPictureFromGallery(false, furniture.furnitureInspections[0].id);
                   }
                 },
                 {
-                  text: "Después",
+                  text: "Tomar Foto",
                   handler: () => {
-                    this.goToSlide(furniture.furnitureInspections[0], false);
+                    this.takePicture(false, furniture.furnitureInspections[0].id);
                   }
                 }
               ]

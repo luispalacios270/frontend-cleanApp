@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
-// import { TabsPage } from '../tabs/tabs';
 import { HomePage } from '../home/home';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
-import { Toast } from '@ionic-native/toast';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-login',
@@ -13,7 +12,7 @@ import { Toast } from '@ionic-native/toast';
 export class LoginPage {
 
   // Object to validate if the user is in the inputs.
-  try: object = {
+  try: {} = {
     email: false,
     pass: false
   };
@@ -46,7 +45,8 @@ export class LoginPage {
     public navParams: NavParams,
     public FormBuilder: FormBuilder,
     public toast: ToastController,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    public storage: Storage
   ) {
     this.loginForm = FormBuilder.group({
       email: ['', Validators.compose([Validators.maxLength(100), this.emailValidator,/* Validators.pattern("/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/")*/, Validators.required])],
@@ -78,30 +78,29 @@ export class LoginPage {
 
 
   login() {
-    this.navCtrl.push(HomePage);
-    // let emailTrimmed: string = this.user.email;
-    // emailTrimmed = emailTrimmed.trim();
-    // this.user.email = emailTrimmed;
-    // // this.us e r.email = th is.user.email.trim();
-    // let loader = this.loadingCtrl.create({
-    //   content: "Cargando"
-    // });
-    // loader.present();
-    // this.userServiceProvider.doLogin(this.user).then(result => {
-    //   loader.dismiss();
-    //   this.token = result;
-    //   this.navCtrl.push(HomePage);
-    // }).catch(err => {
-    //   loader.dismiss();
-    //   // console.log(err);
-    //   if (err.name === 'TimeoutError') {
-    //     this.toast.create({
-    //       message: 'El servidor no esta disponible',
-    //       duration: 3000,
-    //       position: 'bottom'
-    //     }).present();
-    //   } else
-    //     this.wrongUser = true;
-    // });
+    // this.navCtrl.push(HomePage);
+    let emailTrimmed: string = this.user.email;
+    emailTrimmed = emailTrimmed.trim();
+    this.user.email = emailTrimmed;
+    let loader = this.loadingCtrl.create({
+      content: "Cargando"
+    });
+    loader.present();
+    this.userServiceProvider.doLogin(this.user).then((result: any) => {
+      console.log(result);
+      loader.dismiss();
+      this.storage.set("currentUser", result.userId);
+      this.navCtrl.push(HomePage);
+    }).catch(err => {
+      loader.dismiss();
+      if (err.name === 'TimeoutError') {
+        this.toast.create({
+          message: 'El servidor no esta disponible',
+          duration: 3000,
+          position: 'bottom'
+        }).present();
+      } else
+        this.wrongUser = true;
+    });
   }
 }

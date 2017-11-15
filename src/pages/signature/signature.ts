@@ -2,13 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 
-/**
- * Generated class for the SignaturePage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
-@IonicPage()
 @Component({
   selector: 'page-signature',
   templateUrl: 'signature.html',
@@ -17,7 +10,7 @@ export class SignaturePage {
 
   imgSignature: string;
 
-  private signaturePadOptions: Object = { // passed through to szimek/signature_pad constructor
+  private signaturePadOptions: {} = { // passed through to szimek/signature_pad constructor
     'minWidth': 5,
     'canvasWidth': 300,
     'canvasHeight': 300
@@ -26,12 +19,14 @@ export class SignaturePage {
 
   @ViewChild(SignaturePad) signaturePad: SignaturePad;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
-  }
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public viewCtrl: ViewController) { }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SignaturePage');
-  }
+  // ionViewDidLoad() {
+  //   console.log('ionViewDidLoad SignaturePage');
+  // }
 
   cancelModal() {
     this.viewCtrl.dismiss();
@@ -49,7 +44,7 @@ export class SignaturePage {
   savePad() {
     this.imgSignature = this.signaturePad.toDataURL();
     this.signaturePad.clear();
-    console.log(this.imgSignature);
+    // console.log(this.imgSignature);
     this.closeModal(this.imgSignature);
   }
 

@@ -12,7 +12,7 @@ import * as globalVariables from '../../global'
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-picture',
   templateUrl: 'picture.html',

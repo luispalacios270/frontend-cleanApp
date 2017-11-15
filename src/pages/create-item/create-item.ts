@@ -9,7 +9,7 @@ import { ItemProvider } from '../../providers/item/item'
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-create-item',
   templateUrl: 'create-item.html',

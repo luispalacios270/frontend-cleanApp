@@ -12,7 +12,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 
 import * as globalVariables from '../../global'
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-service-detail',
   templateUrl: 'service-detail.html',

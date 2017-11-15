@@ -21,7 +21,8 @@
           <button class="back-drawer" ion-button clear (click)="items=[]">
             <ion-icon name="arrow-back"></ion-icon>
             <span class="title-drawer-area">{{selectedArea}}</span>
-          </button></ion-title>
+          </button>
+        </ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
@@ -45,13 +46,13 @@
 
 
   <ion-row justify-content-center>
-    <button ion-button menuToggle> 
+    <button ion-button menuToggle>
       <span *ngIf="!service.finalDate">
-         Realizar Inspección 
-      </span> 
+        Realizar Inspección
+      </span>
       <span *ngIf="service.finalDate">
-          Modificar Inspección
-       </span> 
+        Modificar Inspección
+      </span>
     </button>
   </ion-row>
   <ion-row justify-content-center *ngIf="service.finalDate">

@@ -51,10 +51,7 @@ export class HomePage implements OnInit {
     public clientService: ClientProvider
   ) { }
 
-  ngOnInit() {
-    // this.updateLists(null);
-    // this.navCtrl.setRoot(HomePage);
-  }
+  ngOnInit() { }
 
   doOption(option: number) {
     switch (option) {
@@ -100,34 +97,34 @@ export class HomePage implements OnInit {
 
   updateLists(refresher: any) {
 
-    this.services.getServicesWithClientsNoFinished().then((result: Array<object>) => {
-      this.servicesListActives = result;
-      this.selectList();
-      if (refresher != null) {
-        refresher.complete();
-      }
-    }).catch(err => {
-      if (refresher != null) {
-        refresher.complete();
-      }
+    this.storage.get("currentUser").then((user: string) => {
 
-    });
-    this.services.getServicesWithClientsFinished().then((result: Array<object>) => {
+      this.services.getServicesWithClientsNoFinished(user).then((result: Array<object>) => {
+        this.servicesListActives = result;
+        this.selectList();
+        if (refresher != null) {
+          refresher.complete();
+        }
+      }).catch(err => {
+        if (refresher != null) {
+          refresher.complete();
+        }
+      });
 
-      this.servicesListFinished = result;
-      this.selectList();
+      this.services.getServicesWithClientsFinished(user).then((result: Array<object>) => {
+        this.servicesListFinished = result;
+        this.selectList();
+      }).catch(err => {
+        if (refresher) refresher.complete();
+      });
 
-    }).catch(err => {
+      this.updateClients(user);
 
-    });
-
-    this.updateClients();
-
-
+    }).catch(err => console.error(err));
   }
 
-  updateClients() {
-    this.clientService.getClients()
+  updateClients(user: string) {
+    this.clientService.getClients(user)
       .then((resp: Array<any>) => {
         this.clients = resp;
         this.clientsFiltered = resp;

@@ -11,7 +11,7 @@
 
   <ion-card id="container-login">
     <ion-card-content>
-      <div col-6 offset-3>
+      <div col-md-4 offset-md-4 col-6 offset-3>
 
         <img src="assets/images/logo.png">
         <!-- <p class="text-center company-name">
@@ -48,10 +48,10 @@
               <a id="forget-pass" href="#">Olvidó contraseña?</a>
             </ion-col> -->
             <ion-col col-12>
-              <!-- <button ion-button [disabled]="loginForm.invalid" (click)="login()" color="primary" block>Login</button> -->
-              <button ion-button (click)="login()" color="primary" block>Login</button>
+              <button ion-button [disabled]="loginForm.invalid" (click)="login()" color="primary" block>Login</button>
+              <!-- <button ion-button (click)="login()" color="primary" block>Login</button> -->
             </ion-col>
-          </ion-row>          
+          </ion-row>
         </div>
       </form>
     </ion-card-content>

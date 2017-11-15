@@ -69,11 +69,12 @@ export class ServicesProvider {
 
   }
 
-  getServicesWithClientsFinished() {
+  getServicesWithClientsFinished(supervisorId: string) {
     let end_point: string = '?filter=';
     let data = {
       where: {
-        finished: true
+        finished: true,
+        supervisorId: supervisorId
       },
       include: "client"
     }
@@ -86,11 +87,12 @@ export class ServicesProvider {
 
   }
 
-  getServicesWithClientsNoFinished() {
+  getServicesWithClientsNoFinished(userId: string) {
     let end_point: string = '?filter=';
     let data = {
       where: {
-        finished: false
+        finished: false,
+        supervisorId: userId
       },
       include: "client"
     }

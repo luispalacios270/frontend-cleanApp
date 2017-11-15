@@ -1,18 +1,16 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      <!--<p class="center-text">Resumen del Servicio</p>-->
+
     </ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
 
-  <!--<ion-row>
-    <p class="header-summary">Resumen</p>
-  </ion-row>-->
+
 
   <ion-row>
-    <ion-col col-6 offset-3>
+    <ion-col col-6 offset-3 col-md-4 offset-md-4>
       <ion-row>
         <canvas id="myChart"></canvas>
       </ion-row>
@@ -37,8 +35,6 @@
               PORCENTAJE
             </th>
           </tr>
-          
-
 
         </thead>
         <tr *ngFor="let item of area.items">
@@ -49,57 +45,14 @@
             {{100*(item.doneItem / item.totalItem) | number:'1.2' }}%
           </td>
           <td *ngIf="item.totalItem==0">
-            Sin Atículos
+            Sin Artículos
           </td>
         </tr>
-        <!--<tr>
-          <td>
-            Habitación
-          </td>
-          <td>
-            100%
-          </td>
-        </tr>-->
+
       </table>
     </ion-card-content>
   </ion-card>
 
-  <!--<ion-card>
-    <ion-card-header>
-      <p class="header-summary">Oficina 1054</p>
-    </ion-card-header>
-    <ion-card-content>
-      <table>
-        <thead>
-          <tr>
-            <th>
-              SECTOR
-            </th>
-            <th>
-              HECHO
-            </th>
-          </tr>
 
-
-        </thead>
-        <tr>
-          <td>
-            Sala
-          </td>
-          <td>
-            80%
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Habitación
-          </td>
-          <td>
-            100%
-          </td>
-        </tr>
-      </table>
-    </ion-card-content>
-  </ion-card>-->
 
 </ion-content>

@@ -11,7 +11,7 @@ import { CreateItemPage } from '../create-item/create-item'
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-@IonicPage()
+
 @Component({
   selector: 'page-create-areas',
   templateUrl: 'create-areas.html',

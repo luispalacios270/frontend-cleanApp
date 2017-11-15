@@ -1,43 +1,9 @@
-<!-- <ion-header>
-  <ion-navbar>
-    <div>
-      <ion-row align-items-center>
-        <ion-title>
-          <p class="center-text">Inspecciones</p>
-        </ion-title>
-         <ion-buttons end>
-          <button (click)="showOption()" ion-button icon-only clear>
-              <ion-icon name="ios-more"></ion-icon>
-          </button>
-        </ion-buttons> 
-      </ion-row>
-      <ion-row align-items-center>
-        <ion-searchbar [(ngModel)]="searchFirlter" [showCancelButton]="true" (ionInput)="doFilter()">
-        </ion-searchbar>
-      </ion-row>
-      <ion-row class="no-margin">
-        <ion-col class="no-margin">
-          <button [ngClass]="{'selectedOption': !onlyFinished}" ion-button full clear class="nav-select" (click)="selectList(false)">Activos</button>
-        </ion-col>
-        <ion-col class="no-margin">
-          <button ion-button full clear class="nav-select" [ngClass]="{'selectedOption': onlyFinished}" (click)="selectList(true)">Finalizados</button>
-        </ion-col>
-      </ion-row>
-    </div>
-  </ion-navbar>
-</ion-header> -->
-
 <ion-header>
   <ion-navbar>
     <ion-title>
-      <!--  <p class="center-text"> -->Inspecciones
-      <!-- </p> -->
+      Inspecciones
     </ion-title>
-
-
-
   </ion-navbar>
-
   <ion-toolbar class="">
     <ion-segment [(ngModel)]="segment" (ionChange)="selectList()">
       <ion-segment-button value="0" color="light">
@@ -70,76 +36,96 @@
   </ion-refresher>
 
   <div [hidden]="segment==='2'">
-    <ion-card (click)="selectService(service)" *ngFor="let service of serviceListAux">
-      <ion-card-content>
-        <ion-row align-items-center justify-content-center>
-          <ion-col col-3>
-            <ion-avatar item-start>
-              <div *ngIf="service.client" [ngStyle]="{'background':'url('+api+'/containers/client-'+service.client.id+'/download/profilePic.jpg), url(assets/images/user.png)'  }"
-                class="avatar-img">
+    <ion-row>
 
-              </div>
-              <!--<img style="border:solid 1px; border-radius:50% " src="http://uniradioserver.com/media/news_thumbs/201611/20161102120336_155.jpg">-->
-            </ion-avatar>
-          </ion-col>
-          <ion-col col-9 *ngIf="service.client">
-            <ion-row>
-              <p class="client-name" color="primary">{{service.client.realm}}</p>
-            </ion-row>
-            <ion-row>
-              <p class="address" text-wrap>{{service.client.address}}</p>
-            </ion-row>
-            <ion-row>
-              <p class="address" text-wrap>{{service.initialDate | date:'medium'}}</p>
-            </ion-row>
-            <ion-row *ngIf="service.finalDate">
-              <p class="address" text-wrap>{{service.finalDate | date:'medium'}}</p>
-            </ion-row>            
-          </ion-col>
-        </ion-row>
-      </ion-card-content>
-    </ion-card>
+      <ion-col col-12 col-md-6 *ngFor="let service of serviceListAux">
+
+          <ion-card (click)="selectService(service)" >
+              <ion-card-content>
+                <ion-row align-items-center justify-content-center>
+                  <ion-col col-3>
+                    <ion-avatar item-start>
+                      <div *ngIf="service.client" [ngStyle]="{'background':'url('+api+'/containers/client-'+service.client.id+'/download/profilePic.jpg), url(assets/images/user.png)'  }"
+                        class="avatar-img">
+                      </div>
+                    </ion-avatar>
+                  </ion-col>
+                  <ion-col col-9 *ngIf="service.client">
+                    <ion-row>
+                      <p class="client-name" color="primary">{{service.client.realm}}</p>
+                    </ion-row>
+                    <ion-row>
+                      <p class="address" text-wrap>{{service.client.address}}</p>
+                    </ion-row>
+                    <ion-row>
+                      <p class="address" text-wrap>{{service.initialDate | date:'medium'}}</p>
+                    </ion-row>
+                    <ion-row *ngIf="service.finalDate">
+                      <p class="address" text-wrap>{{service.finalDate | date:'medium'}}</p>
+                    </ion-row>
+                  </ion-col>
+                </ion-row>
+              </ion-card-content>
+            </ion-card>
+        
+      </ion-col>
+
+      
+
+    </ion-row>
+
   </div>
 
   <ion-list [hidden]="segment!=='2'">
-    <ion-card (click)="modifyUser(client)" *ngFor="let client of clientsFiltered">
-      <ion-card-content>
-        <ion-row align-items-center justify-content-center>
-          <ion-col col-3>
-            <ion-avatar item-start>
-              <div [ngStyle]="{'background':'url('+api+'/containers/client-'+client.id+'/download/profilePic.jpg), url(assets/images/user.png)'}"
-                class="avatar-img">
-              </div>
-            </ion-avatar>
-          </ion-col>
-          <ion-col col-9>
-            <ion-row>
-              <p class="client-name">{{client.realm}}</p>
-            </ion-row>
-            <ion-row>
-              <p class="address" text-wrap>{{client.address}}</p>
-            </ion-row>
-            <!-- <ion-row>
-              <p class="address" text-wrap>{{service.initialDate | date:'medium'}}</p>
-            </ion-row> -->
-            <!-- <ion-row *ngIf="service.finalDate">
-              <p class="address" text-wrap>{{service.finalDate | date:'medium'}}</p>
-            </ion-row> -->
-          </ion-col>
-        </ion-row>
-      </ion-card-content>
-    </ion-card>
+
+    <ion-row>
+      <ion-col col-12 col-md-6 *ngFor="let client of clientsFiltered">
+
+          <ion-card (click)="modifyUser(client)" >
+              <ion-card-content>
+                <ion-row align-items-center justify-content-center>
+                  <ion-col col-3>
+                    <ion-avatar item-start>
+                      <div [ngStyle]="{'background':'url('+api+'/containers/client-'+client.id+'/download/profilePic.jpg), url(assets/images/user.png)'}"
+                        class="avatar-img">
+                      </div>
+                    </ion-avatar>
+                  </ion-col>
+                  <ion-col col-9>
+                    <ion-row>
+                      <p class="client-name">{{client.realm}}</p>
+                    </ion-row>
+                    <ion-row>
+                      <p class="address" text-wrap>{{client.address}}</p>
+                    </ion-row>
+                    <!-- <ion-row>
+                      <p class="address" text-wrap>{{service.initialDate | date:'medium'}}</p>
+                    </ion-row> -->
+                    <!-- <ion-row *ngIf="service.finalDate">
+                      <p class="address" text-wrap>{{service.finalDate | date:'medium'}}</p>
+                    </ion-row> -->
+                  </ion-col>
+                </ion-row>
+              </ion-card-content>
+            </ion-card>
+        
+      </ion-col>
+    </ion-row>
+
+    
     <!--  <ion-item *ngFor="let client of clients " (click)="">
       {{}}
     </ion-item> -->
   </ion-list>
 
   <ion-fab right bottom>
-    <button ion-fab><ion-icon name="add"></ion-icon></button>
+    <button ion-fab>
+      <ion-icon name="add"></ion-icon>
+    </button>
     <ion-fab-list side="left">
       <button (click)="createService()" ion-fab>
         <ion-icon color="primary" name="briefcase">
-        </ion-icon>        
+        </ion-icon>
       </button>
       <button (click)="createUser()" ion-fab>
         <ion-icon color="primary" name="person-add">

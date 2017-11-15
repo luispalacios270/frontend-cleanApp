@@ -16,6 +16,7 @@
             {{area.name}}
           </ion-col>
           <ion-col align-self-center col-4>
+
             <button class="header-buttons" ion-button clear icon-only color="light" icon-end (click)="presentAlertInput('Actualizar Area', 4, area)">
               <ion-icon name="create"></ion-icon>
             </button>
@@ -46,15 +47,21 @@
         </ion-col>
 
         <ion-col col-4>
-          <button class="header-buttons" ion-button clear icon-only color="secondary" icon-end (click)="modifyItem(item)">
-            <ion-icon name="logo-buffer"></ion-icon>
-          </button>
-          <button class="header-buttons" ion-button clear icon-only icon-end color="danger" (click)=" deleteItem(item, iItems, iArea )">
-            <ion-icon name="trash"></ion-icon>
-          </button>
-          <button class="header-buttons" ion-button clear icon-only icon-end color="secondary" (click)="presentAlertInput('Actualizar Item', 5, item)">
-            <ion-icon name="create"></ion-icon>
-          </button>
+
+          <ion-buttons end>
+
+            <button class="header-buttons" ion-button clear icon-only color="secondary" icon-end (click)="modifyItem(item)">
+              <ion-icon name="logo-buffer"></ion-icon>
+            </button>
+            <button class="header-buttons" ion-button clear icon-only icon-end color="danger" (click)=" deleteItem(item, iItems, iArea )">
+              <ion-icon name="trash"></ion-icon>
+            </button>
+            <button class="header-buttons" ion-button clear icon-only icon-end color="secondary" (click)="presentAlertInput('Actualizar Item', 5, item)">
+              <ion-icon name="create"></ion-icon>
+            </button>
+
+
+          </ion-buttons>
 
         </ion-col>
 
