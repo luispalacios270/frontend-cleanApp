@@ -6,7 +6,7 @@ import { ClientProvider } from '../../providers/client/client';
 import { CreateUserPage } from '../create-user/create-user'
 import { TabsPage } from '../tabs/tabs';
 import { Storage } from '@ionic/storage';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+// import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { SocialSharing } from '@ionic-native/social-sharing';
 
@@ -25,7 +25,7 @@ export class ServiceDetailPage {
   items: Array<any>;
   api: string = globalVariables.API_ENDPOINT;
   selectedArea: string = '';
-  fileTransfer: FileTransferObject = this.transfer.create();
+  // fileTransfer: FileTransferObject = this.transfer.create();
 
 
   constructor(
@@ -37,7 +37,7 @@ export class ServiceDetailPage {
     public clientService: ClientProvider,
     public storage: Storage,
     public toastCtrl: ToastController,
-    private transfer: FileTransfer,
+    // private transfer: FileTransfer,
     private file: File,
     private socialSharing: SocialSharing
   ) {
