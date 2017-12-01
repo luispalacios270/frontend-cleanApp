@@ -37,8 +37,8 @@ import { Camera } from '@ionic-native/camera';
 import { SignaturePadModule } from 'angular2-signaturepad';
 import { ItemInspectionProvider } from '../providers/item-inspection/item-inspection';
 import { UrlPicDirective } from '../directives/url-pic/url-pic';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
-import { File } from '@ionic-native/file';
+
+
 import { SocialSharing } from '@ionic-native/social-sharing';
 
 @NgModule({
@@ -108,8 +108,6 @@ import { SocialSharing } from '@ionic-native/social-sharing';
     SignaturePadModule,
     FilesProvider,
     ItemInspectionProvider,
-    FileTransfer,
-    File,
     SocialSharing
 
   ]

@@ -5,7 +5,7 @@ import { AreaPrividerProvider } from '../../providers/area-privider/area-privide
 import { ClientProvider } from '../../providers/client/client';
 import { CreateUserPage } from '../create-user/create-user'
 import { TabsPage } from '../tabs/tabs';
-import { Storage } from '@ionic/storage';
+import { Storage } from '@ionic/storage';ƒ
 // import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { SocialSharing } from '@ionic-native/social-sharing';
