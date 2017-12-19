@@ -1,7 +1,9 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title><p class="center-text header-back-btn">Nueva Inspección</p></ion-title>
+    <ion-title>
+      <p class="center-text header-back-btn">Nueva Inspección</p>
+    </ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -10,26 +12,10 @@
 <ion-content padding>
 
   <ion-list>
-    <!-- <ion-item>
-      <ion-label floating>
-        Direccion del servicio:
-      </ion-label>
-      <ion-input [(ngModel)]="service.address">
-
-      </ion-input>
-    </ion-item> -->
     <ion-item>
       <ion-label>Fecha de inicio de servicio</ion-label>
       <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" [(ngModel)]="service.initialDate"></ion-datetime>
     </ion-item>
-    <!--<ion-item>
-      <ion-label floating>
-        Precio:
-      </ion-label>
-      <ion-input [(ngModel)]="service.price">
-
-      </ion-input>
-    </ion-item>    -->
 
     <ion-item>
       <ion-label floating>
@@ -41,7 +27,11 @@
     </ion-item>
 
     <ion-item>
-      <button (click)="createService(service)" ion-button block>Guardar servicio</button>
+      <ion-row>
+        <ion-col col-12>
+          <button (click)="createService(service)" ion-button block>Guardar servicio</button>
+        </ion-col>
+      </ion-row>
     </ion-item>
 
 

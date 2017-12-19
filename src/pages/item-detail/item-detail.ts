@@ -253,11 +253,11 @@ export class ItemDetailPage {
       }
       this.inspectionProvider.createInspection(data)
         .then(result => {
-          console.log()
+
           furniture.furnitureInspections[0] = result;
         })
         .catch(err => {
-          console.log(err);
+
           this.toast.create({
             message: "Hubo un error",
             duration: 3000,
@@ -273,7 +273,7 @@ export class ItemDetailPage {
           handler: () => {
 
             this.alertCtrl.create({
-              title: "Sleccione la fuente",
+              title: "Seleccione la fuente",
               message: "¿Como desea obtener la imagen?",
               buttons: [
                 {
@@ -321,8 +321,8 @@ export class ItemDetailPage {
 
 
             }).present();
-            this.takePicture(false, furniture.furnitureInspections[0].id);
-            // console.log('Destructive clicked');
+            // this.takePicture(false, furniture.furnitureInspections[0].id);
+
           }
         }, {
           text: 'Ver fotos de objeto',

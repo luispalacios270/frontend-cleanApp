@@ -43,21 +43,12 @@
         <ion-input (blur)="try.realm=true" (focus)="try.realm=false" type="text" formControlName="realm" [(ngModel)]="user.realm"></ion-input>
       </ion-item>
       <div class="error-input item-md" [hidden]="!try.realm || (registerForm.controls.realm.valid || !registerForm.controls.realm._errors.required)">Este campo es requerido</div>
-      <!--<ion-item>
-        <ion-label inline>Apellidos</ion-label>
-        <ion-input (blur)="try.lastName=true" (focus)="try.lastName=false" type="text" formControlName="lastName" [(ngModel)]="user.lastName"></ion-input>
-      </ion-item>
-
-      <div class="error-input item-md" [hidden]="!try.lastName || (registerForm.controls.lastName.valid || !registerForm.controls.lastName._errors.required)">Este campo es requerido</div>-->
-
       <ion-item>
         <ion-label inline>Teléfono</ion-label>
         <ion-input (blur)="try.phone=true" (focus)="try.phone=false" type="text" formControlName="phone" [(ngModel)]="user.phone"></ion-input>
       </ion-item>
 
       <div class="error-input item-md" [hidden]="!try.phone || (registerForm.controls.phone.valid || !registerForm.controls.phone._errors.required)">Este campo es requerido</div>
-      <!-- <div class="error-input item-md" [hidden]="!try.email || registerForm.controls.email.valid || !registerForm.controls.email._errors.invalidEmail">Este campo debe ser un email</div> -->
-
 
       <ion-item>
         <ion-label inline>Correo</ion-label>
@@ -81,15 +72,15 @@
   <ion-row>
     <button *ngIf="!user.id" ion-button (click)="registerUser()" color="primary" [disabled]="registerForm.invalid" block>Guardar</button>
     <div *ngIf="user.id" class="adjust-horizontal">
-      <ion-row>        
+      <ion-row>
         <ion-col col-12 col-md-6>
-            <button ion-button (click)="updateUser()" color="primary" [disabled]="registerForm.invalid" block>Guardar Cambios</button>
+          <button ion-button (click)="updateUser()" color="primary" [disabled]="registerForm.invalid" block>Guardar Cambios</button>
         </ion-col>
         <ion-col col-12 col-md-6>
-            <button ion-button (click)="presentConfirmDelete()" color="danger" [disabled]="registerForm.invalid" block>Eliminar Usuario</button>
+          <button ion-button (click)="presentConfirmDelete()" color="danger" [disabled]="registerForm.invalid" block>Eliminar Usuario</button>
         </ion-col>
-      </ion-row>      
-      
+      </ion-row>
+
     </div>
   </ion-row>
 

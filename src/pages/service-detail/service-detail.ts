@@ -14,7 +14,6 @@ import { CreateUserPage } from "../create-user/create-user";
 import { TabsPage } from "../tabs/tabs";
 import { Storage } from "@ionic/storage";
 
-// import { File } from "@ionic-native/file";
 import { SocialSharing } from "@ionic-native/social-sharing";
 
 import * as globalVariables from "../../global";
