@@ -9,39 +9,34 @@ import {
 import { HomePage } from "../home/home";
 import { UserServiceProvider } from "../../providers/user-service/user-service";
 import { Storage } from "@ionic/storage";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "page-login",
   templateUrl: "login.html"
 })
 export class LoginPage {
-  // Object to validate if the user is in the inputs.
   try: {} = {
     email: false,
     pass: false
   };
 
-  // Object for inputs validations.
+  selectedLanguage = "";
+
   loginForm: any;
 
-  //Flag to show wether the the user and password are correct
   wrongUser: boolean = false;
 
-  // Object to save the token from succesful login
   token: any;
 
-  //Parameters for the login.
   user: any = {
     email: "",
     password: ""
   };
 
   loader: any = this.loadingCtrl.create({
-    content: "Cargando" /* ,
-      duration: 3000 */
-  }); /*  = this.loadingCtrl.create({
     content: "Cargando"
-  }); */
+  });
 
   constructor(
     public navCtrl: NavController,
@@ -50,15 +45,15 @@ export class LoginPage {
     public FormBuilder: FormBuilder,
     public toast: ToastController,
     public loadingCtrl: LoadingController,
-    public storage: Storage
+    public storage: Storage,
+    public translate: TranslateService
   ) {
     this.loginForm = FormBuilder.group({
       email: [
         "",
         Validators.compose([
           Validators.maxLength(100),
-          this
-            .emailValidator /* Validators.pattern("/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/")*/,
+          this.emailValidator,
           ,
           Validators.required
         ])
@@ -91,6 +86,10 @@ export class LoginPage {
 
   dissMissLoader() {
     this.loader.dismiss();
+  }
+
+  getNewLanguage($event): void {
+    this.translate.use($event);
   }
 
   login() {

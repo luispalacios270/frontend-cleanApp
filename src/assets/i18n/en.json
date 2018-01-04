@@ -4,7 +4,15 @@
     "password": "Password",
     "required": "This field is required",
     "shouldBeEmail": "This field should be an email",
-    "loginBtn":"Submit",
-    "language":"Select language"
+    "loginBtn": "Submit",
+    "language": "Language",
+    "wrongUser": "User or password incorrect"
+  },
+  "home": {
+    "actionBarTitle":"Inspections",
+    "activesTab":"Actives",
+    "finishedTab":"Closed",
+    "clientTab":"Clients",
+    "filterHint":"Filter"
   }
 }

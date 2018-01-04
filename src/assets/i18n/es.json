@@ -1,6 +1,18 @@
 {
   "login": {
     "email": "Email",
-    "password": "Contraseña"
+    "password": "Contraseña",
+    "required": "El campo es requerido",
+    "shouldBeEmail": "Por favor, ingrese un email válido",
+    "loginBtn":"Iniciar Sesión",
+    "language":"Idioma",
+    "wrongUser":"Usuario o contraseña erróneos"
+  },
+  "home": {
+    "actionBarTitle":"Inspecciones",
+    "activesTab":"Activas",
+    "finishedTab":"Cerradas",
+    "clientTab":"Clientes",
+    "filterHint":"Realizar busqueda"
   }
 }

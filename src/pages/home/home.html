@@ -1,26 +1,34 @@
 <ion-header>
   <ion-navbar>
+    <!--  "home": {
+    "actionBarTitle":"Inspecciones",
+    "activesTab":"Activas",
+    "finishedTab":"Cerradas",
+    "clientTab":"Clientes",
+    "filterHint":"Realizar busqueda"
+  } -->
+
     <ion-title>
-      Inspecciones
+      {{'home.actionBarTitle' | translate}}
     </ion-title>
   </ion-navbar>
   <ion-toolbar class="">
     <ion-segment [(ngModel)]="segment" (ionChange)="selectList()">
       <ion-segment-button value="0" color="light">
-        Activos
+        {{'home.activesTab' | translate}}
       </ion-segment-button>
       <ion-segment-button value="1">
-        Terminados
+        {{'home.finishedTab' | translate}}
       </ion-segment-button>
       <ion-segment-button value="2">
-        Clientes
+        {{'home.clientTab' | translate}}
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
 
   <ion-toolbar class="">
 
-    <ion-searchbar [(ngModel)]="searchFirlter" placeholder="Realizar filtro" [showCancelButton]="true" (ionInput)="doFilter()">
+    <ion-searchbar [(ngModel)]="searchFirlter" placeholder="{{'home.filterHint' | translate}}" [showCancelButton]="true" (ionInput)="doFilter()">
     </ion-searchbar>
 
   </ion-toolbar>
@@ -40,37 +48,37 @@
 
       <ion-col col-12 col-md-6 *ngFor="let service of serviceListAux">
 
-          <ion-card (click)="selectService(service)" >
-              <ion-card-content>
-                <ion-row align-items-center justify-content-center>
-                  <ion-col col-3>
-                    <ion-avatar item-start>
-                      <div *ngIf="service.client" [ngStyle]="{'background':'url('+api+'/containers/client-'+service.client.id+'/download/profilePic.jpg), url(assets/images/user.png)'  }"
-                        class="avatar-img">
-                      </div>
-                    </ion-avatar>
-                  </ion-col>
-                  <ion-col col-9 *ngIf="service.client">
-                    <ion-row>
-                      <p class="client-name" color="primary">{{service.client.realm}}</p>
-                    </ion-row>
-                    <ion-row>
-                      <p class="address" text-wrap>{{service.client.address}}</p>
-                    </ion-row>
-                    <ion-row>
-                      <p class="address" text-wrap>{{service.initialDate | date:'medium'}}</p>
-                    </ion-row>
-                    <ion-row *ngIf="service.finalDate">
-                      <p class="address" text-wrap>{{service.finalDate | date:'medium'}}</p>
-                    </ion-row>
-                  </ion-col>
+        <ion-card (click)="selectService(service)">
+          <ion-card-content>
+            <ion-row align-items-center justify-content-center>
+              <ion-col col-3>
+                <ion-avatar item-start>
+                  <div *ngIf="service.client" [ngStyle]="{'background':'url('+api+'/containers/client-'+service.client.id+'/download/profilePic.jpg), url(assets/images/user.png)'  }"
+                    class="avatar-img">
+                  </div>
+                </ion-avatar>
+              </ion-col>
+              <ion-col col-9 *ngIf="service.client">
+                <ion-row>
+                  <p class="client-name" color="primary">{{service.client.realm}}</p>
                 </ion-row>
-              </ion-card-content>
-            </ion-card>
-        
+                <ion-row>
+                  <p class="address" text-wrap>{{service.client.address}}</p>
+                </ion-row>
+                <ion-row>
+                  <p class="address" text-wrap>{{service.initialDate | date:'medium'}}</p>
+                </ion-row>
+                <ion-row *ngIf="service.finalDate">
+                  <p class="address" text-wrap>{{service.finalDate | date:'medium'}}</p>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+
       </ion-col>
 
-      
+
 
     </ion-row>
 
@@ -81,38 +89,38 @@
     <ion-row>
       <ion-col col-12 col-md-6 *ngFor="let client of clientsFiltered">
 
-          <ion-card (click)="modifyUser(client)" >
-              <ion-card-content>
-                <ion-row align-items-center justify-content-center>
-                  <ion-col col-3>
-                    <ion-avatar item-start>
-                      <div [ngStyle]="{'background':'url('+api+'/containers/client-'+client.id+'/download/profilePic.jpg), url(assets/images/user.png)'}"
-                        class="avatar-img">
-                      </div>
-                    </ion-avatar>
-                  </ion-col>
-                  <ion-col col-9>
-                    <ion-row>
-                      <p class="client-name">{{client.realm}}</p>
-                    </ion-row>
-                    <ion-row>
-                      <p class="address" text-wrap>{{client.address}}</p>
-                    </ion-row>
-                    <!-- <ion-row>
+        <ion-card (click)="modifyUser(client)">
+          <ion-card-content>
+            <ion-row align-items-center justify-content-center>
+              <ion-col col-3>
+                <ion-avatar item-start>
+                  <div [ngStyle]="{'background':'url('+api+'/containers/client-'+client.id+'/download/profilePic.jpg), url(assets/images/user.png)'}"
+                    class="avatar-img">
+                  </div>
+                </ion-avatar>
+              </ion-col>
+              <ion-col col-9>
+                <ion-row>
+                  <p class="client-name">{{client.realm}}</p>
+                </ion-row>
+                <ion-row>
+                  <p class="address" text-wrap>{{client.address}}</p>
+                </ion-row>
+                <!-- <ion-row>
                       <p class="address" text-wrap>{{service.initialDate | date:'medium'}}</p>
                     </ion-row> -->
-                    <!-- <ion-row *ngIf="service.finalDate">
+                <!-- <ion-row *ngIf="service.finalDate">
                       <p class="address" text-wrap>{{service.finalDate | date:'medium'}}</p>
                     </ion-row> -->
-                  </ion-col>
-                </ion-row>
-              </ion-card-content>
-            </ion-card>
-        
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+
       </ion-col>
     </ion-row>
 
-    
+
     <!--  <ion-item *ngFor="let client of clients " (click)="">
       {{}}
     </ion-item> -->

@@ -6,7 +6,7 @@ import { Toast } from "@ionic-native/toast";
 import { Dialogs } from "@ionic-native/dialogs";
 
 import { TabsPage } from "../pages/tabs/tabs";
-import { LoginPage } from "../pages/Login/login";
+import { LoginPage } from "../pages/login/login";
 import { TranslateService } from "@ngx-translate/core";
 
 @Component({
