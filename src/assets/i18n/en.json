@@ -1,0 +1,10 @@
+{
+  "login": {
+    "email": "Email",
+    "password": "Password",
+    "required": "This field is required",
+    "shouldBeEmail": "This field should be an email",
+    "loginBtn":"Submit",
+    "language":"Select language"
+  }
+}

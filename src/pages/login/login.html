@@ -22,19 +22,19 @@
 
         <ion-list>
           <ion-item>
-            <ion-label floating>Email</ion-label>
+            <ion-label floating>{{ 'login.email' | translate }}</ion-label>
             <ion-input (blur)="try.email=true" (focus)="try.email=false" type="text" formControlName="email" [(ngModel)]="user.email"></ion-input>
           </ion-item>
 
-          <div class="error-input item-md" [hidden]="!try.email || (loginForm.controls.email.valid || !loginForm.controls.email._errors.required)">Este campo es requerido</div>
-          <div class="error-input item-md" [hidden]="!try.email || loginForm.controls.email.valid || !loginForm.controls.email._errors.invalidEmail">Este campo debe ser un email</div>
+          <div class="error-input item-md" [hidden]="!try.email || (loginForm.controls.email.valid || !loginForm.controls.email._errors.required)">{{ 'login.required' | translate }}</div>
+          <div class="error-input item-md" [hidden]="!try.email || loginForm.controls.email.valid || !loginForm.controls.email._errors.invalidEmail">{{ 'login.shouldBeEmail' | translate }}</div>
 
           <ion-item>
-            <ion-label floating>Password</ion-label>
+            <ion-label floating>{{ 'login.password' | translate }}</ion-label>
             <ion-input (blur)="try.pass=true" (focus)="try.pass=false" type="password" formControlName="password" [(ngModel)]="user.password"></ion-input>
           </ion-item>
 
-          <div class="error-input item-md" [hidden]="!try.pass || loginForm.controls.password.valid || !loginForm.controls.password._errors.required">Este campo debe ser un email</div>
+          <div class="error-input item-md" [hidden]="!try.pass || loginForm.controls.password.valid || !loginForm.controls.password._errors.required">{{ 'login.required' | translate }}</div>
 
 
         </ion-list>
@@ -48,9 +48,19 @@
               <a id="forget-pass" href="#">Olvidó contraseña?</a>
             </ion-col> -->
             <ion-col col-12>
-              <button ion-button [disabled]="loginForm.invalid" (click)="login()" color="primary" block>Login</button>
-              <!-- <button ion-button (click)="login()" color="primary" block>Login</button> -->
+              <button ion-button [disabled]="loginForm.invalid" (click)="login()" color="primary" block>{{'login.loginBtn' | translate}}</button>
             </ion-col>
+
+            <ion-col col-12>
+              <ion-item>
+                <ion-label>{{'login.language' | translate}}</ion-label>
+                <ion-select>
+                  <ion-option value="f">Female</ion-option>
+                  <ion-option value="m">Male</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
           </ion-row>
         </div>
       </form>
