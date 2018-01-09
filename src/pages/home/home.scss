@@ -1,7 +1,4 @@
 page-home {
-
- 
-
   .back-button {
     display: none !important;
   }
@@ -11,12 +8,7 @@ page-home {
   ion-navbar {
     padding: 10px 10px 0 10px !important;
   }
-  ion-header {
-    .button-inner {
-      color: white;
-      font-weight: 200;
-    }
-  }
+
   ion-title {
     height: 100%;
   }
@@ -25,8 +17,8 @@ page-home {
   }
   .client-name {
     font-size: 1em !important;
-    font-weight: bold;    
-    color:map-get($colors, primary);
+    font-weight: bold;
+    color: map-get($colors, primary);
     // color: cornflowerblue;
   }
   .address {
@@ -52,7 +44,8 @@ page-home {
   }
 
   @media screen and (min-width: 720px) {
-    .client-name, .address{
+    .client-name,
+    .address {
       width: 100%;
       text-align: center;
       font-size: 0.9em !important;
@@ -68,7 +61,5 @@ page-home {
       max-width: 50px;
       border-radius: 50%;
     }
-
   }
-
 }

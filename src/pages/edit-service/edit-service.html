@@ -2,7 +2,7 @@
 
   <ion-navbar>
     <ion-title>
-      <p class="center-text header-back-btn">Nueva Inspección</p>
+      <p class="header-back-btn">{{'editService.actionBarTitle' | translate}}</p>
     </ion-title>
   </ion-navbar>
 
@@ -13,13 +13,13 @@
 
   <ion-list>
     <ion-item>
-      <ion-label>Fecha de inicio de servicio</ion-label>
+      <ion-label>{{'editService.date' | translate}}</ion-label>
       <ion-datetime displayFormat="YYYY-MM-DDTHH:mm" [(ngModel)]="service.initialDate"></ion-datetime>
     </ion-item>
 
     <ion-item>
       <ion-label floating>
-        Cliente:
+        {{'editService.client' | translate }}:
       </ion-label>
       <ion-select [(ngModel)]="service.clientId">
         <ion-option [value]="client.id" *ngFor="let client of clients"> {{client.realm}}</ion-option>
@@ -29,7 +29,7 @@
     <ion-item>
       <ion-row>
         <ion-col col-12>
-          <button (click)="createService(service)" ion-button block>Guardar servicio</button>
+          <button (click)="createService(service)" ion-button block>{{'editService.save' | translate}}</button>
         </ion-col>
       </ion-row>
     </ion-item>

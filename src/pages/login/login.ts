@@ -93,18 +93,16 @@ export class LoginPage {
   }
 
   login() {
-    // this.navCtrl.push(HomePage);
     let emailTrimmed: string = this.user.email;
     emailTrimmed = emailTrimmed.trim();
     this.user.email = emailTrimmed;
     let loader = this.loadingCtrl.create({
-      content: "Cargando"
+      content: "Loading"
     });
     loader.present();
     this.userServiceProvider
       .doLogin(this.user)
       .then((result: any) => {
-        console.log(result);
         loader.dismiss();
         this.storage.set("currentUser", result.userId);
         this.navCtrl.push(HomePage);

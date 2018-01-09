@@ -1,18 +1,88 @@
 {
   "login": {
-    "email": "Email",
+    "email": "Correo",
     "password": "Contraseña",
     "required": "El campo es requerido",
     "shouldBeEmail": "Por favor, ingrese un email válido",
-    "loginBtn":"Iniciar Sesión",
-    "language":"Idioma",
-    "wrongUser":"Usuario o contraseña erróneos"
+    "loginBtn": "Iniciar Sesión",
+    "language": "Idioma",
+    "wrongUser": "Usuario o contraseña erróneos"
   },
   "home": {
-    "actionBarTitle":"Inspecciones",
-    "activesTab":"Activas",
-    "finishedTab":"Cerradas",
-    "clientTab":"Clientes",
-    "filterHint":"Realizar busqueda"
+    "actionBarTitle": "Inspecciones",
+    "activesTab": "Activas",
+    "finishedTab": "Cerradas",
+    "clientTab": "Clientes",
+    "filterHint": "Realizar busqueda",
+    "popover": {
+      "language": "Cambiar Idioma",
+      "closeAcount": "Cerrar Sesión"
+    }
+  },
+  "user": {
+    "actionBarTitle": "Cliente",
+    "name": "Nombre",
+    "phone": "Teléfono",
+    "email": "Email",
+    "password": "Password",
+    "address": "Dirección",
+    "save": "Guardar",
+    "saveChanges": "Guardar Cambios",
+    "deleteUser": "Eliminar Usuario"
+  },
+  "area": {
+    "actionBarTitle": "Agregar Área"
+  },
+  "editService": {
+    "actionBarTitle": "Nueva Inspección",
+    "date": "Fecha de inicio del servicio",
+    "client": "Cliente",
+    "save": "Guardar Servicio"
+  },
+  "createItem": {
+    "close": "Cerrar",
+    "addObject": "Agregar objeto"
+  },
+  "serviceDetail": {
+    "areas": "Áreas",
+    "makeInspection": "Realizar Inspección",
+    "modifyInspection": "Modificar Inspección",
+    "sharePDF": "Compartir PDF",
+    "info": "Información",
+    "client": "Cliente",
+    "phone": "Teléfono",
+    "address": "Dirección"
+  },
+  "tabs": {
+    "inspections": "Inspecciones",
+    "summary": "Resumen",
+    "approval": "Aprobación"
+  },
+  "itemDetail": {
+    "good": "B",
+    "regular": "R",
+    "bad": "M",
+    "details": "Detalles"
+  },
+  "summary": {
+    "item": "ITEM",
+    "percentage": "PORCENTAJE",
+    "noItems": "Sin Items"
+  },
+  "approval": {
+    "clientAprovement": "Aprobación del cliente",
+    "fullName": "Nombre Completo",
+    "endDate": "Fecha de finalización de servicio",
+    "signatures": "Firmas",
+    "clientSignature": "Firma del cliente",
+    "inspectorSignature": "Firma del inspector",
+    "save": "Guardar y Terminar"
+  },
+  "signature": {
+    "clean": "limpiar"
+  },
+  "shared": {
+    "save": "Guardar",
+    "cancel": "Cancelar"
   }
 }

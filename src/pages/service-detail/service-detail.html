@@ -2,7 +2,8 @@
 
   <ion-navbar>
     <ion-title>
-      <p class="center-text main-header header-back-btn">{{service.client.address}}</p>
+      <!-- <p class="center-text main-header header-back-btn">{{service.client.address}}</p> -->
+      {{service.client.address}}
     </ion-title>
   </ion-navbar>
 
@@ -14,7 +15,7 @@
   <ion-menu [content]="content">
     <ion-header>
       <ion-toolbar *ngIf="!items||items.length==0">
-        <ion-title>Areas</ion-title>
+        <ion-title>{{'serviceDetail.areas' | translate}}</ion-title>
       </ion-toolbar>
       <ion-toolbar *ngIf="items&&items.length>0">
         <ion-title>
@@ -48,16 +49,16 @@
   <ion-row justify-content-center>
     <button ion-button menuToggle>
       <span *ngIf="!service.finalDate">
-        Realizar Inspección
+        {{'serviceDetail.makeInspection' | translate}}
       </span>
       <span *ngIf="service.finalDate">
-        Modificar Inspección
+        {{'serviceDetail.modifyInspection' | translate}}
       </span>
     </button>
   </ion-row>
   <ion-row justify-content-center *ngIf="service.finalDate">
     <button ion-button (click)="downloadPdf(service)">
-      Compartir PDF
+      {{'serviceDetail.sharePDF' | translate}}
     </button>
   </ion-row>
 
@@ -67,7 +68,7 @@
       <div class="inline">
         <div>
           <ion-icon class="header-card" name="information-circle"></ion-icon>
-          <span class="header-card app-title">Información</span>
+          <span class="header-card app-title">{{'serviceDetail.info' | translate}}:</span>
         </div>
 
         <button (click)="editUser()" class="inline-right edit-client" ion-button clear icon-only>
@@ -82,15 +83,15 @@
       <ion-list>
         <ion-item text-wrap>
           <ion-icon name="person" item-start></ion-icon>
-          <span class="label-item">Cliente:</span> {{service.client.realm}}
+          <span class="label-item">{{'serviceDetail.client' | translate}}:</span> {{service.client.realm}}
         </ion-item>
         <ion-item text-wrap>
           <ion-icon name="call" item-start></ion-icon>
-          <span class="label-item">Teléfono:</span> {{service.client.phone}}
+          <span class="label-item">{{'serviceDetail.phone' | translate}}:</span> {{service.client.phone}}
         </ion-item>
         <ion-item text-wrap>
           <ion-icon name="map" item-start></ion-icon>
-          <span class="label-item">Dirección:</span> {{service.client.address}}
+          <span class="label-item">{{'serviceDetail.address' | translate}}:</span> {{service.client.address}}
         </ion-item>
       </ion-list>
     </ion-card-content>

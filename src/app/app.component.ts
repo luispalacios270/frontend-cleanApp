@@ -5,23 +5,33 @@ import { SplashScreen } from "@ionic-native/splash-screen";
 import { Toast } from "@ionic-native/toast";
 import { Dialogs } from "@ionic-native/dialogs";
 
-import { TabsPage } from "../pages/tabs/tabs";
+// import { TabsPage } from "../pages/tabs/tabs";
 import { LoginPage } from "../pages/login/login";
+import { HomePage } from "../pages/home/home";
 import { TranslateService } from "@ngx-translate/core";
+import { Storage } from "@ionic/storage";
 
 @Component({
   templateUrl: "app.html"
 })
 export class MyApp {
   /*rootPage: any = TabsPage;*/
-  rootPage: any = LoginPage;
+  rootPage: any;
 
   constructor(
     platform: Platform,
     statusBar: StatusBar,
     splashScreen: SplashScreen,
-    translate: TranslateService
+    translate: TranslateService,
+    private storage: Storage
   ) {
+    this.storage.get("currentUser").then((currentUser: string) => {
+      if (currentUser) {
+        this.rootPage = HomePage;
+      } else {
+        this.rootPage = LoginPage;
+      }
+    });
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.

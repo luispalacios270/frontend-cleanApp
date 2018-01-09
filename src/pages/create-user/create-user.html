@@ -1,16 +1,8 @@
-<!--
-  Generated template for the CreateUserPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
     <ion-title>
-      <!-- <p class="center-text header-top"> Nuevo Usuario </p> -->
-      Usuario
-      <!--<button ion-button>Agregar areas a usuario</button>-->
+      {{'user.actionBarTitle' | translate}}
     </ion-title>
     <ion-buttons *ngIf="user && user.id" end>
       <button ion-button color="primary" (click)="editAreas(user)">Areas</button>
@@ -39,45 +31,45 @@
   <ion-list>
     <form [formGroup]="registerForm">
       <ion-item>
-        <ion-label inline>Nombre</ion-label>
+        <ion-label inline>{{ 'user.name' | translate }}</ion-label>
         <ion-input (blur)="try.realm=true" (focus)="try.realm=false" type="text" formControlName="realm" [(ngModel)]="user.realm"></ion-input>
       </ion-item>
-      <div class="error-input item-md" [hidden]="!try.realm || (registerForm.controls.realm.valid || !registerForm.controls.realm._errors.required)">Este campo es requerido</div>
+      <div class="error-input item-md" [hidden]="!try.realm || (registerForm.controls.realm.valid || !registerForm.controls.realm._errors.required)">{{ 'login.required' | translate }}</div>
       <ion-item>
-        <ion-label inline>Teléfono</ion-label>
+        <ion-label inline>{{ 'user.phone' | translate }}</ion-label>
         <ion-input (blur)="try.phone=true" (focus)="try.phone=false" type="text" formControlName="phone" [(ngModel)]="user.phone"></ion-input>
       </ion-item>
 
-      <div class="error-input item-md" [hidden]="!try.phone || (registerForm.controls.phone.valid || !registerForm.controls.phone._errors.required)">Este campo es requerido</div>
+      <div class="error-input item-md" [hidden]="!try.phone || (registerForm.controls.phone.valid || !registerForm.controls.phone._errors.required)">{{ 'login.required' | translate }}</div>
 
       <ion-item>
-        <ion-label inline>Correo</ion-label>
+        <ion-label inline>{{ 'user.email' | translate }}</ion-label>
         <ion-input (blur)="try.email=true" (focus)="try.email=false" type="text" formControlName="email" [(ngModel)]="user.email"></ion-input>
       </ion-item>
 
-      <div class="error-input item-md" [hidden]="!try.email || (registerForm.controls.email.valid || !registerForm.controls.email._errors.required)">Este campo es requerido</div>
-      <div class="error-input item-md" [hidden]="!try.email || registerForm.controls.email.valid || !registerForm.controls.email._errors.invalidEmail">Este campo debe ser un email</div>
+      <div class="error-input item-md" [hidden]="!try.email || (registerForm.controls.email.valid || !registerForm.controls.email._errors.required)">{{ 'login.required' | translate }}</div>
+      <div class="error-input item-md" [hidden]="!try.email || registerForm.controls.email.valid || !registerForm.controls.email._errors.invalidEmail">{{ 'login.shouldBeEmail' | translate }}</div>
 
       <ion-item>
-        <ion-label inline>Dirección</ion-label>
+        <ion-label inline>{{ 'user.address' | translate }}</ion-label>
         <ion-input (blur)="try.address=true" (focus)="try.address=false" type="text" formControlName="address" [(ngModel)]="user.address"></ion-input>
       </ion-item>
 
-      <div class="error-input item-md" [hidden]="!try.address || (registerForm.controls.address.valid || !registerForm.controls.address._errors.required)">Este campo es requerido</div>
+      <div class="error-input item-md" [hidden]="!try.address || (registerForm.controls.address.valid || !registerForm.controls.address._errors.required)">{{ 'login.required' | translate }}</div>
 
     </form>
   </ion-list>
 
 
   <ion-row>
-    <button *ngIf="!user.id" ion-button (click)="registerUser()" color="primary" [disabled]="registerForm.invalid" block>Guardar</button>
+    <button *ngIf="!user.id" ion-button (click)="registerUser()" color="primary" [disabled]="registerForm.invalid" block>{{ 'user.save' | translate }}</button>
     <div *ngIf="user.id" class="adjust-horizontal">
       <ion-row>
         <ion-col col-12 col-md-6>
-          <button ion-button (click)="updateUser()" color="primary" [disabled]="registerForm.invalid" block>Guardar Cambios</button>
+          <button ion-button (click)="updateUser()" color="primary" [disabled]="registerForm.invalid" block>{{ 'user.saveChanges' | translate }}</button>
         </ion-col>
         <ion-col col-12 col-md-6>
-          <button ion-button (click)="presentConfirmDelete()" color="danger" [disabled]="registerForm.invalid" block>Eliminar Usuario</button>
+          <button ion-button (click)="presentConfirmDelete()" color="danger" [disabled]="registerForm.invalid" block>{{ 'user.deleteUser' | translate }}</button>
         </ion-col>
       </ion-row>
 

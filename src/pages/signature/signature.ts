@@ -10,7 +10,7 @@ export class SignaturePage {
 
   imgSignature: string;
 
-  private signaturePadOptions: {} = { // passed through to szimek/signature_pad constructor
+  signaturePadOptions: {} = { // passed through to szimek/signature_pad constructor
     'minWidth': 5,
     'canvasWidth': 300,
     'canvasHeight': 300

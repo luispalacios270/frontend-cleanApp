@@ -5,10 +5,8 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
+
 <ion-content padding>
-
-
-
   <ion-row>
     <ion-col col-6 offset-3 col-md-4 offset-md-4>
       <ion-row>
@@ -29,10 +27,10 @@
         <thead>
           <tr>
             <th>
-              ITEM
+              {{'summary.item' | translate}}
             </th>
             <th>
-              PORCENTAJE
+              {{'summary.percentage' | translate}}
             </th>
           </tr>
 
@@ -45,7 +43,7 @@
             {{100*(item.doneItem / item.totalItem) | number:'1.2' }}%
           </td>
           <td *ngIf="item.totalItem==0">
-            Sin Artículos
+            {{'summary.noItems' | translate}}
           </td>
         </tr>
 

@@ -18,6 +18,7 @@ import { SignaturePage } from "../pages/signature/signature";
 import { CreateUserPage } from "../pages/create-user/create-user";
 import { CreateAreasPage } from "../pages/create-areas/create-areas";
 import { CreateItemPage } from "../pages/create-item/create-item";
+import { PopoverPage } from "../pages/home-buttons/home-popover.component";
 
 import { IonicStorageModule } from "@ionic/storage";
 import { StatusBar } from "@ionic-native/status-bar";
@@ -65,7 +66,8 @@ export function createTranslateLoader(http: Http) {
     CreateUserPage,
     CreateAreasPage,
     UrlPicDirective,
-    CreateItemPage
+    CreateItemPage,
+    PopoverPage
   ],
   imports: [
     BrowserModule,
@@ -100,7 +102,8 @@ export function createTranslateLoader(http: Http) {
     SignaturePage,
     CreateUserPage,
     CreateAreasPage,
-    CreateItemPage
+    CreateItemPage,
+    PopoverPage
   ],
   providers: [
     StatusBar,

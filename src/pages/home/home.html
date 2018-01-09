@@ -1,16 +1,13 @@
 <ion-header>
   <ion-navbar>
-    <!--  "home": {
-    "actionBarTitle":"Inspecciones",
-    "activesTab":"Activas",
-    "finishedTab":"Cerradas",
-    "clientTab":"Clientes",
-    "filterHint":"Realizar busqueda"
-  } -->
-
     <ion-title>
       {{'home.actionBarTitle' | translate}}
     </ion-title>
+    <ion-buttons end>
+      <button color="primary" ion-button (click)="presentPopover($event)">
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
   <ion-toolbar class="">
     <ion-segment [(ngModel)]="segment" (ionChange)="selectList()">

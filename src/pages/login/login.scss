@@ -1,19 +1,6 @@
 page-login {
-
-  /* @media screen and (min-height: 720px) {
-    #container-login {
-      margin-top: 7%
-    }
-  }
-
-  @media screen and (max-height: 720px) {    
-        #container-login {
-          margin-top: 25%
-        }    
-  } */
-
   #container-login {
-    margin-top: 25%
+    margin: auto;
   }
   .company-name {
     margin-top: 10px;
@@ -24,8 +11,13 @@ page-login {
     text-align: center;
   }
   ion-content {
-    background: linear-gradient(to bottom, #678f02 0%, #678f02 50%/*, #000000 50%*/
-    , white 50%, white 100%);
+    background: linear-gradient(
+      to bottom,
+      #678f02 0%,
+      #678f02 50%,
+      white 50%,
+      white 100%
+    );
   }
   .error-user {
     margin-top: 20px;

@@ -9,10 +9,21 @@
     "wrongUser": "User or password incorrect"
   },
   "home": {
-    "actionBarTitle":"Inspections",
-    "activesTab":"Actives",
-    "finishedTab":"Closed",
-    "clientTab":"Clients",
-    "filterHint":"Filter"
+    "actionBarTitle": "Inspections",
+    "activesTab": "Actives",
+    "finishedTab": "Closed",
+    "clientTab": "Clients",
+    "filterHint": "Filter"
+  },
+  "user": {
+    "actionBarTitle": "Client",
+    "name": "Name",
+    "phone": "Phone",
+    "email": "Email",
+    "password": "Password",
+    "address": "Adress",
+    "save": "Save",
+    "saveChanges": "Save Changes",
+    "deleteUser": "Delete Client"
   }
 }
