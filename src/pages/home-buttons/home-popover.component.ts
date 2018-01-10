@@ -66,12 +66,13 @@ export class PopoverPage {
 
   getNewLanguage(newLanguage = "en"): void {
     this.translate.use(newLanguage);
+    this.storage.set("currentLang", newLanguage).then();
     this.closePopOver();
   }
 
   closeAccount(): void {
     this.storage.remove("currentUser");
-    this.storage.clear();
+    // this.storage.clear();
     this.app
       .getRootNav()
       .push(LoginPage)

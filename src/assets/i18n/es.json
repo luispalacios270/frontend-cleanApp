@@ -28,10 +28,37 @@
     "address": "Dirección",
     "save": "Guardar",
     "saveChanges": "Guardar Cambios",
-    "deleteUser": "Eliminar Usuario"
+    "deleteUser": "Eliminar Usuario",
+    "selectPic": {
+      "source": "Fuente de la imagen",
+      "message": "Seleccione de donde desea obetener la imagen",
+      "gallery": "Galería",
+      "camera": "Cámara"
+    },
+    "createdUser": {
+      "title": "Usuario Creado",
+      "message": "Usuario creado satisfactoriamente, ¿Desea agregarle áreas?"
+    },
+    "deletClient": {
+      "title": "Eliminación de cliente",
+      "message": "¿Esta seguro que desea eliminar al cliente?"
+    },
+    "emailUsed": "El correo ingresado ya esta siendo usado por otro cliente",
+    "userCreated": "El cliente fue creado de manera correcta"
   },
   "area": {
-    "actionBarTitle": "Agregar Área"
+    "actionBarTitle": "Agregar Área",
+    "add": "Agregar",
+    "alertInfo": {
+      "newData": "Introduzca el nombre del nuevo dato",
+      "placeholder": "2do piso, Oficina 204, alcoba principal"
+    },
+    "type": {
+      "addArea": "Agregar Área",
+      "addItem": "Agrear Item",
+      "updateArea": "Actualizar Área",
+      "updateItem": "Actualizar Item"
+    }
   },
   "editService": {
     "actionBarTitle": "Nueva Inspección",
@@ -41,7 +68,11 @@
   },
   "createItem": {
     "close": "Cerrar",
-    "addObject": "Agregar objeto"
+    "addObject": "Agregar objeto",
+    "type": {
+      "addObject": "Agregar Mueble",
+      "updateObject": "Actualizar Mueble"
+    }
   },
   "serviceDetail": {
     "areas": "Áreas",
@@ -62,12 +93,28 @@
     "good": "B",
     "regular": "R",
     "bad": "M",
-    "details": "Detalles"
+    "details": "Detalles",
+    "takePic": {
+      "title": "Tomar foto",
+      "beforePic": "Seleccionar foto de antes",
+      "afterPic": "Seleccionar foto de después",
+      "selectSource": "Seleccionar fuente",
+      "messageSource": "Seleccione de donde desea obetener la imagen",
+      "gallery": "Galería",
+      "camera": "Camara",
+      "seePics": "Mirar fotos del item",
+      "pictures": "Fotos",
+      "pictureMessage": "¿Que imagenes desea observar?",
+      "before": "Antes",
+      "after": "Después"
+    }
   },
   "summary": {
     "item": "ITEM",
     "percentage": "PORCENTAJE",
-    "noItems": "Sin Items"
+    "noItems": "Sin Items",
+    "finished": "Terminados",
+    "unfinished": "Pendientes"
   },
   "approval": {
     "clientAprovement": "Aprobación del cliente",
@@ -83,6 +130,14 @@
   },
   "shared": {
     "save": "Guardar",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "error": "Hubo un error. Por favor, intente más tarde"
+  },
+  "notes": {
+    "client": "Notas del cliente",
+    "inspector": "Notas del inspector",
+    "action": "Plan de acción",
+    "administrator": "Notas del administrador",
+    "placeholder": "Ingrese notas"
   }
 }

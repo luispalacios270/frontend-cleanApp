@@ -90,6 +90,7 @@ export class LoginPage {
 
   getNewLanguage($event): void {
     this.translate.use($event);
+    this.storage.set("currentLang", $event).then();
   }
 
   login() {

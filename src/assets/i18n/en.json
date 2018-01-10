@@ -13,7 +13,11 @@
     "activesTab": "Actives",
     "finishedTab": "Closed",
     "clientTab": "Clients",
-    "filterHint": "Filter"
+    "filterHint": "Filter",
+    "popover": {
+      "language": "Change Language",
+      "closeAcount": "Sign Out"
+    }
   },
   "user": {
     "actionBarTitle": "Client",
@@ -24,6 +28,117 @@
     "address": "Adress",
     "save": "Save",
     "saveChanges": "Save Changes",
-    "deleteUser": "Delete Client"
+    "deleteUser": "Delete Client",
+    "selectPic": {
+      "source": "Image's Source",
+      "message": "Select the source to get the image from",
+      "gallery": "Gallery",
+      "camera": "Camera"
+    },
+    "createdUser": {
+      "title": "User Created",
+      "message":
+        "User succesfully created. Do you want to add areas to the user?"
+    },
+    "deletClient": {
+      "title": "Deleting Client",
+      "message": "Are you sure you want to delete the client?"
+    },
+    "emailUsed": "The email is already used by another client",
+    "userCreated": "The client was created succesfully"
+  },
+  "area": {
+    "actionBarTitle": "Add Area",
+    "add": "Add",
+    "alertInfo": {
+      "newData": "Input new data's name",
+      "placeholder": "2nd Floor, Office 204, Main Restroom"
+    },
+    "type": {
+      "addArea": "Add Area",
+      "addItem": "Add Item",
+      "updateArea": "Update Area",
+      "updateItem": "Update Item"
+    }
+  },
+  "editService": {
+    "actionBarTitle": "New Inspection",
+    "date": "Start Inspection Date",
+    "client": "Client",
+    "save": "Save Inspection"
+  },
+  "createItem": {
+    "close": "Close",
+    "addObject": "Add Furniture",
+    "type": {
+      "addObject": "Add Furniture",
+      "updateObject": "Update Furniture"
+    }
+  },
+  "serviceDetail": {
+    "areas": "Areas",
+    "makeInspection": "Make Inspection",
+    "modifyInspection": "Modify Inspection",
+    "sharePDF": "Share PDF",
+    "info": "Information",
+    "client": "Client",
+    "phone": "Phone",
+    "address": "Address"
+  },
+  "tabs": {
+    "inspections": "Inspections",
+    "summary": "Summary",
+    "approval": "Approval"
+  },
+  "itemDetail": {
+    "good": "G",
+    "regular": "R",
+    "bad": "B",
+    "details": "Details",
+    "takePic": {
+      "title": "Take Picture",
+      "beforePic": "Select Before Picture",
+      "afterPic": "Select After Picture",
+      "selectSource": "Select Source",
+      "messageSource": "Where would you like to get the picture from?",
+      "gallery": "Gallery",
+      "camera": "Camera",
+      "seePics": "Watch item's pictures",
+      "pictures": "Pictures",
+      "pictureMessage": "What pictures would you like to see?",
+      "before": "Before",
+      "after": "After"
+    }
+  },
+  "summary": {
+    "item": "ITEM",
+    "percentage": "PERCENTAGE",
+    "noItems": "No Items",
+    "finished": "Finished",
+    "unfinished": "Pending"
+  },
+  "approval": {
+    "clientAprovement": "Client's Approval",
+    "fullName": "Full Name",
+    "endDate": "End Inspection Date",
+    "signatures": "Signatures",
+    "clientSignature": "Client's Signature",
+    "inspectorSignature": "Inspector's Signature",
+    "save": "Save & Finish"
+  },
+  "signature": {
+    "clean": "Clean"
+  },
+  "shared": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "error": "There was an error, please try later"
+  },
+  "notes": {
+    "client": "Client's notes",
+    "inspector": "Inspector's notes",
+    "action": "Plan of action",
+    "administrator": "Adminitrator's notes",
+    "placeholder": "input notes"
   }
 }

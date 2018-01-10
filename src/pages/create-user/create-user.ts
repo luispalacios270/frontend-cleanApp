@@ -14,6 +14,7 @@ import { Camera, CameraOptions } from "@ionic-native/camera";
 import { Storage } from "@ionic/storage";
 import { CreateAreasPage } from "../create-areas/create-areas";
 import * as globalVariables from "../../global";
+import { TranslateService } from "@ngx-translate/core";
 
 // @IonicPage()
 
@@ -62,7 +63,8 @@ export class CreateUserPage {
     public alertCtrl: AlertController,
     public modalCtrl: ModalController,
     public toastCtrl: ToastController,
-    public storage: Storage
+    public storage: Storage,
+    private translate: TranslateService
   ) {
     this.registerForm = formBuilder.group({
       email: [
@@ -85,20 +87,32 @@ export class CreateUserPage {
   }
 
   selectTypeOfPic() {
+    let selectPic: any = {};
+    this.translate
+      .get("user.selectPic.source")
+      .subscribe(lang => (selectPic.title = lang));
+    this.translate
+      .get("user.selectPic.message")
+      .subscribe(lang => (selectPic.message = lang));
+    this.translate
+      .get("user.selectPic.gallery")
+      .subscribe(lang => (selectPic.gallery = lang));
+    this.translate
+      .get("user.selectPic.camera")
+      .subscribe(lang => (selectPic.camera = lang));
     this.alertCtrl
       .create({
-        title: "Origen de imagen",
-        message: "Seleccione de donde desea obtener la imagen",
+        title: selectPic.title,
+        message: selectPic.message,
         buttons: [
           {
-            text: "Galería",
-            role: "cancel",
+            text: selectPic.gallery,
             handler: () => {
               this.selectPictureFromGallery();
             }
           },
           {
-            text: "Cámara",
+            text: selectPic.camera,
             handler: () => {
               this.takePicture();
             }
@@ -157,10 +171,17 @@ export class CreateUserPage {
   }
 
   presentConfirm(user: {}) {
+    let createdUser: any = {};
+    this.translate
+      .get("user.createdUser.title")
+      .subscribe(lang => (createdUser.title = lang));
+    this.translate
+      .get("user.createdUser.message")
+      .subscribe(lang => (createdUser.message = lang));
+
     let alert = this.alertCtrl.create({
-      title: "Usuario Creado",
-      message:
-        "El usuario se ha creado de forma correcta. ¿Desea agregar areas al usuario recién creado?",
+      title: createdUser.title,
+      message: createdUser.message,
       buttons: [
         {
           text: "No",
@@ -170,7 +191,7 @@ export class CreateUserPage {
           }
         },
         {
-          text: "Si",
+          text: "Ok",
           handler: () => {
             this.editAreas(user);
           }
@@ -190,11 +211,15 @@ export class CreateUserPage {
         this.presentConfirm(result);
       })
       .catch(err => {
+        let messageUsedEmail: string;
+        this.translate
+          .get("user.emailUsed")
+          .subscribe(lang => (messageUsedEmail = lang));
         // console.log(err);
         if (err.status == 422) {
           this.toastCtrl
             .create({
-              message: "El email ingresado ya pertenece a un cliente",
+              message: messageUsedEmail,
               duration: 3000,
               position: "bottom center"
             })
@@ -204,17 +229,24 @@ export class CreateUserPage {
   }
 
   presentConfirmDelete() {
+    let deletClient: any = {};
+    this.translate.get("user.deletClient.title").subscribe(lang => {
+      deletClient.title = lang;
+    });
+    this.translate.get("user.deletClient.message").subscribe(lang => {
+      deletClient.message = lang;
+    });
+
     this.alertCtrl
       .create({
-        title: "Eliminación de cliente",
-        message: "Esta seguro que desea eliminar el archivo",
+        title: deletClient.title,
+        message: deletClient.message,
         buttons: [
           {
-            text: "No",
-            role: "cancel"
+            text: "No"
           },
           {
-            text: "Si",
+            text: "Ok",
             handler: () => {
               this.deleteUser();
             }
@@ -243,6 +275,11 @@ export class CreateUserPage {
   }
 
   updateUser() {
+    let userCreated: string;
+    this.translate.get("user.userCreated").subscribe(lang => {
+      userCreated = lang;
+    });
+
     this.user.email = this.user.email.trim();
     this.clientProvider
       .updateUser(this.user.id, this.user)
@@ -250,29 +287,29 @@ export class CreateUserPage {
         if (this.img != "") this.uploadPicture(result.id);
         this.toastCtrl
           .create({
-            message: "El usuario se ha actualizado de forma correcta",
+            message: userCreated,
             duration: 3000,
             position: "bottom center"
           })
           .present();
         this.navCtrl.pop();
-        // this.presentConfirm(result);
       })
       .catch(err => {
         console.log(err);
         if (err.status == 422) {
+          let messageUsedEmail: string;
+          this.translate
+            .get("user.emailUsed")
+            .subscribe(lang => (messageUsedEmail = lang));
+
           this.toastCtrl
             .create({
-              message: "El email ingresado ya pertenece a un cliente",
+              message: messageUsedEmail,
               duration: 3000,
               position: "bottom center"
             })
             .present();
         }
       });
-  }
-
-  ionViewDidLoad() {
-    console.log("ionViewDidLoad CreateUserPage");
   }
 }

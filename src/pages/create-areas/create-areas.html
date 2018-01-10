@@ -2,7 +2,7 @@
   <ion-navbar>
     <!-- <button ion-button clear (click)="closeModal()">Cerrar</button> -->
     <ion-buttons end>
-      <button ion-button color="primary" clear (click)="presentAlertInput('área',1)">{{ 'area.actionBarTitle' | translate }}</button>
+      <button ion-button color="primary" clear (click)="presentAlertInput('addArea',1)">{{ 'area.actionBarTitle' | translate }}</button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -17,10 +17,10 @@
           </ion-col>
           <ion-col align-self-center col-4>
 
-            <button class="header-buttons" ion-button clear icon-only color="light" icon-end (click)="presentAlertInput('Actualizar Area', 4, area)">
+            <button class="header-buttons" ion-button clear icon-only color="light" icon-end (click)="presentAlertInput('updateArea', 4, area)">
               <ion-icon name="create"></ion-icon>
             </button>
-            <button class="header-buttons" ion-button clear icon-only color="light" icon-end (click)="presentAlertInput('item',2,area)">
+            <button class="header-buttons" ion-button clear icon-only color="light" icon-end (click)="presentAlertInput('addItem',2,area)">
               <ion-icon name="add"></ion-icon>
             </button>
             <button class="header-buttons" ion-button clear icon-only color="light" icon-end (click)="deleteArea(area, i)">
@@ -53,10 +53,10 @@
             <button class="header-buttons" ion-button clear icon-only color="secondary" icon-end (click)="modifyItem(item)">
               <ion-icon name="logo-buffer"></ion-icon>
             </button>
-            <button class="header-buttons" ion-button clear icon-only icon-end color="danger" (click)=" deleteItem(item, iItems, iArea )">
+            <button class="header-buttons" ion-button clear icon-only icon-end color="danger" (click)="deleteItem(item, iItems, i)">
               <ion-icon name="trash"></ion-icon>
             </button>
-            <button class="header-buttons" ion-button clear icon-only icon-end color="secondary" (click)="presentAlertInput('Actualizar Item', 5, item)">
+            <button class="header-buttons" ion-button clear icon-only icon-end color="secondary" (click)="presentAlertInput('updateItem', 5, item)">
               <ion-icon name="create"></ion-icon>
             </button>
 

@@ -5,13 +5,13 @@ page-about {
   .pie-caption {
     margin: 4px 0 0 0;
     font-size: 1.25em;
-    color: map-get($colors,primary);
+    color: map-get($colors, primary);
   }
   .header-summary {
-    color: map-get($colors,primary);
+    color: map-get($colors, primary);
     font-size: 1.35em;
     width: 100%;
-    text-align: center
+    text-align: center;
     /*font-weight: 100;*/
   }
   td,
@@ -21,19 +21,14 @@ page-about {
     border-bottom: 1px solid rgb(235, 236, 237);
   }
   th {
-    color: map-get($colors,primary);;
+    color: map-get($colors, primary);
   }
-  // td {}
   .progress-bar {
     height: 50px;
     width: 100%;
-    /*background: linear-gradient(to right, blue 0%, blue 50%, orange 50%, orange 100%);*/
   }
   .list-items {
     color: grey;
-  }
-  .finished {
-    text-decoration: line-through;
   }
   .text-porcentage {
     color: slategrey;
