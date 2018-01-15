@@ -37,7 +37,7 @@
         "angular": "^1.6.6",
         "angular2-signaturepad": "^2.6.0",
         "chart.js": "^2.6.0",
-        "cordova-android": "^6.0.0",
+        "cordova-android": "^6.2.3",
         "cordova-ios": "^4.5.4",
         "cordova-plugin-camera": "^2.4.1",
         "cordova-plugin-compat": "^1.2.0",
