@@ -83,7 +83,12 @@
     "info": "Information",
     "client": "Client",
     "phone": "Phone",
-    "address": "Address"
+    "address": "Address",
+    "pdf": {
+      "title": "Sharing PDF",
+      "pdfNotCreated": "The PDF wasn't created yet"
+    },
+    "noAreas":"The area doesn't have items"
   },
   "tabs": {
     "inspections": "Inspections",
@@ -140,5 +145,18 @@
     "action": "Plan of action",
     "administrator": "Adminitrator's notes",
     "placeholder": "input notes"
+  },
+  "approbation": {
+    "endInspection": {
+      "title": "Inspection's Finish",
+      "message": "Would you like to finish the inspection as it is?",
+      "cancel": "cancel"
+    },
+    "inspectionEnded": {
+      "title": "Inspection was finished",
+      "message": "The inspection was finished and the PDF was created",
+      "pdfError": "PDF couldn't be created, plase try again later.",
+      "inspectionError": "The inspection couldn't be finished"
+    }
   }
 }

@@ -17,6 +17,7 @@ import { Storage } from "@ionic/storage";
 import { SocialSharing } from "@ionic-native/social-sharing";
 
 import * as globalVariables from "../../global";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "page-service-detail",
@@ -40,7 +41,8 @@ export class ServiceDetailPage {
     public toastCtrl: ToastController,
     // private transfer: FileTransfer,
     // private file: File,
-    private socialSharing: SocialSharing
+    private socialSharing: SocialSharing,
+    private translateService: TranslateService
   ) {
     this.service = navParams.get("service");
     clientService
@@ -57,41 +59,27 @@ export class ServiceDetailPage {
     });
   }
 
-  downloadPdf(service: any) {
-    const url: string = `${this.api}/containers/pdf/download/${service.id}.pdf`;
-    this.socialSharing
-      .share("Compartir PDF", null, url)
-      .then()
-      .catch(err => {
-        this.toastCtrl
-          .create({
-            duration: 3000,
-            message: "El PDF no se encuentra generado aún",
-            position: "bottom"
-          })
-          .present();
-      });
+  downloadPdf(service: any): void {
+    this.translateService.get("serviceDetail.pdf").subscribe(lang => {
+      const url: string = `${this.api}/containers/pdf/download/${
+        service.id
+      }.pdf`;
+      this.socialSharing
+        .share(lang.title, null, url)
+        .then()
+        .catch(err => {
+          this.toastCtrl
+            .create({
+              duration: 3000,
+              message: lang.pdfNotCreated,
+              position: "bottom"
+            })
+            .present();
+        });
+    });
   }
 
-  /* downloadPdf(service: any) {
-    const url: string = `${this.api}/containers/pdf/download/${service.id}.pdf`;
-    this.fileTransfer.download(url, this.file.externalRootDirectory + 'file.pdf').then((entry) => {
-      this.toastCtrl.create({
-        duration: 3000,
-        message: "Descarga finalizada",
-        position: "bottom"
-      }).present();
-      console.log('download complete: ' + entry.toURL());
-    }, (error) => {
-      this.toastCtrl.create({
-        duration: 3000,
-        message: "Hubo un error",
-        position: "bottom"
-      }).present();
-    });
-  } */
-
-  selectItem(item: object, areaName: string) {
+  selectItem(item: object, areaName: string): void {
     this.storage
       .set("currentService", this.service.id)
       .then(result => {
@@ -116,21 +104,23 @@ export class ServiceDetailPage {
   }
 
   selectArea(areaId: string, areaName: string) {
-    this.areaPrividerProvider
-      .getItems(areaId)
-      .then((result: Array<object>) => {
-        if (result.length == 0) {
-          this.toastCtrl
-            .create({
-              message: "El area seleccionado no cuenta con items",
-              duration: 3000,
-              position: "bottom center"
-            })
-            .present();
-        }
-        this.items = result;
-        this.selectedArea = areaName;
-      })
-      .catch(err => console.log(err));
+    this.translateService.get("serviceDetail.noAreas").subscribe(lang => {
+      this.areaPrividerProvider
+        .getItems(areaId)
+        .then((result: Array<object>) => {
+          if (result.length == 0) {
+            this.toastCtrl
+              .create({
+                message: lang,
+                duration: 3000,
+                position: "bottom center"
+              })
+              .present();
+          }
+          this.items = result;
+          this.selectedArea = areaName;
+        })
+        .catch(err => console.log(err));
+    });
   }
 }

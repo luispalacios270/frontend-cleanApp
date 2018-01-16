@@ -82,7 +82,12 @@
     "info": "Información",
     "client": "Cliente",
     "phone": "Teléfono",
-    "address": "Dirección"
+    "address": "Dirección",
+    "pdf": {
+      "title": "Compartir PDF",
+      "pdfNotCreated": "El pdf aún no ha sido creado"
+    },
+    "noAreas": "El área no tiene items"
   },
   "tabs": {
     "inspections": "Inspecciones",
@@ -139,5 +144,19 @@
     "action": "Plan de acción",
     "administrator": "Notas del administrador",
     "placeholder": "Ingrese notas"
+  },
+  "approbation": {
+    "endInspection": {
+      "title": "Fin de la inspección",
+      "message": "¿Desea finalizar la inspección tal como está?",
+      "cancel": "cancel"
+    },
+    "inspectionEnded": {
+      "title": "Inspección finalizada",
+      "message": "La inspección fue finalizada y el PDF fue creado",
+      "pdfError":
+        "Hubo un problema al crear el PDF, por favor intente más tarde.",
+      "inspectionError": "La inspección no pude ser finalizada."
+    }
   }
 }
