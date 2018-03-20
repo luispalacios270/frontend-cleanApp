@@ -7,7 +7,6 @@ import { AboutPage } from "../pages/about/about";
 import { ContactPage } from "../pages/contact/contact";
 import { HomePage } from "../pages/home/home";
 import { TabsPage } from "../pages/tabs/tabs";
-// import { LoginPage } from "../pages/login/login";
 import { ServiceDetailPage } from "../pages/service-detail/service-detail";
 import { ItemDetailPage } from "../pages/item-detail/item-detail";
 import { EditServicePage } from "../pages/edit-service/edit-service";

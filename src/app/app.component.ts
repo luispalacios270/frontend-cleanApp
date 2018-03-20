@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Platform } from "ionic-angular";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
@@ -7,38 +7,56 @@ import { HomePage } from "../pages/home/home";
 import { TranslateService } from "@ngx-translate/core";
 import { Storage } from "@ionic/storage";
 
+const availablesLanguage = ["en", "es"];
+
 @Component({
   templateUrl: "app.html"
 })
-export class MyApp {
+export class MyApp implements OnInit {
   rootPage: any;
 
   constructor(
-    platform: Platform,
-    statusBar: StatusBar,
-    splashScreen: SplashScreen,
-    translate: TranslateService,
+    private platform: Platform,
+    private statusBar: StatusBar,
+    private splashScreen: SplashScreen,
+    private translate: TranslateService,
     private storage: Storage
-  ) {
-    this.storage.get("currentUser").then((currentUser: string) => {
-      if (currentUser) {
-        this.rootPage = HomePage;
-      } else {
-        this.rootPage = "LoginPage";
-      }
-    });
+  ) {}
 
-    platform.ready().then(() => {
-      statusBar.styleDefault();
-      splashScreen.hide();
+  async selectCorrectLang(): Promise<void> {
+    const lang = await this.storage.get("currentLang");
 
-      translate.setDefaultLang("es");
-      this.storage.get("currentLang").then(lang => {
-        if (lang) translate.use(lang);
-        else translate.use("es");
-      });
+    if (lang) {
+      this.translate.use(lang);
+      return;
+    }
 
-      // the lang to use, if the lang isn't available, it will use the current loader to get them
-    });
+    this.translate.addLangs(availablesLanguage);
+
+    const isBrowserLangInLangsAvailables = this.translate
+      .getLangs()
+      .filter(lang => lang === this.translate.getBrowserLang())[0];
+
+    const defaultLang = isBrowserLangInLangsAvailables
+      ? isBrowserLangInLangsAvailables
+      : availablesLanguage[0];
+
+    this.translate.setDefaultLang(defaultLang);
+    await this.translate.use(defaultLang);
+  }
+
+  async selectInitPage(): Promise<void> {
+    const currentUser = await this.storage.get("currentUser");
+    this.rootPage = currentUser ? HomePage : "LoginPage";
+  }
+
+  async ngOnInit(): Promise<void> {
+    await this.selectCorrectLang();
+    await this.platform.ready();
+
+    this.statusBar.styleDefault();
+    this.splashScreen.hide();
+
+    await this.selectCorrectLang();
   }
 }
