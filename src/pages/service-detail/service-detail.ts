@@ -3,8 +3,6 @@ import {
   NavController,
   NavParams,
   AlertController,
-  ModalController,
-  ViewController,
   ToastController
 } from "ionic-angular";
 import { ServicesProvider } from "../../providers/services/services";

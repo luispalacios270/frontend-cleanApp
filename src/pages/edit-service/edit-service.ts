@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { ClientProvider } from '../../providers/client/client';
 import { ServicesProvider } from '../../providers/services/services';
 import { Storage } from '@ionic/storage';

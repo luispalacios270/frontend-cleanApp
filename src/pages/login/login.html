@@ -15,15 +15,16 @@
             <ion-input (blur)="try.email=true" (focus)="try.email=false" type="text" formControlName="email" [(ngModel)]="user.email"></ion-input>
           </ion-item>
 
-          <div class="error-input item-md" [hidden]="!try.email || (loginForm.controls.email.valid || !loginForm.controls.email._errors.required)">{{ 'login.required' | translate }}</div>
-          <div class="error-input item-md" [hidden]="!try.email || loginForm.controls.email.valid || !loginForm.controls.email._errors.invalidEmail">{{ 'login.shouldBeEmail' | translate }}</div>
+
+          <div class="error-input item-md" [hidden]="!try.email || (loginForm.get('email').valid || !loginForm.get('email').errors.required)">{{ 'login.required' | translate }}</div>
+          <div class="error-input item-md" [hidden]="!try.email || loginForm.get('email').valid || !loginForm.get('email').errors.invalidEmail">{{ 'login.shouldBeEmail' | translate }}</div>
 
           <ion-item>
             <ion-label floating>{{ 'login.password' | translate }}</ion-label>
             <ion-input (blur)="try.pass=true" (focus)="try.pass=false" type="password" formControlName="password" [(ngModel)]="user.password"></ion-input>
           </ion-item>
 
-          <div class="error-input item-md" [hidden]="!try.pass || loginForm.controls.password.valid || !loginForm.controls.password._errors.required">{{ 'login.required' | translate }}</div>
+          <div class="error-input item-md" [hidden]="!try.pass || loginForm.get('password').valid || !loginForm.get('password').errors.required">{{ 'login.required' | translate }}</div>
 
 
         </ion-list>

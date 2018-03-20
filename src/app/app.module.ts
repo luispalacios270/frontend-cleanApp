@@ -7,7 +7,7 @@ import { AboutPage } from "../pages/about/about";
 import { ContactPage } from "../pages/contact/contact";
 import { HomePage } from "../pages/home/home";
 import { TabsPage } from "../pages/tabs/tabs";
-import { LoginPage } from "../pages/login/login";
+// import { LoginPage } from "../pages/login/login";
 import { ServiceDetailPage } from "../pages/service-detail/service-detail";
 import { ItemDetailPage } from "../pages/item-detail/item-detail";
 import { EditServicePage } from "../pages/edit-service/edit-service";
@@ -30,18 +30,17 @@ import { AreaPrividerProvider } from "../providers/area-privider/area-privider";
 import { ItemProvider } from "../providers/item/item";
 import { NotePrividerProvider } from "../providers/note-privider/note-privider";
 import { FilesProvider } from "../providers/files/files";
-import { ValidationProvider } from "../providers/validation/validation";
+
 import { Toast } from "@ionic-native/toast";
 import { Dialogs } from "@ionic-native/dialogs";
 import { ClientProvider } from "../providers/client/client";
 import { Camera } from "@ionic-native/camera";
 import { SignaturePadModule } from "angular2-signaturepad";
 import { ItemInspectionProvider } from "../providers/item-inspection/item-inspection";
-import { UrlPicDirective } from "../directives/url-pic/url-pic";
+
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 
-// import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { SocialSharing } from "@ionic-native/social-sharing";
 
 export function createTranslateLoader(http: Http) {
@@ -55,7 +54,7 @@ export function createTranslateLoader(http: Http) {
     ContactPage,
     HomePage,
     TabsPage,
-    LoginPage,
+    // LoginPage,
     ServiceDetailPage,
     ItemDetailPage,
     EditServicePage,
@@ -65,7 +64,6 @@ export function createTranslateLoader(http: Http) {
     SignaturePage,
     CreateUserPage,
     CreateAreasPage,
-    UrlPicDirective,
     CreateItemPage,
     PopoverPage
   ],
@@ -92,7 +90,7 @@ export function createTranslateLoader(http: Http) {
     ContactPage,
     HomePage,
     TabsPage,
-    LoginPage,
+    // LoginPage,
     ServiceDetailPage,
     ItemDetailPage,
     EditServicePage,
@@ -115,7 +113,6 @@ export function createTranslateLoader(http: Http) {
     ItemProvider,
     NotePrividerProvider,
     ItemProvider,
-    ValidationProvider,
     Toast,
     Dialogs,
     ClientProvider,

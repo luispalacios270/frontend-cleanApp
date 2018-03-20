@@ -3,7 +3,6 @@ import { Http, Headers, RequestOptions } from "@angular/http";
 import { AppSettings } from "../../appSettings";
 // import { Headers, RequestOptions } from '@angular/http'
 import "rxjs/add/operator/map";
-import { TranslateService } from "@ngx-translate/core";
 import { Storage } from "@ionic/storage";
 
 @Injectable()

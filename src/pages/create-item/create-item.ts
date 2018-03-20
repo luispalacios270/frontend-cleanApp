@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import {
-  IonicPage,
   NavController,
   NavParams,
   AlertController,

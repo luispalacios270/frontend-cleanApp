@@ -1,8 +1,6 @@
 import { providerParent } from '../providerParent'
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Headers, RequestOptions } from '@angular/http'
-import { AppSettings } from '../../appSettings'
 import 'rxjs/add/operator/map';
 
 @Injectable()/*

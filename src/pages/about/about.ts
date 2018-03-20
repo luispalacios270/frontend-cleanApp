@@ -1,5 +1,5 @@
 import { Component, ViewChild } from "@angular/core";
-import { NavController, NavParams } from "ionic-angular";
+import { NavController } from "ionic-angular";
 import { ServicesProvider } from "../../providers/services/services";
 import { Storage } from "@ionic/storage";
 import { AreaPrividerProvider } from "../../providers/area-privider/area-privider";
@@ -11,19 +11,13 @@ import { TranslateService } from "@ngx-translate/core";
   templateUrl: "about.html"
 })
 export class AboutPage {
-  @ViewChild("myChart") pieChart;
-
   summary: any;
-  noSelected: boolean = false;
+  noSelected = false;
   service: any = null;
-  areas: Array<any>;
+  areas: any[];
   percentage: number;
-  counts: number = 0;
-  countsTotal: number = 0;
-
-  /*constructor(public navCtrl: NavController) {
-
-  }*/
+  counts = 0;
+  countsTotal = 0;
 
   constructor(
     public navCtrl: NavController,
@@ -31,13 +25,10 @@ export class AboutPage {
     public areaPrividerProvider: AreaPrividerProvider,
     private storage: Storage,
     private translate: TranslateService
-  ) {
-    // this.init();
-  }
+  ) {}
 
-  updateSummary() {
+  updateSummary(): void {
     this.storage.get("currentService").then(val => {
-      console.log("valor", val);
       if (val != null) {
         this.servicesProvider
           .getServiceById(val)
@@ -45,7 +36,6 @@ export class AboutPage {
             this.servicesProvider
               .getSummary(val, result.clientId)
               .then((result: any) => {
-                console.log(result);
                 this.areas = result.result.areas;
                 this.service = result.result.service;
                 this.createChart();
@@ -57,11 +47,11 @@ export class AboutPage {
     });
   }
 
-  init() {
+  init(): void {
     this.updateSummary();
   }
 
-  getItemsPerArea() {
+  getItemsPerArea(): void {
     this.countsTotal = 0;
     this.counts = 0;
     this.areas.forEach((item: any, index: number) => {
@@ -82,7 +72,7 @@ export class AboutPage {
     });
   }
 
-  createChart() {
+  createChart(): void {
     let finishedMessage: string;
     let unfinishedMessage: string;
 
@@ -93,9 +83,9 @@ export class AboutPage {
       .get("summary.unfinished")
       .subscribe(lang => (unfinishedMessage = lang));
 
-    var ctx = document.getElementById("myChart");
+    const ctx = document.getElementById("myChart");
 
-    var myChart = new Chart(ctx, {
+    const myChart = new Chart(ctx, {
       type: "pie",
       data: {
         labels: [finishedMessage, unfinishedMessage],
@@ -114,7 +104,7 @@ export class AboutPage {
     });
   }
 
-  ionViewDidEnter() {
+  ionViewDidEnter(): void {
     this.init();
   }
 }

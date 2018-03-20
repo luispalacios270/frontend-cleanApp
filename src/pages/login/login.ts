@@ -1,42 +1,42 @@
-import { Component } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, Validators, AbstractControl } from "@angular/forms";
 import {
   NavController,
   NavParams,
   ToastController,
-  LoadingController
+  LoadingController,
+  IonicPage
 } from "ionic-angular";
 import { HomePage } from "../home/home";
 import { UserServiceProvider } from "../../providers/user-service/user-service";
 import { Storage } from "@ionic/storage";
 import { TranslateService } from "@ngx-translate/core";
+import { emailValidator } from "../../utils/isValidEmail";
+import { User } from "./models/user";
+import { FormGroup } from "@angular/forms/src/model";
+import { InvalidEmail } from "./models/emailError.interface";
 
+@IonicPage()
 @Component({
   selector: "page-login",
   templateUrl: "login.html"
 })
-export class LoginPage {
-  try: {} = {
+export class LoginPage implements OnInit {
+  try = {
     email: false,
     pass: false
   };
 
   selectedLanguage = "";
 
-  loginForm: any;
+  loginForm: FormGroup;
 
-  wrongUser: boolean = false;
+  wrongUser = false;
 
-  token: any;
-
-  user: any = {
+  user: User = {
     email: "",
     password: ""
   };
-
-  loader: any = this.loadingCtrl.create({
-    content: "Cargando"
-  });
 
   constructor(
     public navCtrl: NavController,
@@ -47,8 +47,10 @@ export class LoginPage {
     public loadingCtrl: LoadingController,
     public storage: Storage,
     public translate: TranslateService
-  ) {
-    this.loginForm = FormBuilder.group({
+  ) {}
+
+  ngOnInit(): void {
+    this.loginForm = this.FormBuilder.group({
       email: [
         "",
         Validators.compose([
@@ -62,63 +64,42 @@ export class LoginPage {
     });
   }
 
-  /**
-   * Validate if the value is a valid email thru regExp
-   * @param {any} control value of input
-   * @returns {object} returns an object with the attribute invalidEmail true if there is an error
-   */
-  emailValidator(control: any) {
-    // RFC 2822 compliant regex
-    if (
-      control.value.match(
-        /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
-      )
-    ) {
-      return null;
-    } else {
-      return { invalidEmail: true };
-    }
+  emailValidator(control: AbstractControl): InvalidEmail {
+    const isValidEmail = emailValidator(control.value);
+    return isValidEmail ? null : new InvalidEmail();
   }
 
-  presentLoading() {
-    this.loader.present();
+  presentToastForErrorServer(): void {
+    const toastRef = this.toast.create({
+      message: "El servidor no esta disponible",
+      duration: 3000,
+      position: "bottom"
+    });
+    toastRef.present();
   }
 
-  dissMissLoader() {
-    this.loader.dismiss();
+  async getNewLanguage(newLang: string): Promise<void> {
+    this.translate.use(newLang);
+    await this.storage.set("currentLang", newLang);
   }
 
-  getNewLanguage($event): void {
-    this.translate.use($event);
-    this.storage.set("currentLang", $event).then();
-  }
+  async login(): Promise<void> {
+    this.user.email = this.user.email.trim();
 
-  login() {
-    let emailTrimmed: string = this.user.email;
-    emailTrimmed = emailTrimmed.trim();
-    this.user.email = emailTrimmed;
-    let loader = this.loadingCtrl.create({
+    const loader = this.loadingCtrl.create({
       content: "Loading"
     });
-    loader.present();
-    this.userServiceProvider
-      .doLogin(this.user)
-      .then((result: any) => {
-        loader.dismiss();
-        this.storage.set("currentUser", result.userId);
-        this.navCtrl.push(HomePage);
-      })
-      .catch(err => {
-        loader.dismiss();
-        if (err.name === "TimeoutError") {
-          this.toast
-            .create({
-              message: "El servidor no esta disponible",
-              duration: 3000,
-              position: "bottom"
-            })
-            .present();
-        } else this.wrongUser = true;
-      });
+
+    await loader.present();
+
+    try {
+      const loginResult = await this.userServiceProvider.doLogin(this.user);
+      await this.storage.set("currentUser", loginResult.userId);
+      await this.navCtrl.push(HomePage);
+    } catch (error) {
+      if (error.name === "TimeoutError") this.presentToastForErrorServer();
+      else this.wrongUser = true;
+    }
+    await loader.dismiss();
   }
 }
