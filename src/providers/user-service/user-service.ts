@@ -1,7 +1,7 @@
 import { providerParent } from "../providerParent";
 import { Injectable } from "@angular/core";
 import { Http } from "@angular/http";
-import { User } from "../../pages/login/models/user";
+import { User } from "../../pages/login/models";
 import { LoginResponse } from "./models/login.interface";
 
 @Injectable()

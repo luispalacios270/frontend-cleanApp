@@ -12,9 +12,8 @@ import { UserServiceProvider } from "../../providers/user-service/user-service";
 import { Storage } from "@ionic/storage";
 import { TranslateService } from "@ngx-translate/core";
 import { emailValidator } from "../../utils/isValidEmail";
-import { User } from "./models/user";
+import { InvalidEmail, User } from "./models";
 import { FormGroup } from "@angular/forms/src/model";
-import { InvalidEmail } from "./models/emailError.interface";
 
 @IonicPage()
 @Component({

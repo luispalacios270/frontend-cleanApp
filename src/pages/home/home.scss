@@ -19,7 +19,6 @@ page-home {
     font-size: 1em !important;
     font-weight: bold;
     color: map-get($colors, primary);
-    // color: cornflowerblue;
   }
   .address {
     color: grey;
@@ -33,12 +32,11 @@ page-home {
     // padding-left: 30px;
   }
   .avatar-img {
-    // background: url("http://uniradioserver.com/media/news_thumbs/201611/20161102120336_155.jpg");
     background-size: cover !important;
     background-position: center top !important;
     max-height: 50px;
     min-height: 50px;
-    // width: 100%; // height: 50px;
+
     max-width: 50px;
     border-radius: 50%;
   }

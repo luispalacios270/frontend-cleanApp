@@ -1,4 +1,4 @@
-import { Component, ViewChild } from "@angular/core";
+import { Component } from "@angular/core";
 import { NavController } from "ionic-angular";
 import { ServicesProvider } from "../../providers/services/services";
 import { Storage } from "@ionic/storage";
@@ -26,6 +26,10 @@ export class AboutPage {
     private storage: Storage,
     private translate: TranslateService
   ) {}
+
+  ionViewDidEnter(): void {
+    this.init();
+  }
 
   updateSummary(): void {
     this.storage.get("currentService").then(val => {
@@ -102,9 +106,5 @@ export class AboutPage {
         ]
       }
     });
-  }
-
-  ionViewDidEnter(): void {
-    this.init();
   }
 }
