@@ -7,7 +7,7 @@ import {
   LoadingController,
   IonicPage
 } from "ionic-angular";
-import { HomePage } from "../home/home";
+// import { HomePage } from "../home/home";
 import { UserServiceProvider } from "../../providers/user-service/user-service";
 import { Storage } from "@ionic/storage";
 import { TranslateService } from "@ngx-translate/core";
@@ -94,7 +94,7 @@ export class LoginPage implements OnInit {
     try {
       const loginResult = await this.userServiceProvider.doLogin(this.user);
       await this.storage.set("currentUser", loginResult.userId);
-      await this.navCtrl.push(HomePage);
+      await this.navCtrl.push("HomePage");
     } catch (error) {
       if (error.name === "TimeoutError") this.presentToastForErrorServer();
       else this.wrongUser = true;

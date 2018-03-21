@@ -9,9 +9,9 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-  <ion-toolbar class="">
+  <ion-toolbar>
     <ion-segment [(ngModel)]="segment" (ionChange)="selectList()">
-      <ion-segment-button value="0" color="light">
+      <ion-segment-button value="0">
         {{'home.activesTab' | translate}}
       </ion-segment-button>
       <ion-segment-button value="1">
@@ -22,12 +22,9 @@
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
-
-  <ion-toolbar class="">
-
+  <ion-toolbar>
     <ion-searchbar [(ngModel)]="searchFirlter" placeholder="{{'home.filterHint' | translate}}" [showCancelButton]="true" (ionInput)="doFilter()">
     </ion-searchbar>
-
   </ion-toolbar>
 
 
@@ -42,7 +39,6 @@
 
   <div [hidden]="segment==='2'">
     <ion-row>
-
       <ion-col col-12 col-md-6 *ngFor="let service of serviceListAux">
 
         <ion-card (click)="selectService(service)">
@@ -74,11 +70,7 @@
         </ion-card>
 
       </ion-col>
-
-
-
     </ion-row>
-
   </div>
 
   <ion-list [hidden]="segment!=='2'">
@@ -86,7 +78,7 @@
     <ion-row>
       <ion-col col-12 col-md-6 *ngFor="let client of clientsFiltered">
 
-        <ion-card (click)="modifyUser(client)">
+        <ion-card (click)="goToClientPage(client)">
           <ion-card-content>
             <ion-row align-items-center justify-content-center>
               <ion-col col-3>
@@ -103,24 +95,12 @@
                 <ion-row>
                   <p class="address" text-wrap>{{client.address}}</p>
                 </ion-row>
-                <!-- <ion-row>
-                      <p class="address" text-wrap>{{service.initialDate | date:'medium'}}</p>
-                    </ion-row> -->
-                <!-- <ion-row *ngIf="service.finalDate">
-                      <p class="address" text-wrap>{{service.finalDate | date:'medium'}}</p>
-                    </ion-row> -->
               </ion-col>
             </ion-row>
           </ion-card-content>
         </ion-card>
-
       </ion-col>
     </ion-row>
-
-
-    <!--  <ion-item *ngFor="let client of clients " (click)="">
-      {{}}
-    </ion-item> -->
   </ion-list>
 
   <ion-fab right bottom>
@@ -132,13 +112,11 @@
         <ion-icon color="primary" name="briefcase">
         </ion-icon>
       </button>
-      <button (click)="createUser()" ion-fab>
+      <button (click)="goToClientPage()" ion-fab>
         <ion-icon color="primary" name="person-add">
         </ion-icon>
       </button>
     </ion-fab-list>
   </ion-fab>
-
-
 
 </ion-content>

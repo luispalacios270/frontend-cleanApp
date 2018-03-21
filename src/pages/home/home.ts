@@ -1,9 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import {
   NavController,
   AlertController,
   ToastController,
-  PopoverController
+  PopoverController,
+  IonicPage
 } from "ionic-angular";
 import { ServicesProvider } from "../../providers/services/services";
 import { ServiceDetailPage } from "../service-detail/service-detail";
@@ -14,35 +15,38 @@ import { Storage } from "@ionic/storage";
 import { ClientProvider } from "../../providers/client/client";
 
 import * as globalVariables from "../../global";
+import { Client } from "../../providers/client/model/client.interface";
 
+@IonicPage()
 @Component({
   selector: "page-home",
   templateUrl: "home.html"
 })
-export class HomePage implements OnInit {
-  clients: Array<any>;
+export class HomePage {
+  clients: Client[];
 
-  clientsFiltered: Array<any>;
+  clientsFiltered: any[];
 
-  api: string = globalVariables.API_ENDPOINT;
+  api = globalVariables.API_ENDPOINT;
 
-  segment: string = "0";
+  segment = "0";
 
-  servicesList: Array<object>;
+  servicesList: any[];
 
   onlyFinished: boolean = false;
 
   // List of services unfinished.
-  servicesListActives: Array<object>;
+  servicesListActives: any[];
 
   // List of finished services.
-  servicesListFinished: Array<object>;
+  servicesListFinished: any[];
 
   // List of the current list
-  selectedList: Array<object>;
+  selectedList: any[];
 
   // Auxiliar Array to do the filters
-  serviceListAux: Array<object>;
+  serviceListAux: any[];
+
   searchFirlter: string;
 
   constructor(
@@ -55,52 +59,12 @@ export class HomePage implements OnInit {
     public popoverCtrl: PopoverController
   ) {}
 
-  ngOnInit() {}
-
-  doOption(option: number) {
-    switch (option) {
-      case 0:
-        this.alert.create({
-          title: "Clientes"
-        });
-
-        break;
-
-      default:
-        break;
-    }
-  }
-
-  presentPopover(event: Event) {
-    let popover = this.popoverCtrl.create(PopoverPage);
+  presentPopover(event: Event): void {
+    const popover = this.popoverCtrl.create(PopoverPage);
     popover.present({ ev: event });
   }
 
-  showOption() {
-    let alert = this.alert.create();
-    alert.setTitle("Opciones");
-    alert.addInput({
-      type: "radio",
-      label: "Editar Clientes",
-      value: "0",
-      checked: true
-    });
-
-    alert.addButton("Cancel");
-    alert.addButton({
-      text: "OK",
-      handler: data => {
-        console.log(data);
-      }
-    });
-    alert.present();
-  }
-
-  modifyUser(client) {
-    this.navCtrl.push(CreateUserPage, { user: client });
-  }
-
-  updateLists(refresher: any) {
+  updateLists(refresher: any): void {
     this.storage
       .get("currentUser")
       .then((user: string) => {
@@ -134,7 +98,7 @@ export class HomePage implements OnInit {
       .catch(err => console.error(err));
   }
 
-  updateClients(user: string) {
+  updateClients(user: string): void {
     this.clientService
       .getClients(user)
       .then((resp: Array<any>) => {
@@ -144,27 +108,24 @@ export class HomePage implements OnInit {
       .catch(err => console.log(err));
   }
 
-  createUser() {
-    this.navCtrl.push(CreateUserPage);
+  goToClientPage(client?): void {
+    const userToModify = client ? { user: client } : undefined;
+    this.navCtrl.push(CreateUserPage, userToModify);
   }
 
-  createService() {
+  createService(): void {
     this.navCtrl.push(EditServicePage, {
       service: null
     });
   }
 
-  selectService(service) {
+  selectService(service): void {
     this.navCtrl.push(ServiceDetailPage, {
       service: service
     });
   }
 
-  /*  test(testVariable: boolean = false) {
-     return testVariable;
-   } */
-
-  selectList() {
+  selectList(): void {
     const option = Number(this.segment);
     switch (option) {
       case 0:
@@ -184,22 +145,9 @@ export class HomePage implements OnInit {
         this.serviceListAux = this.servicesListActives;
         break;
     }
-    return; /*
-
-
-
-
-    if (this.onlyFinished) {
-      this.selectedList = this.servicesListFinished;
-      this.serviceListAux = this.servicesListFinished;
-    }
-    if (!this.onlyFinished) {
-      this.selectedList = this.servicesListActives;
-      this.serviceListAux = this.servicesListActives;
-    } */
   }
 
-  deleteService(serviceId: string) {
+  deleteService(serviceId: string): void {
     this.alert
       .create({
         title: "Eliminar Servicio",
@@ -221,8 +169,6 @@ export class HomePage implements OnInit {
                   this.services
                     .getServices()
                     .then((result: Array<object>) => {
-                      // console.log("result", result);
-                      // this.servicesList = result;
                       this.serviceListAux = result;
                     })
                     .catch(err => {
@@ -245,43 +191,41 @@ export class HomePage implements OnInit {
       .present();
   }
 
-  doRefresh(refresher) {
+  doRefresh(refresher): void {
     this.updateLists(refresher);
   }
 
-  doFilter() {
-    if (this.searchFirlter != null && this.searchFirlter != "") {
-      this.serviceListAux = this.selectedList.filter((item: any) => {
-        return (
-          item.client.realm
-            .toLowerCase()
-            .includes(this.searchFirlter.toLowerCase()) ||
-          item.client.address
-            .toLowerCase()
-            .includes(this.searchFirlter.toLowerCase())
-        );
-      });
-      this.clientsFiltered = this.clients.filter(client => {
-        return (
-          client.realm
-            .toLowerCase()
-            .includes(this.searchFirlter.toLowerCase()) ||
-          client.address
-            .toLowerCase()
-            .includes(this.searchFirlter.toLowerCase())
-        );
-      });
-    } else {
+  filterToFindMatchItem(item): boolean {
+    const doesItemMatch =
+      item.client.realm
+        .toLowerCase()
+        .includes(this.searchFirlter.toLowerCase()) ||
+      item.client.address
+        .toLowerCase()
+        .includes(this.searchFirlter.toLowerCase());
+
+    return doesItemMatch;
+  }
+
+  filterToFindMatchClient(client): boolean {
+    const doesClientMatch =
+      client.realm.toLowerCase().includes(this.searchFirlter.toLowerCase()) ||
+      client.address.toLowerCase().includes(this.searchFirlter.toLowerCase());
+
+    return doesClientMatch;
+  }
+
+  doFilter(): void {
+    if (!this.searchFirlter) {
       this.serviceListAux = this.selectedList;
       this.clientsFiltered = this.clients;
+      return;
     }
+    this.serviceListAux = this.selectedList.filter(this.filterToFindMatchItem);
+    this.clientsFiltered = this.clients.filter(this.filterToFindMatchClient);
   }
 
-  ionViewDidLoad() {
-    // this.navCtrl.setRoot(HomePage);
-  }
-
-  ionViewDidEnter() {
+  ionViewDidEnter(): void {
     this.updateLists(null);
   }
 }

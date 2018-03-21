@@ -3,7 +3,6 @@ import { Platform } from "ionic-angular";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 
-import { HomePage } from "../pages/home/home";
 import { TranslateService } from "@ngx-translate/core";
 import { Storage } from "@ionic/storage";
 
@@ -47,7 +46,7 @@ export class MyApp implements OnInit {
 
   async selectInitPage(): Promise<void> {
     const currentUser = await this.storage.get("currentUser");
-    this.rootPage = currentUser ? HomePage : "LoginPage";
+    this.rootPage = currentUser ? "HomePage" : "LoginPage";
   }
 
   async ngOnInit(): Promise<void> {

@@ -5,7 +5,7 @@ import { MyApp } from "./app.component";
 
 import { AboutPage } from "../pages/about/about";
 import { ContactPage } from "../pages/contact/contact";
-import { HomePage } from "../pages/home/home";
+// import { HomePage } from "../pages/home/home";
 import { TabsPage } from "../pages/tabs/tabs";
 import { ServiceDetailPage } from "../pages/service-detail/service-detail";
 import { ItemDetailPage } from "../pages/item-detail/item-detail";
@@ -51,9 +51,8 @@ export function createTranslateLoader(http: Http) {
     MyApp,
     AboutPage,
     ContactPage,
-    HomePage,
+    // HomePage,
     TabsPage,
-    // LoginPage,
     ServiceDetailPage,
     ItemDetailPage,
     EditServicePage,
@@ -87,7 +86,7 @@ export function createTranslateLoader(http: Http) {
     MyApp,
     AboutPage,
     ContactPage,
-    HomePage,
+    // HomePage,
     TabsPage,
     // LoginPage,
     ServiceDetailPage,
