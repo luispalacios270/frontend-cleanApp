@@ -82,23 +82,24 @@ export class LoginPage implements OnInit {
     await this.storage.set("currentLang", newLang);
   }
 
-  async login(): Promise<void> {
+  login(): void {
     this.user.email = this.user.email.trim();
-
     const loader = this.loadingCtrl.create({
       content: "Loading"
     });
+    loader.present();
 
-    await loader.present();
-
-    try {
-      const loginResult = await this.userServiceProvider.doLogin(this.user);
-      await this.storage.set("currentUser", loginResult.userId);
-      await this.navCtrl.push("HomePage");
-    } catch (error) {
-      if (error.name === "TimeoutError") this.presentToastForErrorServer();
-      else this.wrongUser = true;
-    }
-    await loader.dismiss();
+    this.userServiceProvider.doLogin(this.user).subscribe(
+      loginResult => {
+        this.storage.set("currentUser", loginResult.userId);
+        this.navCtrl.push("HomePage");
+        loader.dismiss();
+      },
+      error => {
+        if (error.name === "TimeoutError") this.presentToastForErrorServer();
+        else this.wrongUser = true;
+        loader.dismiss();
+      }
+    );
   }
 }

@@ -1,5 +1,4 @@
 import { Component } from "@angular/core";
-
 import {
   App,
   NavController,
@@ -9,7 +8,6 @@ import {
 } from "ionic-angular";
 import { Storage } from "@ionic/storage";
 import { TranslateService } from "@ngx-translate/core";
-import { LoginPage } from "../login/login";
 
 @Component({
   template: `
@@ -75,7 +73,7 @@ export class PopoverPage {
     // this.storage.clear();
     this.app
       .getRootNav()
-      .push(LoginPage)
+      .push("LoginPage")
       .then(() => {
         const index = this.app.getRootNav().getActive().index;
         this.app.getRootNav().remove(0, index);

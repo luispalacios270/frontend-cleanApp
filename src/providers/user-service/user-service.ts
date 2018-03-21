@@ -1,20 +1,18 @@
-import { providerParent } from "../providerParent";
 import { Injectable } from "@angular/core";
-import { Http } from "@angular/http";
+import { HttpHandlerProvider } from "../http-handler/http-handler";
 import { User } from "../../pages/login/models";
 import { LoginResponse } from "./models/login.interface";
+import { Observable } from "rxjs/Observable";
 
 @Injectable()
-export class UserServiceProvider extends providerParent {
+export class UserServiceProvider {
   readonly modelEndPoint = "/Supervisors";
 
-  constructor(public http: Http) {
-    super(http);
-  }
+  constructor(public httpHandler: HttpHandlerProvider) {}
 
-  doLogin(user: User): Promise<LoginResponse> {
+  doLogin(user: User): Observable<LoginResponse> {
     if (!user) return;
-    const completeEndPoint = `${this.link + this.modelEndPoint}/login`;
-    return this.postData(completeEndPoint, user);
+    const completeEndPoint = `${this.modelEndPoint}/login`;
+    return this.httpHandler.postData(completeEndPoint, user);
   }
 }

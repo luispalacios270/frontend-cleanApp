@@ -29,6 +29,7 @@ import { AreaPrividerProvider } from "../providers/area-privider/area-privider";
 import { ItemProvider } from "../providers/item/item";
 import { NotePrividerProvider } from "../providers/note-privider/note-privider";
 import { FilesProvider } from "../providers/files/files";
+import { HttpHandlerProvider } from "../providers/http-handler/http-handler";
 
 import { Toast } from "@ionic-native/toast";
 import { Dialogs } from "@ionic-native/dialogs";
@@ -105,6 +106,7 @@ export function createTranslateLoader(http: Http) {
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
+    HttpHandlerProvider,
     UserServiceProvider,
     ServicesProvider,
     AreaPrividerProvider,
