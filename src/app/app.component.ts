@@ -51,6 +51,7 @@ export class MyApp implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+    await this.selectInitPage();
     await this.selectCorrectLang();
     await this.platform.ready();
 
