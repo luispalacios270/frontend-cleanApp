@@ -7,37 +7,28 @@
         <img src="assets/images/logo.png">
 
       </div>
-      <form [formGroup]="loginForm">
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
 
         <ion-list>
           <ion-item>
             <ion-label floating>{{ 'login.email' | translate }}</ion-label>
-            <ion-input (blur)="try.email=true" (focus)="try.email=false" type="text" formControlName="email" [(ngModel)]="user.email"></ion-input>
+            <ion-input (ionBlur)="try.email=true" (ionFocus)="try.email=false" type="text" formControlName="email"></ion-input>
           </ion-item>
-
-
           <div class="error-input item-md" [hidden]="!try.email || (loginForm.get('email').valid || !loginForm.get('email').errors.required)">{{ 'login.required' | translate }}</div>
           <div class="error-input item-md" [hidden]="!try.email || loginForm.get('email').valid || !loginForm.get('email').errors.invalidEmail">{{ 'login.shouldBeEmail' | translate }}</div>
 
           <ion-item>
             <ion-label floating>{{ 'login.password' | translate }}</ion-label>
-            <ion-input (blur)="try.pass=true" (focus)="try.pass=false" type="password" formControlName="password" [(ngModel)]="user.password"></ion-input>
+            <ion-input (ionBlur)="try.pass=true" (ionFocus)="try.pass=false" type="password" formControlName="password"></ion-input>
           </ion-item>
 
           <div class="error-input item-md" [hidden]="!try.pass || loginForm.get('password').valid || !loginForm.get('password').errors.required">{{ 'login.required' | translate }}</div>
-
-
         </ion-list>
 
-
         <div class="error-user item-md" [hidden]="!wrongUser">{{'login.wrongUser' | translate}}</div>
-        <div padding>
-          <ion-row align-items-center>
-            <ion-col col-12>
-              <button ion-button [disabled]="loginForm.invalid" (click)="login()" color="primary" block>{{'login.loginBtn' | translate}}</button>
-            </ion-col>
-          </ion-row>
-        </div>
+
+        <button ion-button type="submit" [disabled]="loginForm.invalid" color="primary" block>{{'login.loginBtn' | translate}}</button>
+
       </form>
 
       <div padding>

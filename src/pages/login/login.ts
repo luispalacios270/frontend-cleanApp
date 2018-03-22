@@ -1,5 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, Validators, AbstractControl } from "@angular/forms";
+import {
+  FormBuilder,
+  Validators,
+  AbstractControl,
+  FormGroup
+} from "@angular/forms";
 import {
   NavController,
   NavParams,
@@ -7,13 +12,12 @@ import {
   LoadingController,
   IonicPage
 } from "ionic-angular";
-// import { HomePage } from "../home/home";
+
 import { UserServiceProvider } from "../../providers/user-service/user-service";
 import { Storage } from "@ionic/storage";
 import { TranslateService } from "@ngx-translate/core";
 import { emailValidator } from "../../utils/isValidEmail";
 import { InvalidEmail, User } from "./models";
-import { FormGroup } from "@angular/forms/src/model";
 
 @IonicPage()
 @Component({
@@ -31,11 +35,6 @@ export class LoginPage implements OnInit {
   loginForm: FormGroup;
 
   wrongUser = false;
-
-  user: User = {
-    email: "",
-    password: ""
-  };
 
   constructor(
     public navCtrl: NavController,
@@ -83,13 +82,15 @@ export class LoginPage implements OnInit {
   }
 
   login(): void {
-    this.user.email = this.user.email.trim();
+    const userInfo = <User>this.loginForm.value;
+    userInfo.email = userInfo.email.trim();
+
     const loader = this.loadingCtrl.create({
       content: "Loading"
     });
     loader.present();
 
-    this.userServiceProvider.doLogin(this.user).subscribe(
+    this.userServiceProvider.doLogin(userInfo).subscribe(
       loginResult => {
         this.storage.set("currentUser", loginResult.userId);
         this.navCtrl.push("HomePage");

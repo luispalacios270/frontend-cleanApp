@@ -43,6 +43,8 @@ import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 
 import { SocialSharing } from "@ionic-native/social-sharing";
 
+// import { DirectivesModule } from "../directives/directives.module";
+
 export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
@@ -80,7 +82,8 @@ export function createTranslateLoader(http: Http) {
       menuType: "overlay"
     }),
     IonicStorageModule.forRoot(),
-    SignaturePadModule
+    SignaturePadModule,
+    // DirectivesModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
