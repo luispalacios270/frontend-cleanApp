@@ -77,9 +77,9 @@ export class LoginPage implements OnInit {
     toastRef.present();
   }
 
-  async getNewLanguage(newLang: string): Promise<void> {
+  getNewLanguage(newLang: string): void {
     this.translate.use(newLang);
-    await this.storage.set("currentLang", newLang);
+    this.storage.set("currentLang", newLang);
   }
 
   login(): void {
