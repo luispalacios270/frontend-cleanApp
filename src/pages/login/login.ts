@@ -1,28 +1,27 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   Validators,
   AbstractControl,
   FormGroup
-} from "@angular/forms";
+} from '@angular/forms';
 import {
   NavController,
-  NavParams,
   ToastController,
   LoadingController,
   IonicPage
-} from "ionic-angular";
+} from 'ionic-angular';
 
-import { UserServiceProvider } from "../../providers/user-service/user-service";
-import { Storage } from "@ionic/storage";
-import { TranslateService } from "@ngx-translate/core";
-import { emailValidator } from "../../utils/isValidEmail";
-import { InvalidEmail, User } from "./models";
+import { UserServiceProvider } from '../../providers/user-service/user-service';
+import { Storage } from '@ionic/storage';
+import { TranslateService } from '@ngx-translate/core';
+import { emailValidator } from '../../utils/isValidEmail';
+import { InvalidEmail, User } from './models';
 
 @IonicPage()
 @Component({
-  selector: "page-login",
-  templateUrl: "login.html"
+  selector: 'page-login',
+  templateUrl: 'login.html'
 })
 export class LoginPage implements OnInit {
   try = {
@@ -30,27 +29,26 @@ export class LoginPage implements OnInit {
     pass: false
   };
 
-  selectedLanguage = "";
+  selectedLanguage = '';
 
   loginForm: FormGroup;
 
   wrongUser = false;
 
   constructor(
-    public navCtrl: NavController,
-    public userServiceProvider: UserServiceProvider,
-    public navParams: NavParams,
-    public FormBuilder: FormBuilder,
-    public toast: ToastController,
-    public loadingCtrl: LoadingController,
-    public storage: Storage,
-    public translate: TranslateService
+    private navCtrl: NavController,
+    private userServiceProvider: UserServiceProvider,
+    private FormBuilder: FormBuilder,
+    private toast: ToastController,
+    private loadingCtrl: LoadingController,
+    private storage: Storage,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
     this.loginForm = this.FormBuilder.group({
       email: [
-        "",
+        '',
         Validators.compose([
           Validators.maxLength(100),
           this.emailValidator,
@@ -58,7 +56,7 @@ export class LoginPage implements OnInit {
           Validators.required
         ])
       ],
-      password: ["", Validators.required]
+      password: ['', Validators.required]
     });
   }
 
@@ -69,16 +67,16 @@ export class LoginPage implements OnInit {
 
   presentToastForErrorServer(): void {
     const toastRef = this.toast.create({
-      message: "El servidor no esta disponible",
+      message: 'El servidor no esta disponible',
       duration: 3000,
-      position: "bottom"
+      position: 'bottom'
     });
     toastRef.present();
   }
 
   getNewLanguage(newLang: string): void {
     this.translate.use(newLang);
-    this.storage.set("currentLang", newLang);
+    this.storage.set('currentLang', newLang);
   }
 
   login(): void {
@@ -86,18 +84,18 @@ export class LoginPage implements OnInit {
     userInfo.email = userInfo.email.trim();
 
     const loader = this.loadingCtrl.create({
-      content: "Loading"
+      content: 'Loading'
     });
     loader.present();
 
     this.userServiceProvider.doLogin(userInfo).subscribe(
       loginResult => {
-        this.storage.set("currentUser", loginResult.userId);
-        this.navCtrl.push("HomePage");
+        this.storage.set('currentUser', loginResult.userId);
+        this.navCtrl.push('HomePage');
         loader.dismiss();
       },
       error => {
-        if (error.name === "TimeoutError") this.presentToastForErrorServer();
+        if (error.name === 'TimeoutError') this.presentToastForErrorServer();
         else this.wrongUser = true;
         loader.dismiss();
       }
