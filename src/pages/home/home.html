@@ -1,13 +1,18 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      {{'home.actionBarTitle' | translate}}
+      <div class="logo-container">
+        <img class="logo" src="assets/images/logo.png">
+        <span> {{'home.actionBarTitle' | translate}}</span>
+      </div>
     </ion-title>
+
     <ion-buttons end>
       <button color="primary" ion-button (click)="presentPopover($event)">
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
+
   </ion-navbar>
   <ion-toolbar class="">
     <ion-segment [(ngModel)]="segment" (ionChange)="selectList()">
@@ -118,9 +123,6 @@
     </ion-row>
 
 
-    <!--  <ion-item *ngFor="let client of clients " (click)="">
-      {{}}
-    </ion-item> -->
   </ion-list>
 
   <ion-fab right bottom>
