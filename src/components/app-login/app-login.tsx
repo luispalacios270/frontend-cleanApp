@@ -1,45 +1,57 @@
 import { Component } from "@stencil/core";
 
-declare const firebase;
-
 @Component({
   tag: "app-login",
   styleUrl: "app-login.scss"
 })
 export class AppHome {
-  async handleMouseDown(): Promise<void> {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    try {
-      const loginResult = await firebase.auth().signInWithPopup(provider);
-      console.log(loginResult);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   render() {
     return [
-      <ion-header>
-        <ion-toolbar class="toolbar-sp">
-          <div class="toolbar-container">
-            <img src="https://http2.mlstatic.com/ui/navigation/3.1.7/mercadolibre/logo__large_plus.png" />
-            <input type="text" />
-          </div>
-          <div />
-        </ion-toolbar>
-      </ion-header>,
       <ion-content>
-        <ion-card
-          onMouseDown={() => this.handleMouseDown()}
-          class="login-card transition"
-        >
+        <ion-card id="container-login">
           <ion-card-content>
-            <p class="transition">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum
-              nisi eligendi asperiores sapiente dolores, quae at similique minus
-              inventore perspiciatis eius. Ducimus libero labore quaerat
-              architecto, hic aperiam dolorem quibusdam.
-            </p>
+            <div col-md-4 offset-md-4 col-6 offset-3>
+              <img src="assets/images/logo.png" />
+            </div>
+            <form>
+              <ion-list>
+                <ion-item>
+                  <ion-label />
+                  <ion-input type="text" />
+                </ion-item>
+
+                <div class="error-input item-md" />
+                <div class="error-input item-md" />
+
+                <ion-item>
+                  <ion-label />
+                  <ion-input type="password" />
+                </ion-item>
+
+                <div class="error-input item-md" />
+              </ion-list>
+
+              <div class="error-user item-md" />
+              <div padding>
+                <ion-row align-items-center>
+                  <ion-col col-12>
+                    <button ion-button color="primary" />
+                  </ion-col>
+                </ion-row>
+              </div>
+            </form>
+
+            <div padding>
+              <ion-col col-12>
+                <ion-item>
+                  <ion-label />
+                  <ion-select>
+                    <ion-option value="en">English</ion-option>
+                    <ion-option value="es">Español</ion-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+            </div>
           </ion-card-content>
         </ion-card>
       </ion-content>

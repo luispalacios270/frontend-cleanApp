@@ -1,34 +1,35 @@
 app-login {
-  .toolbar-background {
-    background-color: #fff159;
+  #container-login {
+    margin: 0 !important;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
-
-  .toolbar-container {
-    display: flex;
+  .company-name {
+    margin-top: 10px;
+    color: dimgray;
+    font-weight: bold;
   }
-
-  input {
-    border: none;
-    border-radius: 2px;
-    margin-left: 17px;
-    width: 50%;
-    -webkit-box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.25);
-    padding-left: 20px;
-
-    &:focus {
-      outline: none;
-    }
+  .text-center {
+    text-align: center;
   }
-
-  .login-card {
-    cursor: pointer;
-    width: 50%;
-
-    &:hover {
-      background-color: blue;
-      p {
-        color: white !important;
-      }
-    }
+  ion-scroll {
+    background: linear-gradient(
+      to bottom,
+      #678f02 0%,
+      #678f02 50%,
+      white 50%,
+      white 100%
+    );
+  }
+  .error-user {
+    margin-top: 20px;
+    text-align: center;
+    color: red;
+    font-size: 1.2em;
+  }
+  #forget-pass {
+    font-size: 0.8em;
   }
 }
