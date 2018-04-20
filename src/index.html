@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>Ionic PWA Toolkit</title>
@@ -14,16 +15,34 @@
 
   <meta http-equiv="x-ua-compatible" content="IE=Edge">
 
+
   <link href="/build/app.css" rel="stylesheet">
+
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDLr-EuPsppH2Y-a4OkjwpOoJfcQgItKac",
+      authDomain: "cleaningapp-97cd7.firebaseapp.com",
+      databaseURL: "https://cleaningapp-97cd7.firebaseio.com",
+      projectId: "cleaningapp-97cd7",
+      storageBucket: "",
+      messagingSenderId: "1022678572635"
+    };
+    firebase.initializeApp(config);
+  </script>
+
   <script src="/build/app.js"></script>
 
   <link rel="apple-touch-icon" href="/assets/icon/icon.png">
   <link rel="icon" type="image/x-icon" href="/assets/icon/favicon.ico">
   <link rel="manifest" href="/manifest.json">
 </head>
+
 <body>
 
   <my-app></my-app>
 
 </body>
+
 </html>

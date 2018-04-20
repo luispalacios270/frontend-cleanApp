@@ -1,0 +1,34 @@
+app-login {
+  .toolbar-background {
+    background-color: #fff159;
+  }
+
+  .toolbar-container {
+    display: flex;
+  }
+
+  input {
+    border: none;
+    border-radius: 2px;
+    margin-left: 17px;
+    width: 50%;
+    -webkit-box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.25);
+    padding-left: 20px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .login-card {
+    cursor: pointer;
+    width: 50%;
+
+    &:hover {
+      background-color: blue;
+      p {
+        color: white !important;
+      }
+    }
+  }
+}

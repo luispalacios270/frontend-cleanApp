@@ -1,9 +1,8 @@
-import { TestWindow } from '@stencil/core/testing';
-import { MyApp } from './my-app';
+import { TestWindow } from "@stencil/core/testing";
+import { MyApp } from "./my-app";
 
-describe('my-app', () => {
-
-  it('should update', async () => {
+describe("my-app", () => {
+  it("should update", async () => {
     await window.flush();
   });
 
@@ -13,7 +12,7 @@ describe('my-app', () => {
     window = new TestWindow();
     element = await window.load({
       components: [MyApp],
-      html: '<my-app></my-app>'
+      html: "<my-app></my-app>"
     });
   });
 });

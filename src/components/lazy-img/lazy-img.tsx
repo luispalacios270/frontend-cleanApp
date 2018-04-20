@@ -24,7 +24,7 @@ export class LazyImg {
   @State() oldSrc: string;
 
   @Event() lazyImgloaded: EventEmitter<HTMLImageElement>;
-  @Prop({context: 'isServer'}) isServer: boolean;
+  @Prop({ context: 'isServer' }) isServer: boolean;
 
   image: HTMLImageElement;
   io: IntersectionObserver | null;
