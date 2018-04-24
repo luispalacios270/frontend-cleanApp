@@ -1,0 +1,5 @@
+$colors: (green-limeade: #678f02);
+
+$primary-color: map-get($map: $colors, $key: green-limeade);
+$secundary-color: white;
+$danger-color: red;

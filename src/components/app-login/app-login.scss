@@ -1,3 +1,5 @@
+@import "../../global/style/_theme.scss";
+
 app-login {
   #container-login {
     position: absolute;
@@ -17,16 +19,16 @@ app-login {
   ion-scroll {
     background: linear-gradient(
       to bottom,
-      #678f02 0%,
-      #678f02 50%,
-      white 50%,
-      white 100%
+      $primary-color 0%,
+      $primary-color 50%,
+      $secundary-color 50%,
+      $secundary-color 100%
     );
   }
   .error-user {
     margin-top: 20px;
     text-align: center;
-    color: red;
+    $danger-color: red;
     font-size: 1.2em;
   }
   #forget-pass {
