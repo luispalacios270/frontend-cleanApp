@@ -1,10 +1,10 @@
-import { Component, State } from "@stencil/core";
+import { Component, State } from '@stencil/core';
 
 declare const firebase;
 
 @Component({
-  tag: "app-login",
-  styleUrl: "app-login.scss"
+  tag: 'app-login',
+  styleUrl: 'app-login.scss'
 })
 export class AppHome {
   @State() email: string;
