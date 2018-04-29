@@ -62,6 +62,7 @@ export class AppHome {
                     onInput={event => this.handlePasswordChange(event)}
                     inputmode="password"
                   />
+                  <span>dksjdksjdks</span>
                 </ion-item>
 
                 <div class="error-input item-md" />
