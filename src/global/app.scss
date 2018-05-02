@@ -1,7 +1,11 @@
 /* Document Level Styles */
 
-@import "./style/_theme.scss";
+@import './style/_theme.scss';
 
 .transition {
   transition: ease-in-out 0.2s;
+}
+
+.primary-button {
+  background-color: $primary-color !important;
 }

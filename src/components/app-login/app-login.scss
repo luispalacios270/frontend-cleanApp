@@ -1,21 +1,7 @@
-@import "../../global/style/_theme.scss";
+@import '../../global/style/_theme.scss';
+@import '../../global/style/_tools.scss';
 
 app-login {
-  #container-login {
-    position: absolute;
-    margin: 0 !important;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  .company-name {
-    margin-top: 10px;
-    color: dimgray;
-    font-weight: bold;
-  }
-  .text-center {
-    text-align: center;
-  }
   ion-scroll {
     background: linear-gradient(
       to bottom,
@@ -24,14 +10,21 @@ app-login {
       $secundary-color 50%,
       $secundary-color 100%
     );
-  }
-  .error-user {
-    margin-top: 20px;
-    text-align: center;
-    $danger-color: red;
-    font-size: 1.2em;
-  }
-  #forget-pass {
-    font-size: 0.8em;
+
+    #container-login {
+      margin: 0 !important;
+      @include center-absolute;
+    }
+
+    .error-user {
+      margin-top: 20px;
+      text-align: center;
+      $danger-color: red;
+      font-size: 1.2em;
+    }
+
+    #forget-pass {
+      font-size: 0.8em;
+    }
   }
 }

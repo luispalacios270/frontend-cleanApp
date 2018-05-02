@@ -20,11 +20,9 @@ export class AppHome {
 
   async performLogin(): Promise<void> {
     try {
-      const user = await firebase
+      await firebase
         .auth()
         .signInWithEmailAndPassword(this.email, this.password);
-
-      console.log(user);
     } catch (error) {
       console.error(error);
     }
@@ -53,16 +51,12 @@ export class AppHome {
                   />
                 </ion-item>
 
-                <div class="error-input item-md" />
-                <div class="error-input item-md" />
-
                 <ion-item>
-                  <ion-label position="floating"> Contraseña </ion-label>
+                  <ion-label class="" position="floating"> Contraseña </ion-label>
                   <ion-input
                     onInput={event => this.handlePasswordChange(event)}
                     inputmode="password"
                   />
-                  <span>dksjdksjdks</span>
                 </ion-item>
 
                 <div class="error-input item-md" />
@@ -70,13 +64,16 @@ export class AppHome {
 
               <div class="error-user item-md" />
 
+              <ion-button
+                class="primary-button"
+                expand="block"
+                onClick={() => this.performLogin()}
+              >
+                Iniciar Sesión
+              </ion-button>
+
               {/* <ion-col col-12> */}
-              <ion-row justify-content="center">
-                <ion-button onClick={() => this.performLogin()}>
-                  Iniciar Sesión
-                  {/* <ion-icon name="logo-facebook" slot="start" /> */}
-                </ion-button>
-              </ion-row>
+              <ion-row justify-content="center" />
               {/* </ion-col> */}
             </form>
 
