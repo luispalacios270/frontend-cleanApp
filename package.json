@@ -1,6 +1,6 @@
 {
   "name": "limpiezaApp",
-  "version": "0.0.1",
+  "version": "1.2",
   "author": "Ionic Framework",
   "homepage": "http://ionicframework.com/",
   "private": true,
@@ -13,7 +13,8 @@
     "start": "ionic serve",
     "test": "karma start ./test-config/karma.conf.js",
     "test-ci": "karma start ./test-config/karma.conf.js --single-run",
-    "e2e": "webdriver-manager update --standalone false --gecko false; protractor ./test-config/protractor.conf.js"
+    "e2e":
+      "webdriver-manager update --standalone false --gecko false; protractor ./test-config/protractor.conf.js"
   },
   "dependencies": {
     "@angular/common": "4.1.2",
@@ -103,9 +104,6 @@
       },
       "cordova-plugin-x-socialsharing": {}
     },
-    "platforms": [
-      "android",
-      "ios"
-    ]
+    "platforms": ["android", "ios"]
   }
 }
