@@ -5,7 +5,7 @@ import { Http } from '@angular/http';
 @Injectable()
 export class UserServiceProvider extends providerParent {
 
-    modelEndPoint: string = '/Supervisors';
+    modelEndPoint = '/Supervisors';
 
     constructor(public http: Http) {
         super(http);
@@ -13,7 +13,7 @@ export class UserServiceProvider extends providerParent {
 
     doLogin(user: object) {
         if (!user) return;
-        const completeEndPoint: string = `${this.link + this.modelEndPoint}/login`
+        const completeEndPoint = `${this.link + this.modelEndPoint}/login`
         return this.postData(completeEndPoint, user);
     };
 }

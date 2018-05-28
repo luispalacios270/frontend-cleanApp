@@ -1,0 +1,10 @@
+camera-icon {
+  .color-grey-icon {
+    color: #6b6c6e !important;
+    font-size: 1em !important;
+  }
+  .color-primary-icon {
+    color: map-get($colors, primary);
+    font-size: 1em !important;
+  }
+}

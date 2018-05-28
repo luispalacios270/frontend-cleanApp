@@ -53,9 +53,9 @@ export class HomePage implements OnInit {
     public storage: Storage,
     public clientService: ClientProvider,
     public popoverCtrl: PopoverController
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   doOption(option: number) {
     switch (option) {
@@ -100,10 +100,15 @@ export class HomePage implements OnInit {
     this.navCtrl.push(CreateUserPage, { user: client });
   }
 
-  updateLists(refresher: any) {
+  async updateLists(refresher: any) {
+    const isSuperUser = await this.storage.get('superUser');
+
     this.storage
       .get("currentUser")
       .then((user: string) => {
+        if (isSuperUser) {
+          user = null;
+        }
         this.services
           .getServicesWithClientsNoFinished(user)
           .then((result: Array<object>) => {
@@ -134,7 +139,7 @@ export class HomePage implements OnInit {
       .catch(err => console.error(err));
   }
 
-  updateClients(user: string) {
+  updateClients(user?: string) {
     this.clientService
       .getClients(user)
       .then((resp: Array<any>) => {
@@ -160,10 +165,6 @@ export class HomePage implements OnInit {
     });
   }
 
-  /*  test(testVariable: boolean = false) {
-     return testVariable;
-   } */
-
   selectList() {
     const option = Number(this.segment);
     switch (option) {
@@ -184,19 +185,6 @@ export class HomePage implements OnInit {
         this.serviceListAux = this.servicesListActives;
         break;
     }
-    return; /*
-
-
-
-
-    if (this.onlyFinished) {
-      this.selectedList = this.servicesListFinished;
-      this.serviceListAux = this.servicesListFinished;
-    }
-    if (!this.onlyFinished) {
-      this.selectedList = this.servicesListActives;
-      this.serviceListAux = this.servicesListActives;
-    } */
   }
 
   deleteService(serviceId: string) {
@@ -221,8 +209,7 @@ export class HomePage implements OnInit {
                   this.services
                     .getServices()
                     .then((result: Array<object>) => {
-                      // console.log("result", result);
-                      // this.servicesList = result;
+
                       this.serviceListAux = result;
                     })
                     .catch(err => {
@@ -250,7 +237,7 @@ export class HomePage implements OnInit {
   }
 
   doFilter() {
-    if (this.searchFirlter != null && this.searchFirlter != "") {
+    if (this.searchFirlter != null && this.searchFirlter !== "") {
       this.serviceListAux = this.selectedList.filter((item: any) => {
         return (
           item.client.realm

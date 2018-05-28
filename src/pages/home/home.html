@@ -45,10 +45,12 @@
     </ion-refresher-content>
   </ion-refresher>
 
-  <div [hidden]="segment==='2'">
+  <div [hidden]="segment === '2'">
     <ion-row>
 
-      <ion-col col-12 col-md-6 *ngFor="let service of serviceListAux">
+      <ng-container *ngFor="let service of serviceListAux">
+
+      <ion-col col-12 col-md-6 *ngIf="service.client" >
 
         <ion-card (click)="selectService(service)">
           <ion-card-content>
@@ -80,18 +82,21 @@
 
       </ion-col>
 
+    </ng-container>
+
 
 
     </ion-row>
 
   </div>
 
-  <ion-list [hidden]="segment!=='2'">
+  <ion-list [hidden]="segment !== '2'">
 
     <ion-row>
+      
       <ion-col col-12 col-md-6 *ngFor="let client of clientsFiltered">
 
-        <ion-card (click)="modifyUser(client)">
+        <ion-card  (click)="modifyUser(client)">
           <ion-card-content>
             <ion-row align-items-center justify-content-center>
               <ion-col col-3>
@@ -120,6 +125,7 @@
         </ion-card>
 
       </ion-col>
+
     </ion-row>
 
 

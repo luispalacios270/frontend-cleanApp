@@ -76,15 +76,19 @@ export class ClientProvider {
 
 
 
-  getClients(supervisorId: string) {
-    const end_point: string = '?filter=';
+  getClients(supervisorId?: string) {
+    const end_point = '?filter=';
+
     const data = {
       where: {
         supervisorId: supervisorId
       }
     }
+
+    const completedEndPoint = supervisorId ? this.link + this.modelEndPoint + end_point + JSON.stringify(data) : this.link + this.modelEndPoint;
+
     return new Promise((resolve, reject) => {
-      this.http.get(this.link + this.modelEndPoint + end_point + JSON.stringify(data), this.options)
+      this.http.get(completedEndPoint, this.options)
         .map(res => res.json())
         .subscribe(result => resolve(result)
         , err => reject(err));

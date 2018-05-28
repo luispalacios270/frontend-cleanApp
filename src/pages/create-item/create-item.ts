@@ -33,7 +33,7 @@ export class CreateItemPage implements OnInit {
     public toastCtrl: ToastController,
     public viewCtrl: ViewController,
     private translate: TranslateService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getItem();
@@ -50,7 +50,6 @@ export class CreateItemPage implements OnInit {
       position: "bottom center"
     });
     toast.present();
-    return;
   }
 
   getItem() {
@@ -90,7 +89,7 @@ export class CreateItemPage implements OnInit {
       })
       .catch(err => {
         this.showErr();
-        // console.log(err);
+
       });
   }
 

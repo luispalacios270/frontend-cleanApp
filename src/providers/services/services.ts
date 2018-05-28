@@ -23,9 +23,9 @@ export class ServicesProvider {
     return new Promise((resolve, reject) => {
       this.http
         .patch(
-          this.link + this.modelEndPoint + end_point,
-          serviceObject,
-          this.options
+        this.link + this.modelEndPoint + end_point,
+        serviceObject,
+        this.options
         )
         .map(res => res.json())
         .subscribe(result => resolve(result), err => reject(err));
@@ -77,13 +77,16 @@ export class ServicesProvider {
     });
   }
 
-  getServicesWithClientsFinished(supervisorId: string) {
-    let end_point: string = "?filter=";
-    let data = {
-      where: {
-        finished: true,
-        supervisorId: supervisorId
-      },
+  getServicesWithClientsFinished(supervisorId?: string) {
+    const end_point = "?filter=";
+
+    const whereData = supervisorId ? {
+      finished: true,
+      supervisorId: supervisorId
+    } : { finished: true };
+
+    const data = {
+      where: whereData,
       include: "client"
     };
     return new Promise((resolve, reject) => {
@@ -94,15 +97,19 @@ export class ServicesProvider {
     });
   }
 
-  getServicesWithClientsNoFinished(userId: string) {
-    let end_point: string = "?filter=";
-    let data = {
-      where: {
-        finished: false,
-        supervisorId: userId
-      },
+  getServicesWithClientsNoFinished(userId?: string) {
+    const end_point = "?filter=";
+
+    const whereData = userId ? {
+      finished: false,
+      supervisorId: userId
+    } : { finished: false };
+
+    const data = {
+      where: whereData,
       include: "client"
     };
+
     return new Promise((resolve, reject) => {
       this.http
         .get(this.link + this.modelEndPoint + end_point + JSON.stringify(data))
@@ -125,9 +132,9 @@ export class ServicesProvider {
     return new Promise((resolve, reject) => {
       this.http
         .post(
-          this.link + this.modelEndPoint + end_point,
-          JSON.stringify(areaData),
-          this.options
+        this.link + this.modelEndPoint + end_point,
+        JSON.stringify(areaData),
+        this.options
         )
         .map(res => res.json())
         .subscribe(result => resolve(result), err => reject(err));

@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  ViewController
+} from 'ionic-angular';
 import { FilesProvider } from '../../providers/files/files';
-import * as globalVariables from '../../global'
-
-
-
+import * as globalVariables from '../../global';
 
 /**
  * Generated class for the PicturePage page.
@@ -15,10 +17,9 @@ import * as globalVariables from '../../global'
 // @IonicPage()
 @Component({
   selector: 'page-picture',
-  templateUrl: 'picture.html',
+  templateUrl: 'picture.html'
 })
 export class PicturePage implements OnInit {
-
   fileList: Array<object>;
   ext: string = globalVariables.API_ENDPOINT;
 
@@ -28,29 +29,28 @@ export class PicturePage implements OnInit {
     public navParams: NavParams,
     public files: FilesProvider,
     public viewCtrl: ViewController
-  ) { }
+  ) {}
 
   ngOnInit() {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-
-    let futnitureId = this.params.get("furnitureId");
+    let futnitureId = this.params.get('furnitureId');
     futnitureId = futnitureId.id;
-    let isBeforePic = this.params.get("isBeforePic");
+    let isBeforePic = this.params.get('isBeforePic');
     if (isBeforePic)
-      this.files.getBeforePics(futnitureId)
+      this.files
+        .getBeforePics(futnitureId)
         .then((result: Array<object>) => {
-          console.log("Pictures", result);
+          console.log('Pictures', result);
           this.fileList = result;
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err));
     else {
-      this.files.getAfterPics(futnitureId)
+      this.files
+        .getAfterPics(futnitureId)
         .then((result: Array<object>) => {
-          console.log("Pictures", result);
+          console.log('Pictures', result);
           this.fileList = result;
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err));
     }
   }
 
@@ -61,7 +61,4 @@ export class PicturePage implements OnInit {
   closeModal() {
     this.viewCtrl.dismiss();
   }
-
-
-
 }

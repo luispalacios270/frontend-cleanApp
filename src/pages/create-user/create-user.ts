@@ -127,7 +127,7 @@ export class CreateUserPage {
       imageData => {
         this.img = "data:image/jpeg;base64," + imageData;
       },
-      err => {}
+      err => { }
     );
   }
 
@@ -153,7 +153,7 @@ export class CreateUserPage {
   uploadPicture(userId: string) {
     this.files
       .uploadProfilePic(userId, this.img)
-      .then(result => {})
+      .then(result => { })
       .catch(err => console.log(err));
   }
 
@@ -262,15 +262,19 @@ export class CreateUserPage {
     this.clientProvider
       .deleteClientServices(this.user.id)
       .then(() => this.clientProvider.deleteClient(this.user.id))
-      .then(() => this.navCtrl.popTo(this.navCtrl.getByIndex(1)))
+      .then(() => this.navCtrl.popTo(this.navCtrl.getByIndex(0)))
       .catch(() => {
-        this.toastCtrl
-          .create({
-            message: "Ha pasado un problema",
-            duration: 3000,
-            position: "bottom center"
-          })
-          .present();
+
+        this.translate.get('shared.error').subscribe(lang => {
+
+          this.toastCtrl
+            .create({
+              message: lang,
+              duration: 3000,
+              position: "bottom center"
+            })
+            .present();
+        })
       });
   }
 

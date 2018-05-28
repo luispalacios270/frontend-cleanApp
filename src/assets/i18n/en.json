@@ -37,8 +37,7 @@
     },
     "createdUser": {
       "title": "User Created",
-      "message":
-        "User succesfully created. Do you want to add areas to the user?"
+      "message": "User succesfully created. Do you want to add areas to the user?"
     },
     "deletClient": {
       "title": "Deleting Client",
@@ -59,7 +58,8 @@
       "addItem": "Add Item",
       "updateArea": "Update Area",
       "updateItem": "Update Item"
-    }
+    },
+    "errorCreatingArea": "there was en error creating the area"
   },
   "editService": {
     "actionBarTitle": "New Inspection",
@@ -88,7 +88,7 @@
       "title": "Sharing PDF",
       "pdfNotCreated": "The PDF wasn't created yet"
     },
-    "noAreas":"The area doesn't have items"
+    "noAreas": "The area doesn't have items"
   },
   "tabs": {
     "inspections": "Inspections",

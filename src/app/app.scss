@@ -13,7 +13,6 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese');
-
 ion-app {
   font-family: 'Open Sans', sans-serif !important;
 }
@@ -53,6 +52,11 @@ $main-color: cornflowerblue;
 
 .color-grey-icon {
   color: #6b6c6e !important;
+  font-size: 1em !important;
+}
+
+.color-primary-icon {
+  color: map-get($colors, primary);
   font-size: 1em !important;
 }
 
@@ -111,7 +115,6 @@ $main-color: cornflowerblue;
 .logo-container {
   display: flex;
   align-items: center;
-
   .logo {
     margin-top: 8px;
     margin-right: 8px;

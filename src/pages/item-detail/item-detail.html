@@ -57,9 +57,7 @@
           </ion-item-divider>
           <ion-row align-items-center justify-content-center>
             <ion-col class="parent">
-              <button (click)="presentActionSheet(furniture)" class="color-grey-icon" ion-button clear icon-only>
-                <ion-icon name="camera"></ion-icon>
-              </button>
+              <camera-icon [serviceId]="serviceId" [furniture]="furniture"></camera-icon>
             </ion-col>
             <ion-col class="parent">
               <button (click)="goToNotes(furniture)" class="color-grey-icon" ion-button clear icon-only>

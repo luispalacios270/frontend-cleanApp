@@ -95,11 +95,7 @@ export class CreateAreasPage {
         // console.log(this.oldAreas);
       })
       .catch(err => {
-        this.toastCtrl.create({
-          message: "Hubo un error al crear el área",
-          duration: 3000,
-          position: "bottom center"
-        });
+        this.printError();
       });
   }
 
@@ -144,7 +140,6 @@ export class CreateAreasPage {
             text: alertInfo.save,
             handler: data => {
               data = data.title;
-              // console.log(data);
               switch (option) {
                 case 1:
                   this.addArea(data);
@@ -173,7 +168,7 @@ export class CreateAreasPage {
   }
 
   addItem(parent: any, nameItem: string) {
-    let objTmp: object = {
+    const objTmp = {
       name: nameItem
     };
     this.areaProvider
@@ -185,20 +180,9 @@ export class CreateAreasPage {
           parent.items = [result];
         }
         this.showItems = true;
-        // this.toastCtrl
-        //   .create({
-        //     message: "El área fue creada de manera correcta",
-        //     duration: 3000,
-        //     position: "bottom center"
-        //   })
-        //   .present();
       })
       .catch(err => {
-        this.toastCtrl.create({
-          message: "Hubo un error al crear el área",
-          duration: 3000,
-          position: "bottom center"
-        });
+        this.printError();
       });
   }
 
@@ -214,24 +198,24 @@ export class CreateAreasPage {
         } else {
           parent.furniture = [result];
         }
-
-        // this.toastCtrl
-        //   .create({
-        //     message: "El mueble fue creada de manera correcta",
-        //     duration: 3000,
-        //     position: "bottom center"
-        //   })
-        //   .present();
       })
       .catch(err => {
-        this.toastCtrl
-          .create({
-            message: "Hubo un error al crear el área",
-            duration: 3000,
-            position: "bottom center"
-          })
-          .present();
+        this.printError();
       });
+  }
+
+  printError(): void {
+    this.translate.get('area.errorCreatingArea').subscribe(lang => {
+      this.toastCtrl
+        .create({
+          message: lang,
+          duration: 3000,
+          position: "bottom center"
+        })
+        .present();
+    })
+
+
   }
 
   modifyItem(item: any) {

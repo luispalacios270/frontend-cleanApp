@@ -1,19 +1,20 @@
-import { Component } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
+  App,
   NavController,
   NavParams,
   ToastController,
   LoadingController
-} from "ionic-angular";
-import { HomePage } from "../home/home";
-import { UserServiceProvider } from "../../providers/user-service/user-service";
-import { Storage } from "@ionic/storage";
-import { TranslateService } from "@ngx-translate/core";
+} from 'ionic-angular';
+import { HomePage } from '../home/home';
+import { UserServiceProvider } from '../../providers/user-service/user-service';
+import { Storage } from '@ionic/storage';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: "page-login",
-  templateUrl: "login.html"
+  selector: 'page-login',
+  templateUrl: 'login.html'
 })
 export class LoginPage {
   try: {} = {
@@ -21,7 +22,7 @@ export class LoginPage {
     pass: false
   };
 
-  selectedLanguage = "";
+  selectedLanguage = '';
 
   loginForm: any;
 
@@ -30,12 +31,12 @@ export class LoginPage {
   token: any;
 
   user: any = {
-    email: "",
-    password: ""
+    email: '',
+    password: ''
   };
 
   loader: any = this.loadingCtrl.create({
-    content: "Cargando"
+    content: 'Cargando'
   });
 
   constructor(
@@ -46,11 +47,12 @@ export class LoginPage {
     public toast: ToastController,
     public loadingCtrl: LoadingController,
     public storage: Storage,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private app: App
   ) {
     this.loginForm = FormBuilder.group({
       email: [
-        "",
+        '',
         Validators.compose([
           Validators.maxLength(100),
           this.emailValidator,
@@ -58,7 +60,7 @@ export class LoginPage {
           Validators.required
         ])
       ],
-      password: ["", Validators.required]
+      password: ['', Validators.required]
     });
   }
 
@@ -90,35 +92,47 @@ export class LoginPage {
 
   getNewLanguage($event): void {
     this.translate.use($event);
-    this.storage.set("currentLang", $event).then();
+    this.storage.set('currentLang', $event).then();
   }
 
-  login() {
+  login(): void {
     let emailTrimmed: string = this.user.email;
     emailTrimmed = emailTrimmed.trim();
     this.user.email = emailTrimmed;
     let loader = this.loadingCtrl.create({
-      content: "Loading"
+      content: 'Loading'
     });
     loader.present();
     this.userServiceProvider
       .doLogin(this.user)
       .then((result: any) => {
         loader.dismiss();
-        this.storage.set("currentUser", result.userId);
-        this.navCtrl.push(HomePage);
+        this.handleSuperUser();
+        this.storage.set('currentUser', result.userId);
+        this.app
+          .getRootNav()
+          .push(HomePage)
+          .then(() => {
+            const index = this.app.getRootNav().getActive().index;
+            this.app.getRootNav().remove(0, index);
+          });
       })
       .catch(err => {
         loader.dismiss();
-        if (err.name === "TimeoutError") {
-          this.toast
-            .create({
-              message: "El servidor no esta disponible",
-              duration: 3000,
-              position: "bottom"
-            })
-            .present();
-        } else this.wrongUser = true;
+        // if (err.name === "TimeoutError") {
+        //   this.toast
+        //     .create({
+        //       message: "El servidor no esta disponible",
+        //       duration: 3000,
+        //       position: "bottom"
+        //     })
+        //     .present();
+        /* } else  */ this.wrongUser = true;
       });
+  }
+
+  handleSuperUser(): void {
+    if (this.user.email !== 'mcastro@qcmaintenance.ca') return;
+    this.storage.set('superUser', true);
   }
 }

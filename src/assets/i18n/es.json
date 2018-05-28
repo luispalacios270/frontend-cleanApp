@@ -58,7 +58,8 @@
       "addItem": "Agrear Item",
       "updateArea": "Actualizar Área",
       "updateItem": "Actualizar Item"
-    }
+    },
+    "errorCreatingArea": "Hubo un error al crear el área"
   },
   "editService": {
     "actionBarTitle": "Nueva Inspección",
@@ -154,8 +155,7 @@
     "inspectionEnded": {
       "title": "Inspección finalizada",
       "message": "La inspección fue finalizada y el PDF fue creado",
-      "pdfError":
-        "Hubo un problema al crear el PDF, por favor intente más tarde.",
+      "pdfError": "Hubo un problema al crear el PDF, por favor intente más tarde.",
       "inspectionError": "La inspección no pude ser finalizada."
     }
   }

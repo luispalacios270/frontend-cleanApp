@@ -1,35 +1,32 @@
-import { Component, ViewChild } from '@angular/core';
 import {
-  IonicPage,
-  NavController,
-  NavParams,
-  ActionSheetController,
-  ToastController,
-  Slides,
-  ModalController,
-  AlertController
-} from 'ionic-angular';
-import { ItemProvider } from '../../providers/item/item';
-import { FilesProvider } from '../../providers/files/files';
-import { ItemInspectionProvider } from '../../providers/item-inspection/item-inspection';
-import { NotesPage } from '../notes/notes';
-import { HomePage } from '../home/home';
-import { PicturePage } from '../picture/picture';
-import { Camera, CameraOptions } from '@ionic-native/camera';
-import { Storage } from '@ionic/storage';
+  Component,
+  Input,
+  ChangeDetectionStrategy,
+  OnInit,
+  NgZone
+} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { ItemInspectionProvider } from '../../providers/item-inspection/item-inspection';
+import {
+  ToastController,
+  AlertController,
+  ActionSheetController,
+  ModalController
+} from 'ionic-angular';
+import { FilesProvider } from '../../providers/files/files';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { PicturePage } from '../../pages/picture/picture';
 
 @Component({
-  selector: 'page-item-detail',
-  templateUrl: 'item-detail.html'
+  selector: 'camera-icon',
+  templateUrl: 'camera-icon.html'
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ItemDetailPage {
-  @ViewChild(Slides) slides: Slides;
-
-  serviceId: any;
-  item: any;
-  areaName: string;
-  furnitures: Array<any>;
+export class CameraIconComponent implements OnInit {
+  @Input() serviceId: string;
+  @Input() furniture: any;
+  hasPicsAfter = false;
+  hasPicsBefore = false;
 
   options: CameraOptions = {
     quality: 50,
@@ -49,55 +46,28 @@ export class ItemDetailPage {
   };
 
   constructor(
-    public navCtrl: NavController,
-    public navParams: NavParams,
-    public itemProvider: ItemProvider,
-    public actionSheet: ActionSheetController,
+    private inspectionProvider: ItemInspectionProvider,
+    private toast: ToastController,
+    private translate: TranslateService,
+    private alertCtrl: AlertController,
+    private actionSheet: ActionSheetController,
+    private filesProvider: FilesProvider,
     private cameraCtrl: Camera,
-    public storage: Storage,
-    public modalCtrl: ModalController,
-    public toast: ToastController,
-    public inspectionProvider: ItemInspectionProvider,
-    public filesProvider: FilesProvider,
-    public alertCtrl: AlertController,
-    private translate: TranslateService
-  ) {
-    this.init();
+    private modalCtrl: ModalController,
+    private ngZone: NgZone
+  ) {}
 
-  }
+  ngOnInit(): void {
+    this.filesProvider
+      .isThereBeforePics(this.furniture.id)
+      .subscribe(_ => this.ngZone.run(() => (this.hasPicsBefore = true)));
 
-  selectService() {
-    this.navCtrl.insert(0, HomePage);
-    this.navCtrl.pop();
-  }
-
-  init() {
-    this.storage.get('currentItem').then(val => {
-      this.item = val;
-      this.storage.get('areaName').then(areaName => {
-        this.areaName = areaName;
-        this.updateFurnitures();
-      });
-    });
-    // this.item = this.navParams.get("item");
-    // this.areaName = this.navParams.get("areaName");
-  }
-
-  updateFurnitures() {
-    this.storage.get('currentService').then(val => {
-
-      this.serviceId = val;
-      this.itemProvider
-        .getFurnitures(this.item.id, val)
-        .then((result: Array<object>) => {
-          this.furnitures = result;
-        })
-        .catch(err => console.log('error', err));
-    });
+    this.filesProvider
+      .isThereAfterPics(this.furniture.id)
+      .subscribe(_ => this.ngZone.run(() => (this.hasPicsAfter = true)));
   }
 
   goToSlide(furnitureId: string, isBeforePic: boolean) {
-    // this.slides.slideTo(2, 500);
     let profileModal = this.modalCtrl.create(PicturePage, {
       furnitureId: furnitureId,
       isBeforePic: isBeforePic
@@ -105,51 +75,17 @@ export class ItemDetailPage {
     profileModal.present();
   }
 
-
-  rankFurniture(furniture: any, qualification: number) {
-    if (furniture.furnitureInspections.length > 0) {
-      let data = furniture.furnitureInspections[0];
-      this.inspectionProvider
-        .updateFurnitureInspection(data.id, { qualification: qualification })
-        .then(result => {
-
-          furniture.furnitureInspections[0] = result;
-        })
-        .catch(err => {
-          this.printError();
-        });
-    } else {
-      let data = {
-        furnitureId: furniture.id,
-        serviceId: this.serviceId,
-        qualification: qualification
-      };
-      this.inspectionProvider
-        .createInspection(data)
-        .then(result => {
-
-          furniture.furnitureInspections[0] = result;
-        })
-        .catch(err => {
-          this.printError();
-        });
-    }
-  }
-
-  getNotes(furnitureInspection) {
-    if (furnitureInspection.length === 0) return 0;
-    else {
-      let counter: number = 0;
-      if (furnitureInspection[0].notesActionPlan !== '')
-        counter += furnitureInspection[0].notesActionPlan.split('\n').length;
-      if (furnitureInspection[0].notesAdministrator !== '')
-        counter += furnitureInspection[0].notesAdministrator.split('\n').length;
-      if (furnitureInspection[0].notesClient !== '')
-        counter += furnitureInspection[0].notesClient.split('\n').length;
-      if (furnitureInspection[0].notesInspector !== '')
-        counter += furnitureInspection[0].notesInspector.split('\n').length;
-      return counter;
-    }
+  takePicture(isBefore: boolean, furnitureId: string) {
+    this.cameraCtrl.getPicture(this.options).then(
+      imageData => {
+        // let base64Image = 'data:image/jpeg;base64,' + imageData;
+        if (isBefore) this.uploadBeforePic(furnitureId, imageData);
+        else this.uploadAfterPic(furnitureId, imageData);
+      },
+      err => {
+        // Handle error
+      }
+    );
   }
 
   uploadBeforePic(furnitureId, imageData) {
@@ -170,19 +106,6 @@ export class ItemDetailPage {
       });
   }
 
-  takePicture(isBefore: boolean, furnitureId: string) {
-    this.cameraCtrl.getPicture(this.options).then(
-      imageData => {
-        // let base64Image = 'data:image/jpeg;base64,' + imageData;
-        if (isBefore) this.uploadBeforePic(furnitureId, imageData);
-        else this.uploadAfterPic(furnitureId, imageData);
-      },
-      err => {
-        // Handle error
-      }
-    );
-  }
-
   selectPictureFromGallery(isBefore: boolean, furnitureId: string) {
     this.cameraCtrl.getPicture(this.optionsGallery).then(
       imageData => {
@@ -196,55 +119,7 @@ export class ItemDetailPage {
     );
   }
 
-  goToNotes(furniture) {
-    if (furniture.furnitureInspections.length > 0)
-      this.modalCtrl
-        .create(NotesPage, {
-          furniture: furniture.furnitureInspections[0]
-        })
-        .present();
-    else {
-      let data = {
-        furnitureId: furniture.id,
-        serviceId: this.serviceId
-      };
-      this.inspectionProvider
-        .createInspection(data)
-        .then(result => {
-          furniture.furnitureInspections[0] = result;
-          this.modalCtrl
-            .create(NotesPage, {
-              furniture: furniture.furnitureInspections[0]
-            })
-            .present();
-        })
-        .catch(err => {
-          this.printError();
-        });
-    }
-  }
-
-  finishItem() {
-    this.itemProvider
-      .finishiIem(this.item.id)
-      .then(result => {
-        this.navCtrl.pop();
-
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-
-  ionViewDidLoad() {
-    this.init();
-  }
-
-  ionViewDidEnter() {
-    this.updateFurnitures();
-  }
-
-  presentActionSheet(furniture: any) {
+  presentActionSheet(furniture: any): void {
     let actionSheetInfo: any = {};
 
     this.translate.get('itemDetail.takePic.title').subscribe(lang => {
@@ -372,7 +247,6 @@ export class ItemDetailPage {
                 ]
               })
               .present();
-            // this.takePicture(false, furniture.furnitureInspections[0].id);
           }
         },
         {
@@ -384,14 +258,17 @@ export class ItemDetailPage {
                 message: actionSheetInfo.pictureMessage,
                 buttons: [
                   {
-                    text: actionSheetInfo.before,
+                    text: `${actionSheetInfo.before}${
+                      this.hasPicsBefore ? '*' : ''
+                    }`,
                     handler: () => {
                       this.goToSlide(furniture.furnitureInspections[0], true);
-
                     }
                   },
                   {
-                    text: actionSheetInfo.after,
+                    text: `${actionSheetInfo.after}${
+                      this.hasPicsAfter ? '*' : ''
+                    }`,
                     handler: () => {
                       this.goToSlide(furniture.furnitureInspections[0], false);
                     }

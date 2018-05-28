@@ -28,7 +28,7 @@ export class PopoverPage {
     private storage: Storage,
     private alertCtrl: AlertController,
     private translate: TranslateService
-  ) {}
+  ) { }
 
   changeLanguage(): void {
     this.translate.get("login.language").subscribe((res: string) => {
@@ -72,6 +72,7 @@ export class PopoverPage {
 
   closeAccount(): void {
     this.storage.remove("currentUser");
+    this.storage.remove('superUser');
     // this.storage.clear();
     this.app
       .getRootNav()
