@@ -17,6 +17,24 @@ import { FilesProvider } from '../../providers/files/files';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { PicturePage } from '../../pages/picture/picture';
 
+interface Furniture {
+  name: string;
+  id: string;
+  itemId: string;
+  furnitureInspections: FurnitureInspection[];
+}
+
+interface FurnitureInspection {
+  qualification: number;
+  notesClient: string;
+  notesInspector: string;
+  notesActionPlan: string;
+  notesAdministrator: string;
+  id: string;
+  furnitureId: string;
+  serviceId: string;
+}
+
 @Component({
   selector: 'camera-icon',
   templateUrl: 'camera-icon.html'
@@ -24,7 +42,7 @@ import { PicturePage } from '../../pages/picture/picture';
 })
 export class CameraIconComponent implements OnInit {
   @Input() serviceId: string;
-  @Input() furniture: any;
+  @Input() furniture: Furniture;
   hasPicsAfter = false;
   hasPicsBefore = false;
 
@@ -58,13 +76,16 @@ export class CameraIconComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.filesProvider
-      .isThereBeforePics(this.furniture.id)
-      .subscribe(_ => this.ngZone.run(() => (this.hasPicsBefore = true)));
+    if (this.furniture.furnitureInspections.length > 0) {
+      const furnitureId = this.furniture.furnitureInspections[0].id;
+      this.filesProvider
+        .isThereBeforePics(furnitureId)
+        .subscribe(_ => this.ngZone.run(() => (this.hasPicsBefore = true)));
 
-    this.filesProvider
-      .isThereAfterPics(this.furniture.id)
-      .subscribe(_ => this.ngZone.run(() => (this.hasPicsAfter = true)));
+      this.filesProvider
+        .isThereAfterPics(furnitureId)
+        .subscribe(_ => this.ngZone.run(() => (this.hasPicsAfter = true)));
+    }
   }
 
   goToSlide(furnitureId: string, isBeforePic: boolean) {
