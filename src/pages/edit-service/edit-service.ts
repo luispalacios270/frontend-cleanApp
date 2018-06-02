@@ -3,21 +3,18 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 import { ClientProvider } from '../../providers/client/client';
 import { ServicesProvider } from '../../providers/services/services';
 import { Storage } from '@ionic/storage';
+import { TranslateService } from "@ngx-translate/core";
 // @IonicPage()
 @Component({
   selector: 'page-edit-service',
   templateUrl: 'edit-service.html',
 })
 export class EditServicePage {
-
-
-
-  serviceId: string = "";
-  service: {} = {
+  serviceId = "";
+  service = {
     address: "",
     price: 0,
-    initialDate: new Date().toISOString()//,
-    // clientId: ""
+    initialDate: new Date().toISOString()
   }
 
   currentUser: string;
@@ -31,7 +28,8 @@ export class EditServicePage {
     public clientService: ClientProvider,
     public serviceProvider: ServicesProvider,
     public toast: ToastController,
-    public storage: Storage) {
+    public storage: Storage,
+    private translate: TranslateService) {
 
     this.storage.get("currentUser").then((user: string) => {
       this.currentUser = user;
@@ -42,27 +40,30 @@ export class EditServicePage {
     });
   }
 
-  createService(service: {}) {
-    const newService = { ...service, supervisorId: this.currentUser }
-    this.serviceProvider.createNewServices(newService)
-      .then((result: any) => {
-        this.serviceId = result.id;
-        this.toast.create({
-          message: 'Servicio creado de manera correcta',
-          duration: 3000,
-          position: 'bottom'
-        }).present();
-        this.navCtrl.pop();
+  createService(service: {}): void {
+    this.translate.get('editService.createService').subscribe(lang => {
 
-      })
-      .catch(err => {
-        console.log(err);
-        this.toast.create({
-          message: 'Se presentó un problema y no se pudo agregar',
-          duration: 3000,
-          position: 'bottom'
-        }).present();
-      });
+      const newService = { ...service, supervisorId: this.currentUser }
+      this.serviceProvider.createNewServices(newService)
+        .then((result: any) => {
+          this.serviceId = result.id;
+          this.toast.create({
+            message: lang.created,
+            duration: 3000,
+            position: 'bottom'
+          }).present();
+          this.navCtrl.pop();
+
+        })
+        .catch(err => {
+          console.log(err);
+          this.toast.create({
+            message: lang.error,
+            duration: 3000,
+            position: 'bottom'
+          }).present();
+        });
+    })
   }
 
   // ionViewDidLoad() {

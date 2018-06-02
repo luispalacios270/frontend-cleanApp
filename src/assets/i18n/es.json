@@ -65,7 +65,11 @@
     "actionBarTitle": "Nueva Inspección",
     "date": "Fecha de inicio del servicio",
     "client": "Cliente",
-    "save": "Guardar Servicio"
+    "save": "Guardar Servicio",
+    "createService": {
+      "created": "La inspección fue creada",
+      "error": "La inspección no pudo ser creada"
+    }
   },
   "createItem": {
     "close": "Cerrar",

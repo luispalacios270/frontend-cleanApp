@@ -65,7 +65,11 @@
     "actionBarTitle": "New Inspection",
     "date": "Start Inspection Date",
     "client": "Client",
-    "save": "Save Inspection"
+    "save": "Save Inspection",
+    "createService": {
+      "created": "The inspection was created",
+      "error":"The inspection could not be created"
+    }
   },
   "createItem": {
     "close": "Close",

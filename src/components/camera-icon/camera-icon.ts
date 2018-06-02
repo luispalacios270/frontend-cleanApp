@@ -73,9 +73,9 @@ export class CameraIconComponent implements OnInit {
     private cameraCtrl: Camera,
     private modalCtrl: ModalController,
     private ngZone: NgZone
-  ) {}
+  ) { }
 
-  ngOnInit(): void {
+  checkIfFurnitureHasPics(): void {
     if (this.furniture.furnitureInspections.length > 0) {
       const furnitureId = this.furniture.furnitureInspections[0].id;
       this.filesProvider
@@ -86,6 +86,10 @@ export class CameraIconComponent implements OnInit {
         .isThereAfterPics(furnitureId)
         .subscribe(_ => this.ngZone.run(() => (this.hasPicsAfter = true)));
     }
+  }
+
+  ngOnInit(): void {
+    this.checkIfFurnitureHasPics();
   }
 
   goToSlide(furnitureId: string, isBeforePic: boolean) {
@@ -112,7 +116,7 @@ export class CameraIconComponent implements OnInit {
   uploadBeforePic(furnitureId, imageData) {
     this.filesProvider
       .uploadBeforePic(furnitureId, imageData)
-      .then()
+      .then(_ => this.checkIfFurnitureHasPics())
       .catch(() => {
         this.printError();
       });
@@ -121,7 +125,7 @@ export class CameraIconComponent implements OnInit {
   uploadAfterPic(furnitureId, imageData) {
     this.filesProvider
       .uploadAfterPic(furnitureId, imageData)
-      .then()
+      .then(_ => this.checkIfFurnitureHasPics())
       .catch(() => {
         this.printError();
       });
@@ -130,12 +134,13 @@ export class CameraIconComponent implements OnInit {
   selectPictureFromGallery(isBefore: boolean, furnitureId: string) {
     this.cameraCtrl.getPicture(this.optionsGallery).then(
       imageData => {
-        // let base64Image = 'data:image/jpeg;base64,' + imageData;
+
         if (isBefore) this.uploadBeforePic(furnitureId, imageData);
         else this.uploadAfterPic(furnitureId, imageData);
       },
       err => {
-        // Handle error
+
+
       }
     );
   }
@@ -280,7 +285,7 @@ export class CameraIconComponent implements OnInit {
                 buttons: [
                   {
                     text: `${actionSheetInfo.before}${
-                      this.hasPicsBefore ? '*' : ''
+                    this.hasPicsBefore ? '*' : ''
                     }`,
                     handler: () => {
                       this.goToSlide(furniture.furnitureInspections[0], true);
@@ -288,7 +293,7 @@ export class CameraIconComponent implements OnInit {
                   },
                   {
                     text: `${actionSheetInfo.after}${
-                      this.hasPicsAfter ? '*' : ''
+                    this.hasPicsAfter ? '*' : ''
                     }`,
                     handler: () => {
                       this.goToSlide(furniture.furnitureInspections[0], false);
