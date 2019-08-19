@@ -1,15 +1,15 @@
-import { Component, OnInit } from "@angular/core";
-import { Platform } from "ionic-angular";
-import { StatusBar } from "@ionic-native/status-bar";
-import { SplashScreen } from "@ionic-native/splash-screen";
+import { Component, OnInit } from '@angular/core';
+import { Platform } from 'ionic-angular';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { TranslateService } from "@ngx-translate/core";
-import { Storage } from "@ionic/storage";
+import { TranslateService } from '@ngx-translate/core';
+import { Storage } from '@ionic/storage';
 
-const availablesLanguage = ["en", "es"];
+const availablesLanguage = ['en', 'es'];
 
 @Component({
-  templateUrl: "app.html"
+  templateUrl: 'app.html'
 })
 export class MyApp implements OnInit {
   rootPage: any;
@@ -23,7 +23,7 @@ export class MyApp implements OnInit {
   ) {}
 
   async selectCorrectLang(): Promise<void> {
-    const lang = await this.storage.get("currentLang");
+    const lang = await this.storage.get('currentLang');
 
     if (lang) {
       this.translate.use(lang);
@@ -45,8 +45,8 @@ export class MyApp implements OnInit {
   }
 
   async selectInitPage(): Promise<void> {
-    const currentUser = await this.storage.get("currentUser");
-    this.rootPage = currentUser ? "HomePage" : "LoginPage";
+    const currentUser = await this.storage.get('currentUser');
+    this.rootPage = currentUser ? 'HomePage' : 'login';
   }
 
   async ngOnInit(): Promise<void> {

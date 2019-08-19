@@ -2,11 +2,15 @@
 
   <ion-card id="container-login">
     <ion-card-content>
-      <div col-md-4 offset-md-4 col-6 offset-3>
 
-        <img src="assets/images/logo.png">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-md-4 offset-md-4 col-6 offset-3>
+            <img src="assets/images/logo.png">
+          </ion-col>
+        </ion-row>
+      </ion-grid>
 
-      </div>
       <form [formGroup]="loginForm" (ngSubmit)="login()">
 
         <ion-list>

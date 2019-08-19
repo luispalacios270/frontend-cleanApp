@@ -1,7 +1,7 @@
-import { Http } from "@angular/http";
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs/Observable";
-import { environment } from "../../enviroment/enviroment";
+import { Http } from '@angular/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { environment } from '../../enviroment/enviroment';
 
 @Injectable()
 export class HttpHandlerProvider {

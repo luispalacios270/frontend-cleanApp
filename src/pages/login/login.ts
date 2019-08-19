@@ -18,7 +18,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { emailValidator } from '../../utils/isValidEmail';
 import { InvalidEmail, User } from './models';
 
-@IonicPage()
+@IonicPage({ name: 'login' })
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
@@ -28,8 +28,6 @@ export class LoginPage implements OnInit {
     email: false,
     pass: false
   };
-
-  selectedLanguage = '';
 
   loginForm: FormGroup;
 
