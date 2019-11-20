@@ -35,7 +35,7 @@
     "@ionic/storage": "^2.0.1",
     "@ngx-translate/core": "^9.0.2",
     "@ngx-translate/http-loader": "0.1.0",
-    "angular": "^1.6.6",
+    "angular": "^1.7.9",
     "angular2-signaturepad": "^2.6.0",
     "chart.js": "^2.6.0",
     "cordova-android": "6.4.0",
